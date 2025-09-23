@@ -1,0 +1,2529 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HazaCheck - 건설사 출신 전문가의 진짜 하자점검</title>
+    <meta name="description" content="건설사 출신 전문가의 진짜 하자점검 서비스. 다양한 현장 경험으로 완벽한 내 집 만들기를 도와드립니다.">
+    <meta name="keywords" content="하자점검, 입주점검, 건설사, 전문가, 시공, 아파트, 건축기사">
+    <meta property="og:title" content="HazaCheck - 건설사 출신 전문가의 진짜 하자점검">
+    <meta property="og:description" content="현장 경험 풍부한 건축기사가 직접 점검하는 전문 하자점검 서비스">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ko_KR">
+    <meta property="og:image" content="https://hazacheck.com/og.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://hazacheck.com/">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Centralized site config for easy maintenance
+        const SITE_CONFIG = {
+            phone: '010-2600-5800',
+            kakaoUrl: 'https://open.kakao.com/o/sbmVyCTh',
+            kakaoId: '@hazacheck',
+            email: 'hazacheck@gmail.com'
+        };
+        tailwind.config = {
+            theme: {
+                extend: {
+                    screens: {
+                        'xs': '475px',
+                        '3xl': '1600px'
+                    },
+                    fontFamily: {
+                        'sans': ['Inter', 'Noto Sans KR', 'system-ui', 'sans-serif']
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'scale-in': 'scaleIn 0.5s ease-out',
+                        'slide-in-left': 'slideInLeft 0.7s ease-out',
+                        'slide-in-right': 'slideInRight 0.7s ease-out'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap');
+        
+        /* 한글 폰트 최적화 */
+        @font-face {
+            font-family: 'Noto Sans KR';
+            font-style: normal;
+            font-weight: 400;
+            font-display: swap;
+            src: url('https://fonts.gstatic.com/s/notosanskr/v36/PbykFmXiEBPT4ITbgNA5Cgm20xz64px_1hVWr0wuPNGmlQNMEfD4.woff2') format('woff2');
+            unicode-range: U+AC00-D7AF, U+1100-11FF, U+3130-318F, U+A960-A97F, U+D7B0-D7FF;
+        }
+        
+        :root {
+            --hazacheck-blue: #2563eb;
+            --hazacheck-blue-light: #3b82f6;
+            --hazacheck-orange: #f59e0b;
+            --hazacheck-gray-900: #1f2937;
+            --hazacheck-gray-700: #374151;
+            --hazacheck-gray-600: #4b5563;
+            --hazacheck-gray-500: #6b7280;
+            --hazacheck-gray-400: #9ca3af;
+            --hazacheck-gray-100: #f8fafc;
+            --hazacheck-gray-50: #f9fafb;
+            --hazacheck-success: #10b981;
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.06);
+            --shadow-medium: 0 8px 40px rgba(0, 0, 0, 0.08);
+            --warm-bg: #fefefe;
+            --soft-blue: #f0f9ff;
+            --soft-gray: #f8fafc;
+        }
+        
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Noto Sans KR', 'Inter', system-ui, sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            text-rendering: optimizeLegibility;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-feature-settings: 'kern' 1, 'liga' 1;
+            background-color: var(--warm-bg);
+            color: var(--hazacheck-gray-900);
+        }
+        
+        /* 한글 텍스트 최적화 */
+        .korean-text {
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: 400;
+            letter-spacing: -0.02em;
+            word-break: keep-all;
+            overflow-wrap: break-word;
+        }
+        
+        /* 특수문자 및 이모지 최적화 */
+        .emoji-text {
+            font-family: 'Apple Color Emoji', 'Segoe UI Emoji', 'Noto Color Emoji', sans-serif;
+            font-variant-emoji: emoji;
+        }
+
+        /* 2025 Modern CSS Trends */
+        :root {
+            --glass-bg: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+            --neon-glow: 0 0 20px rgba(59, 130, 246, 0.5);
+            --cyber-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --glassmorphism: rgba(255, 255, 255, 0.25);
+            --backdrop-blur: blur(20px);
+        }
+
+        /* Enhanced Mobile-First Design with 2025 Trends */
+        .mobile-cta-button {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 8px 32px rgba(234, 88, 12, 0.4), var(--neon-glow);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 280px;
+            justify-content: center;
+            backdrop-filter: var(--backdrop-blur);
+            -webkit-backdrop-filter: var(--backdrop-blur);
+        }
+
+        .mobile-cta-button:hover {
+            transform: translateX(-50%) translateY(-2px);
+            box-shadow: 0 12px 40px rgba(234, 88, 12, 0.6);
+        }
+
+        .mobile-contact-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--glassmorphism);
+            backdrop-filter: var(--backdrop-blur);
+            -webkit-backdrop-filter: var(--backdrop-blur);
+            border-top: 1px solid var(--glass-border);
+            padding: 12px 16px;
+            display: flex;
+            gap: 12px;
+            z-index: 999;
+            box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-contact-btn {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+
+        .mobile-contact-btn.phone {
+            background: #1e40af;
+            color: white;
+        }
+
+        .mobile-contact-btn.kakao {
+            background: #fee500;
+            color: #3c1e1e;
+        }
+
+        .mobile-contact-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Enhanced mobile typography */
+        .mobile-title {
+            font-size: clamp(1.75rem, 8vw, 2.5rem);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .mobile-subtitle {
+            font-size: clamp(1rem, 4vw, 1.25rem);
+            line-height: 1.4;
+            margin-bottom: 1.5rem;
+        }
+
+        .mobile-text {
+            font-size: clamp(0.875rem, 3vw, 1rem);
+            line-height: 1.6;
+        }
+
+        /* 2025 Modern Card Design */
+        .mobile-card {
+            background: var(--glassmorphism);
+            backdrop-filter: var(--backdrop-blur);
+            -webkit-backdrop-filter: var(--backdrop-blur);
+            border-radius: 24px;
+            padding: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .mobile-card:hover::before {
+            left: 100%;
+        }
+
+        .mobile-card:hover {
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15), var(--neon-glow);
+            transform: translateY(-4px) scale(1.02);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        /* 2025 Modern Pricing Cards */
+        .mobile-pricing-card {
+            background: var(--glassmorphism);
+            backdrop-filter: var(--backdrop-blur);
+            -webkit-backdrop-filter: var(--backdrop-blur);
+            border-radius: 28px;
+            padding: 32px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            margin-bottom: 24px;
+            border: 2px solid var(--glass-border);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mobile-pricing-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--cyber-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .mobile-pricing-card.featured {
+            border-color: rgba(59, 130, 246, 0.4);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), var(--glassmorphism));
+            box-shadow: 0 16px 48px rgba(59, 130, 246, 0.2), var(--neon-glow);
+        }
+
+        .mobile-pricing-card.featured::after {
+            opacity: 1;
+        }
+
+        .mobile-pricing-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.2), var(--neon-glow);
+            border-color: rgba(59, 130, 246, 0.5);
+        }
+
+        /* 2025 Modern Button Design */
+        .mobile-btn {
+            width: 100%;
+            padding: 18px 28px;
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: var(--backdrop-blur);
+            -webkit-backdrop-filter: var(--backdrop-blur);
+        }
+
+        .mobile-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .mobile-btn:hover::before {
+            left: 100%;
+        }
+
+        .mobile-btn-primary {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            box-shadow: 0 8px 32px rgba(30, 64, 175, 0.3), var(--neon-glow);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .mobile-btn-orange {
+            background: linear-gradient(135deg, #ea580c, #dc2626);
+            color: white;
+            box-shadow: 0 8px 32px rgba(234, 88, 12, 0.3), 0 0 20px rgba(234, 88, 12, 0.5);
+            border-color: rgba(234, 88, 12, 0.3);
+        }
+
+        .mobile-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3), var(--neon-glow);
+        }
+
+        /* Hide mobile elements on desktop */
+        @media (min-width: 768px) {
+            .mobile-cta-button,
+            .mobile-contact-bar {
+                display: none;
+            }
+        }
+
+        /* Show mobile elements only on mobile */
+        @media (max-width: 767px) {
+            .mobile-cta-button,
+            .mobile-contact-bar {
+                display: flex;
+            }
+            
+            /* Add bottom padding to prevent overlap */
+            body {
+                padding-bottom: 120px;
+            }
+        }
+
+        /* 2025 Modern Backgrounds */
+        .gradient-bg {
+            background: linear-gradient(135deg, var(--hazacheck-blue) 0%, var(--hazacheck-blue-light) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gradient-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 219, 255, 0.2) 0%, transparent 50%);
+            animation: gradientShift 8s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        /* 2025 Modern Animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotateX(0deg) scale(1); }
+            33% { transform: translateY(-12px) rotateX(3deg) scale(1.02); }
+            66% { transform: translateY(-18px) rotateX(-2deg) scale(1.01); }
+        }
+
+        .floating {
+            animation: float 6s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        /* 2025 Modern Text Effects */
+        .text-glow {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.5), 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .text-gradient {
+            background: var(--cyber-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hazacheck-bg {
+            background: var(--hazacheck-blue);
+        }
+
+        .hazacheck-bg-light {
+            background: var(--hazacheck-blue-light);
+        }
+
+        .hazacheck-bg-orange {
+            background: var(--hazacheck-orange);
+        }
+
+        .btn-simple {
+            transition: all 0.2s ease;
+            font-weight: 600;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-simple:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-medium);
+        }
+
+        .btn-primary {
+            background: var(--hazacheck-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--hazacheck-blue-light);
+        }
+
+        .btn-orange {
+            background: var(--hazacheck-orange);
+            color: white;
+        }
+
+        .btn-orange:hover {
+            background: #dc2626;
+        }
+
+        .hazacheck-text {
+            color: var(--hazacheck-blue);
+            font-weight: 800;
+        }
+
+        .hazacheck-accent {
+            color: var(--hazacheck-orange);
+            font-weight: 700;
+        }
+
+        .text-primary {
+            color: var(--hazacheck-gray-900);
+        }
+
+        .text-secondary {
+            color: var(--hazacheck-gray-600);
+        }
+        /* checklist utilities */
+        .badge { background-color: rgb(241 245 249); color: rgb(71 85 105); font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 8px; }
+        .chip { background-color: rgb(239 246 255); color: rgb(29 78 216); font-size: 11px; padding: 2px 8px; border-radius: 8px; border: 1px solid rgb(219 234 254); }
+        .skip-link { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+        .skip-link:focus { position:fixed; left:16px; top:16px; width:auto; height:auto; padding:8px 12px; background:#111827; color:#fff; border-radius:8px; z-index:10000; }
+        @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 to-blue-50">
+    <a href="#main-content" class="skip-link">본문으로 바로가기</a>
+    <!-- Main content landmark -->
+    <div id="main-content">
+        <!-- Optimized Header for Better UX -->
+        <header class="bg-white/95 backdrop-blur-md sticky top-0 z-50 border-b border-gray-200 shadow-sm">
+            <div class="container mx-auto px-4">
+                <!-- Top Bar with Trust Signals -->
+                <div class="hidden sm:block py-2 border-b border-gray-100">
+                    <div class="flex justify-between items-center text-sm">
+                        <div class="flex items-center space-x-6 text-secondary">
+                            <span class="flex items-center gap-1">
+                                <span class="w-2 h-2 bg-green-500 rounded-full"></span>
+                                전문가 대기중
+                            </span>
+                            <span>🏆 다양한 현장 경험</span>
+                            <span>📅 당일 방문 가능</span>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <a href="#" data-config="phone_href" class="text-primary font-semibold hover:text-blue-600 transition-colors">
+                                <span data-config="phone_display">📞 010-2600-5800</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Header -->
+                <div class="py-4">
+                    <div class="flex justify-between items-center">
+                        <!-- Enhanced Logo -->
+                        <div class="flex items-center space-x-3">
+                            <div class="w-12 h-12 hazacheck-bg rounded-xl flex items-center justify-center shadow-sm">
+                                <span class="text-white font-bold text-xl">🏗️</span>
+                            </div>
+                            <div>
+                                <h1 class="text-2xl font-bold hazacheck-text leading-none">HazaCheck</h1>
+                                <p class="text-sm text-secondary">전문 하자점검 서비스</p>
+                            </div>
+                        </div>
+
+                        <!-- Desktop Navigation with Clear Hierarchy -->
+                        <div class="hidden md:flex items-center space-x-6">
+                            <nav class="flex items-center space-x-6">
+                                <a href="#services" class="text-secondary hover:text-primary transition-colors font-medium">서비스</a>
+                                <a href="#pricing" class="text-secondary hover:text-primary transition-colors font-medium">가격</a>
+                                <a href="#about" class="text-secondary hover:text-primary transition-colors font-medium">회사소개</a>
+                                <a href="#contact" class="text-secondary hover:text-primary transition-colors font-medium">연락처</a>
+                            </nav>
+                            <div class="flex items-center space-x-3">
+                                <button class="btn-simple btn-primary text-white px-6 py-3 rounded-lg font-semibold shadow-sm" onclick="scrollToForm()">
+                                    무료 견적받기
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Mobile Menu Button -->
+                        <button class="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors" onclick="toggleMobileMenu()">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Mobile Menu -->
+                    <div id="mobileMenu" class="hidden md:hidden mt-4 pb-4 border-t border-gray-100">
+                        <nav class="space-y-2 pt-4">
+                            <a href="#services" class="block py-2 text-secondary hover:text-primary transition-colors">서비스</a>
+                            <a href="#pricing" class="block py-2 text-secondary hover:text-primary transition-colors">가격</a>
+                            <a href="#about" class="block py-2 text-secondary hover:text-primary transition-colors">회사소개</a>
+                            <a href="#contact" class="block py-2 text-secondary hover:text-primary transition-colors">연락처</a>
+                        </nav>
+                        <div class="mt-4 space-y-2">
+                            <a href="#" data-config="phone_href" class="block w-full text-center py-3 border border-gray-200 rounded-lg font-semibold text-primary">
+                                📞 전화 상담
+                            </a>
+                            <button class="w-full btn-simple btn-primary text-white py-3 rounded-lg font-semibold" onclick="scrollToForm()">
+                                무료 견적받기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section - Trust-First Positioning -->
+        <section class="gradient-bg text-white py-16 sm:py-20 lg:py-24 relative overflow-hidden">
+            <!-- Background Elements -->
+            <div class="absolute inset-0 bg-gradient-to-br from-black/20 to-transparent"></div>
+
+            <div class="container mx-auto px-4 relative z-10">
+                <div class="max-w-4xl mx-auto text-center">
+                    <!-- Trust Badge -->
+                    <div class="inline-flex items-center bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-4 py-2 mb-6">
+                        <span class="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
+                        <span class="text-sm font-medium">전문가 상담 가능</span>
+                    </div>
+
+                    <!-- Primary Value Proposition -->
+                    <h1 class="mobile-title text-white mb-6 korean-text">
+                        시공사 언어로 점검하는 팀, HazaCheck
+                    </h1>
+
+                    <!-- Clear Benefit Statement -->
+                    <p class="mobile-subtitle mb-8 text-blue-100 max-w-2xl mx-auto korean-text">
+                        기준대로 보고, 증거로 남깁니다. 원/근 사진과 측정치, 시공사 접수 문구까지 한 번에 정리합니다. 영어 상담 가능.
+                    </p>
+
+                    <!-- Micro Bullets -->
+                    <div class="grid sm:grid-cols-3 gap-4 mb-8 max-w-3xl mx-auto">
+                        <div class="text-center">
+                            <div class="text-sm text-blue-100 korean-text">현장 출신 2인 1조<br>(대표 + 한미반도체 엔지니어)</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-sm text-blue-100 korean-text">열화상·라돈·공기질·평활/수직도·내시경 장비 보유</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-sm text-blue-100 korean-text">시공사 접수 문구까지 포함된 사진 리포트</div>
+                        </div>
+                    </div>
+
+                    <!-- Primary CTA Group -->
+                    <div class="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-6 sm:p-8 mb-8 max-w-2xl mx-auto">
+                        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                            <a href="#" data-config="phone_href" class="bg-white/20 backdrop-blur-sm border border-white/30 text-white px-8 py-4 rounded-xl font-bold text-lg text-center hover:bg-white/30 transition-all" data-track="cta_hero_phone">
+                                📞 전화상담
+                            </a>
+                            <a href="#" data-config="kakao_href" target="_blank" class="bg-yellow-400 hover:bg-yellow-500 text-black px-8 py-4 rounded-xl font-bold text-lg text-center transition-all" data-track="cta_hero_kakao">
+                                💬 카톡상담
+                            </a>
+                            <button class="btn-simple btn-orange text-white px-8 py-4 rounded-xl font-bold text-lg shadow-xl transform hover:scale-105 transition-all" onclick="scrollToForm()" data-track="cta_hero_quote">
+                                📝 견적신청
+                            </button>
+                        </div>
+
+                        <p class="text-sm text-blue-200 mt-4">
+                            빠른 상담 가능 | 전문가 직접 점검 | 상세한 보고서 제공
+                        </p>
+                    </div>
+
+                    <!-- Trust Indicators -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-3xl mx-auto">
+                        <div class="text-center">
+                            <div class="text-2xl mb-2">🏆</div>
+                            <div class="text-lg font-bold text-yellow-300">전문</div>
+                            <div class="text-sm text-blue-100">건축기사</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl mb-2">🔬</div>
+                            <div class="text-lg font-bold text-yellow-300">전문</div>
+                            <div class="text-sm text-blue-100">장비 보유</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl mb-2">📋</div>
+                            <div class="text-lg font-bold text-yellow-300">체계적</div>
+                            <div class="text-sm text-blue-100">점검 프로세스</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl mb-2">📄</div>
+                            <div class="text-lg font-bold text-yellow-300">시공사 대응</div>
+                            <div class="text-sm text-blue-100">리포트 제공</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-16 sm:py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center mb-10">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-4 korean-text">왜 HazaCheck인가</h2>
+                    <p class="text-lg text-secondary korean-text">Top5 건설사 공사팀 출신이 현장 기준으로 점검합니다. 6000세대 시공 경험에서 축적된 하자 DB와 전문 장비를 바탕으로, 시공사 접수까지 한 번에 끝냅니다.</p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+                    <div class="mobile-card">
+                        <h3 class="text-xl font-bold text-primary mb-2 korean-text">현장 출신의 전문성</h3>
+                        <p class="text-secondary korean-text">Top5 건설사 공사팀 출신 · 다수 현장 시공 · 입주 및 초기 CS 응대 경험. 시공사의 언어와 기준을 압니다.</p>
+                    </div>
+                    <div class="mobile-card">
+                        <h3 class="text-xl font-bold text-primary mb-2 korean-text">증빙 중심 리포트</h3>
+                        <p class="text-secondary korean-text">열화상 · 라돈/공기질 · 평활/수직도 · 내시경 등 전문 장비로 원/근 사진과 측정치를 남기고, 그대로 접수 가능한 문구까지 제공합니다.</p>
+                    </div>
+                    <div class="mobile-card">
+                        <h3 class="text-xl font-bold text-primary mb-2 korean-text">2인 1조 현장 운영</h3>
+                        <p class="text-secondary korean-text">대표(건축기사) + 한미반도체 출신 엔지니어가 함께 점검합니다. 영어 상담 가능(외국인 고객 환영).</p>
+                    </div>
+                    <div class="mobile-card">
+                        <h3 class="text-xl font-bold text-primary mb-2 korean-text">한 번뿐인 점검, 완벽하게</h3>
+                        <p class="text-secondary korean-text">약 6000세대 시공 경험에서 축적된 하자 DB로 누락을 줄이고, 사후 접수/재점검까지 이어지게 돕습니다.</p>
+                    </div>
+                </div>
+
+                <div class="max-w-4xl mx-auto text-center mt-10">
+                    <p class="text-xl font-bold korean-text">현장을 아는 사람이 쓰는 리포트. 시공사도 쉽게 수긍합니다.</p>
+                    <p class="text-sm text-secondary mt-2 korean-text">영어 상담 가능 · 대표 직통 · 전문 장비 보유 · 접수 문구 제공</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 실시간 실적 카운터 섹션 -->
+        <section class="py-12 bg-gradient-to-r from-blue-600 to-blue-700 text-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-8">
+                    <h2 class="text-2xl sm:text-3xl font-bold mb-4 korean-text">📊 전문 서비스</h2>
+                    <p class="text-blue-100 korean-text">전문 하자점검 서비스로 안심하고 입주하세요</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+                    <div class="text-center">
+                        <div class="text-3xl sm:text-4xl font-bold text-yellow-300 mb-2" id="inspection-counter">전문</div>
+                        <div class="text-sm text-blue-100 korean-text">건축기사</div>
+                        <div class="text-xs text-blue-200 mt-1 korean-text">자격증 보유</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl sm:text-4xl font-bold text-yellow-300 mb-2">전문</div>
+                        <div class="text-sm text-blue-100 korean-text">장비 사용</div>
+                        <div class="text-xs text-blue-200 mt-1 korean-text">열화상카메라 등</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl sm:text-4xl font-bold text-yellow-300 mb-2">상세</div>
+                        <div class="text-sm text-blue-100 korean-text">보고서</div>
+                        <div class="text-xs text-blue-200 mt-1 korean-text">사진포함 제공</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl sm:text-4xl font-bold text-yellow-300 mb-2">2시간</div>
+                        <div class="text-sm text-blue-100 korean-text">평균 응답시간</div>
+                        <div class="text-xs text-blue-200 mt-1 korean-text">24시간 내 보장</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Trust - 5 Proof Blocks -->
+        <section class="py-16 sm:py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-6 korean-text">
+                        신뢰할 수 있는 이유
+                    </h2>
+                    <p class="text-lg text-secondary korean-text">
+                        검증된 전문성과 투명한 서비스로 믿을 수 있습니다
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                    <!-- Proof #1: 출신/도메인 -->
+                    <div class="mobile-card text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                            <span class="text-white text-2xl">👨‍🔧</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-4 korean-text">전문(출신/자격)</h3>
+                        <p class="text-secondary korean-text mb-4">Top5 건설사 공사팀 출신 · 건축기사 보유</p>
+                        <div class="mt-4 bg-blue-50 p-3 rounded-lg">
+                            <a href="#" class="text-xs text-blue-700 font-semibold" aria-disabled="true" data-proof="pending">자격증(마스킹)</a>
+                        </div>
+                    </div>
+
+                    <!-- Proof #2: 장비 -->
+                    <div class="mobile-card text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                            <span class="text-white text-2xl">🔬</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-4 korean-text">장비</h3>
+                        <p class="text-secondary korean-text mb-4">열화상 · 라돈 · 공기질 · 평활/수직도 · 내시경</p>
+                        <div class="mt-4 bg-green-50 p-3 rounded-lg">
+                            <a href="#" class="text-xs text-green-700 font-semibold" aria-disabled="true" data-proof="pending">장비 리스트(PDF)</a>
+                        </div>
+                    </div>
+
+                    <!-- Proof #3: 프로세스 -->
+                    <div class="mobile-card text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                            <span class="text-white text-2xl">📋</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-4 korean-text">체계(프로세스)</h3>
+                        <p class="text-secondary korean-text mb-4">체크리스트 기반 루트(공간→항목) + 측정치 스냅샷</p>
+                        <div class="mt-4 bg-purple-50 p-3 rounded-lg">
+                            <a href="#" class="text-xs text-purple-700 font-semibold" aria-disabled="true" data-proof="pending">체크리스트 샘플</a>
+                        </div>
+                    </div>
+
+                    <!-- Proof #4: 리포트 -->
+                    <div class="mobile-card text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                            <span class="text-white text-2xl">📊</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-4 korean-text">시공사 대응 리포트</h3>
+                        <p class="text-secondary korean-text mb-4">원/근 사진 + 문제/근거 + 권장조치 + ‘접수 문구’까지 제공</p>
+                        <div class="mt-4 bg-orange-50 p-3 rounded-lg">
+                            <a href="#" class="text-xs text-orange-700 font-semibold" aria-disabled="true" data-proof="pending" data-track="cta_sample_request">리포트 샘플 요청</a>
+                        </div>
+                    </div>
+
+                    
+                        </div>
+                        </div>
+        </section>
+
+        <!-- Services & Coverage Section (Checklist-First) -->
+        <section id="services" class="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-slate-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-5xl mx-auto mb-8 sm:mb-12">
+                    <div class="flex items-start justify-between gap-4">
+                        <div>
+                            <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-4 korean-text">점검 범위</h2>
+                            <p class="text-lg text-secondary korean-text">각 항목은 ‘어떻게 확인했는지’를 적고, 원/근 사진과 측정치를 함께 남깁니다. 시공사 접수 문구는 버튼으로 바로 복사됩니다.</p>
+                    </div>
+                        <div class="hidden sm:flex items-center gap-3">
+                            <a href="#" class="text-sm text-blue-700 hover:text-blue-900 font-semibold" data-track="doc_equipment">장비 리스트 PDF</a>
+                            <a href="#" class="text-sm text-blue-700 hover:text-blue-900 font-semibold" data-track="cta_sample_request">리포트 샘플 요청(카톡)</a>
+                </div>
+            </div>
+                </div>
+
+                <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                    <!-- 3.1 현관/전실 -->
+                    <details class="rounded-2xl shadow-sm border border-slate-200 bg-white/80 scope-accordion" aria-label="현관/전실 점검" open>
+                        <summary class="py-3 px-4 flex items-center gap-2 cursor-pointer" aria-controls="scope-entrance" aria-expanded="false">
+                            <span class="text-xl">🚪</span>
+                            <span class="font-bold text-primary">현관/전실</span>
+                            <span class="ml-auto text-xs text-slate-500 hidden md:inline">문닫힘·틈새·도어클로저 | 타일/마루</span>
+                        </summary>
+                        <div id="scope-entrance" class="px-4 pb-4" aria-live="polite">
+                            <ul class="list-disc pl-5 text-sm text-gray-600 space-y-1 korean-text mb-3">
+                                <li>문닫힘·틈새·도어클로저 상태</li>
+                                <li>바닥 타일·마루 파손/들뜸</li>
+                                <li>분전반 라벨·차단 테스트</li>
+                                <li class="text-xs text-slate-500">증거: 원/근 사진 · 측정치 · 판정</li>
+                            </ul>
+                            <ul class="grid md:grid-cols-2 gap-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">현관문 작동/기밀성</div>
+                                        <div class="text-xs text-slate-500">— [체크] 문닫힘, 틈새, 도어클로저 / [장비] 육안 / [판정] 불규칙한 틈·문풍지 미흡 / [사진] 원·근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">체크: 문닫힘·틈새·도어클로저</span>
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 불규칙한 틈·문풍지 미흡</span>
+                                            <span class="chip">원/근 사진</span>
+                </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">바닥 타일·마루 마감</div>
+                                        <div class="text-xs text-slate-500">— [체크] 파손·줄눈·들뜸 / [장비] 육안 / [판정] 파임/깨짐·들뜸음 / [사진] 원·근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">체크: 파손·줄눈·들뜸</span>
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 파임/깨짐·들뜸음</span>
+                                            <span class="chip">원/근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">신발장 수평/수직·문짝 정렬</div>
+                                        <div class="text-xs text-slate-500">— [체크] 문 여러 번 개폐 / [장비] 수평계 / [판정] 간섭/틈 불균일 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 수평계</span>
+                                            <span class="badge">판정: 간섭/틈 불균일</span>
+                                            <span class="chip">근 사진</span>
+                                            <span class="chip">측정치 기록</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">초인종·스위치·조명</div>
+                                        <div class="text-xs text-slate-500">— [체크] 작동/표기 / [장비] 멀티미터/테스터 / [판정] 불점등·오배선 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 멀티미터/테스터</span>
+                                            <span class="badge">판정: 불점등·오배선</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">분전반 표기·차단기 동작</div>
+                                        <div class="text-xs text-slate-500">— [체크] 라벨·테스트버튼 / [장비] 멀티미터 / [판정] 라벨 누락·RCD 미작동 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 멀티미터</span>
+                                            <span class="badge">판정: 라벨 누락·RCD 미작동</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">천장 감지기/스프링클러 배치</div>
+                                        <div class="text-xs text-slate-500">— [체크] 위치·막힘 / [장비] 육안 / [판정] 가구 간섭·마감 누락 / [사진] 원</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 가구 간섭·마감 누락</span>
+                                            <span class="chip">원 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                            <div class="mt-4 flex items-center justify-between">
+                                <p class="text-xs text-slate-500 korean-text">현장 상황에 따라 항목이 증감될 수 있습니다.</p>
+                                <button class="text-sm text-blue-700 hover:text-blue-900 font-semibold" data-track="copy_claim_template" onclick="copyClaimTemplate('[현관/전실] 도어 닫힘 시 틈새/간섭 확인되어 기밀성 저하 우려. 도어클로저/경첩 재조정 및 수평 재세팅 요청합니다.')">접수 문구 복사</button>
+                            </div>
+                        </div>
+                    </details>
+
+                    <!-- 3.2 거실/침실 -->
+                    <details class="rounded-2xl shadow-sm border border-slate-200 bg-white/80 scope-accordion" aria-label="거실/침실 점검">
+                        <summary class="py-3 px-4 flex items-center gap-2 cursor-pointer" aria-controls="scope-living" aria-expanded="false">
+                            <span class="text-xl">🛋️</span>
+                            <span class="font-bold text-primary">거실/침실</span>
+                            <span class="ml-auto text-xs text-slate-500 hidden md:inline">평활/수직 | 창호 기밀 | 전원</span>
+                        </summary>
+                        <div id="scope-living" class="px-4 pb-4">
+                            <ul class="list-disc pl-5 text-sm text-gray-600 space-y-1 korean-text mb-3">
+                                <li>바닥 평활/수직 허용오차 확인</li>
+                                <li>창호 개폐/잠금·틈새 점검</li>
+                                <li>전원·조명 동작 확인</li>
+                                <li class="text-xs text-slate-500">증거: 원/근 사진 · 측정치 · 판정</li>
+                        </ul>
+                            <ul class="grid md:grid-cols-2 gap-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">바닥 평활도/수직도</div>
+                                        <div class="text-xs text-slate-500">— [체크] 레벨 측정 / [장비] 수평계·평활도 게이지 / [판정] 편차 수치 기록 / [사진] 근+측정치</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 수평계/게이지</span>
+                                            <span class="badge">판정: 허용오차</span>
+                                            <span class="chip">근+측정치</span>
+                                            <span class="chip">측정치 기록</span>
+                    </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">창호 기밀성/작동/유리 결함</div>
+                                        <div class="text-xs text-slate-500">— [체크] 개폐·잠금·틈새 / [장비] 육안(+필요 시 열화상) / [판정] 실리콘 파단·프레임 이격 / [사진] 원·근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">보강: 열화상(필요시)</span>
+                                            <span class="badge">판정: 기밀/작동</span>
+                                            <span class="chip">원·근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">방충망·핸들·스토퍼</div>
+                                        <div class="text-xs text-slate-500">— [체크] 개폐 저항/간섭 / [장비] 육안 / [판정] 간섭·틀어짐 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 간섭·틀어짐</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">벽체 도배·몰딩·아트월</div>
+                                        <div class="text-xs text-slate-500">— [체크] 오염·찍힘·들뜸 / [장비] 육안 / [판정] 접합부 벌어짐 / [사진] 원·근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 들뜸/오염</span>
+                                            <span class="chip">원·근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">콘센트/스위치 전원</div>
+                                        <div class="text-xs text-slate-500">— [체크] 테스터 확인 / [장비] 멀티미터 / [판정] 무전압·역상배선 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 테스터</span>
+                                            <span class="badge">판정: 통전</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">천장 조명·감지기</div>
+                                        <div class="text-xs text-slate-500">— [체크] 점등/배치 / [장비] 육안 / [판정] 불점등·편심 / [사진] 원</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 위치/동작</span>
+                                            <span class="chip">원 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                        </ul>
+                            <div class="mt-4 flex items-center justify-between">
+                                <p class="text-xs text-slate-500 korean-text">현장 상황에 따라 항목이 증감될 수 있습니다.</p>
+                                <button class="text-sm text-blue-700 hover:text-blue-900 font-semibold" data-track="copy_claim_template" onclick="copyClaimTemplate('[거실/침실] 바닥 평활/수직 허용오차 이탈 및 창호 기밀 저하 의심. 게이지/레벨 수치 근거로 보정 및 실리콘 재시공 요청합니다.')">접수 문구 복사</button>
+                    </div>
+                        </div>
+                    </details>
+
+                    <!-- 3.3 주방 -->
+                    <details class="rounded-2xl shadow-sm border border-slate-200 bg-white/80 scope-accordion" aria-label="주방 점검">
+                        <summary class="py-3 px-4 flex items-center gap-2 cursor-pointer" aria-controls="scope-kitchen" aria-expanded="false">
+                            <span class="text-xl">🍽️</span>
+                            <span class="font-bold text-primary">주방</span>
+                            <span class="ml-auto text-xs text-slate-500 hidden md:inline">배수/누수 | 상하부장 수평 | 전원/환기</span>
+                        </summary>
+                        <div id="scope-kitchen" class="px-4 pb-4">
+                            <ul class="list-disc pl-5 text-sm text-gray-600 space-y-1 korean-text mb-3">
+                                <li>싱크 배수·수전 누수 확인</li>
+                                <li>상·하부장 수평/간섭 점검</li>
+                                <li>가스/인덕션·후드 동작 확인</li>
+                                <li class="text-xs text-slate-500">증거: 원/근 사진 · 측정치 · 판정</li>
+                        </ul>
+                            <ul class="grid md:grid-cols-2 gap-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">싱크볼 배수/물고임</div>
+                                        <div class="text-xs text-slate-500">— [체크] 물채움·배수시간 / [장비] 육안 / [판정] 고임 흔적·소음 / [사진] 원·근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 고임 흔적·소음</span>
+                                            <span class="chip">원·근 사진</span>
+                    </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">수전 누수/수압/온수 전환</div>
+                                        <div class="text-xs text-slate-500">— [체크] 냉온 전환·스프레이 / [장비] 육안 / [판정] 이음부 누수·흐름 불량 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 누수/수압</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">상·하부장 수평/문짝 정렬</div>
+                                        <div class="text-xs text-slate-500">— [체크] 간섭·평행 / [장비] 수평계 / [판정] 간섭·틈 불균일 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 수평계</span>
+                                            <span class="badge">판정: 허용오차</span>
+                                            <span class="chip">근 사진</span>
+                                            <span class="chip">측정치 기록</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">가스·인덕션 설치/작동</div>
+                                        <div class="text-xs text-slate-500">— [체크] 점화·표시등 / [장비] 테스터 / [판정] 점화 지연·오배선 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 테스터</span>
+                                            <span class="badge">판정: 접지/전원</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">후드 흡기/배기/소음</div>
+                                        <div class="text-xs text-slate-500">— [체크] 필터·풍량감 / [장비] 육안 / [판정] 역풍·진동 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 흡기/소음</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">상하수도 연결·트랩</div>
+                                        <div class="text-xs text-slate-500">— [체크] 누수·냄새 / [장비] 육안 / [판정] 연결부 누수·트랩 미설치 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 연결/트랩</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                    </div>
+                                </li>
+                        </ul>
+                            <div class="mt-4 flex items-center justify-between">
+                                <p class="text-xs text-slate-500 korean-text">현장 상황에 따라 항목이 증감될 수 있습니다.</p>
+                                <button class="text-sm text-blue-700 hover:text-blue-900 font-semibold" data-track="copy_claim_template" onclick="copyClaimTemplate('[주방] 싱크볼 배수 불량(물 고임/샘) 및 상하부장 수평 이탈. 수전 누수/수압 점검과 수평 재조정 요청합니다.')">접수 문구 복사</button>
+                    </div>
+                        </div>
+                    </details>
+
+                    <!-- 3.4 욕실 -->
+                    <details class="rounded-2xl shadow-sm border border-slate-200 bg-white/80 scope-accordion" aria-label="욕실 점검">
+                        <summary class="py-3 px-4 flex items-center gap-2 cursor-pointer" aria-controls="scope-bath" aria-expanded="false">
+                            <span class="text-xl">🚿</span>
+                            <span class="font-bold text-primary">욕실</span>
+                            <span class="ml-auto text-xs text-slate-500 hidden md:inline">구배/배수 | 실리콘/유리 | 환기</span>
+                        </summary>
+                        <div id="scope-bath" class="px-4 pb-4">
+                            <ul class="list-disc pl-5 text-sm text-gray-600 space-y-1 korean-text mb-3">
+                                <li>바닥 구배/배수 흐름 확인</li>
+                                <li>유리·실리콘·수전 상태 점검</li>
+                                <li>환기팬 회전/역풍 점검</li>
+                                <li class="text-xs text-slate-500">증거: 원/근 사진 · 측정치 · 판정</li>
+                        </ul>
+                            <ul class="grid md:grid-cols-2 gap-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">바닥 구배/배수</div>
+                                        <div class="text-xs text-slate-500">— [체크] 물채움·흐름 관찰 / [장비] 육안 / [판정] 고임·역류 / [사진] 원·근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 고임/흐름</span>
+                                            <span class="chip">원·근 사진</span>
+                    </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">샤워부스/유리/실리콘</div>
+                                        <div class="text-xs text-slate-500">— [체크] 파손·실리콘 결함 / [장비] 육안 / [판정] 틈·곰팡이·박리 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 파손/누수</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">수전·양변기 누수/작동</div>
+                                        <div class="text-xs text-slate-500">— [체크] 탱크·배수 / [장비] 육안 / [판정] 새어 나옴·느림 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 누수/작동</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">타일 균열/줄눈</div>
+                                        <div class="text-xs text-slate-500">— [체크] 충격음·이격 / [장비] 육안 / [판정] 균열·줄눈 파손 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 균열/박리</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">환기팬 작동·역풍</div>
+                                        <div class="text-xs text-slate-500">— [체크] 전원·풍량 / [장비] 육안 / [판정] 역류·소음 / [사진] 근</div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">수건걸이·액세서리</div>
+                                        <div class="text-xs text-slate-500">— [체크] 고정·수평 / [장비] 육안 / [판정] 흔들림 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 고정/수평</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 회전/역풍</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                        </ul>
+                            <div class="mt-4 flex items-center justify-between">
+                                <p class="text-xs text-slate-500 korean-text">현장 상황에 따라 항목이 증감될 수 있습니다.</p>
+                                <button class="text-sm text-blue-700 hover:text-blue-900 font-semibold" data-track="copy_claim_template" onclick="copyClaimTemplate('[욕실] 바닥 구배 불량으로 물 고임 확인. 배수구 방향 구배 재시공 및 실리콘 보수 요청합니다.')">접수 문구 복사</button>
+                    </div>
+                        </div>
+                    </details>
+
+                    <!-- 3.5 발코니/다용도실 -->
+                    <details class="rounded-2xl shadow-sm border border-slate-200 bg-white/80 scope-accordion" aria-label="발코니/다용도실 점검">
+                        <summary class="py-3 px-4 flex items-center gap-2 cursor-pointer" aria-controls="scope-utility" aria-expanded="false">
+                            <span class="text-xl">🧺</span>
+                            <span class="font-bold text-primary">발코니/다용도실</span>
+                            <span class="ml-auto text-xs text-slate-500 hidden md:inline">배수/기울기 | 급·배수 | 샷시 기밀</span>
+                        </summary>
+                        <div id="scope-utility" class="px-4 pb-4">
+                            <ul class="list-disc pl-5 text-sm text-gray-600 space-y-1 korean-text mb-3">
+                                <li>배수 트랩·바닥 기울기 확인</li>
+                                <li>세탁 급·배수 연결·누수 점검</li>
+                                <li>샷시 기밀·유리 결함 확인</li>
+                                <li class="text-xs text-slate-500">증거: 원/근 사진 · 측정치 · 판정</li>
+                        </ul>
+                            <ul class="grid md:grid-cols-2 gap-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">배수구 트랩/바닥 기울기</div>
+                                        <div class="text-xs text-slate-500">— [체크] 물채움·흐름 / [장비] 육안 / [판정] 역구배/악취 / [사진] 원·근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 고임/흐름</span>
+                                            <span class="chip">원·근 사진</span>
+                    </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">세탁 급·배수 연결</div>
+                                        <div class="text-xs text-slate-500">— [체크] 누수·흐름 / [장비] 육안 / [판정] 연결부 누수 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 누수/연결</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">샷시 기밀/유리 결함</div>
+                                        <div class="text-xs text-slate-500">— [체크] 개폐·잠금 / [장비] 육안 / [판정] 유리 흠·실리콘 파단 / [사진] 원·근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 기밀/파손</span>
+                                            <span class="chip">원·근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">보일러/열교환기 외관·누수 징후</div>
+                                        <div class="text-xs text-slate-500">— [체크] 누수 흔적·배관 / [장비] 육안 / [판정] 결로·누수 징후 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 누수/부식</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">실외기실 배수/전원</div>
+                                        <div class="text-xs text-slate-500">— [체크] 드레인·차단기 / [장비] 육안·멀티미터 / [판정] 누수·무전압 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 멀티미터</span>
+                                            <span class="badge">판정: 배수/전원</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                    </div>
+                                </li>
+                        </ul>
+                            <div class="mt-4 flex items-center justify-between">
+                                <p class="text-xs text-slate-500 korean-text">현장 상황에 따라 항목이 증감될 수 있습니다.</p>
+                                <button class="text-sm text-blue-700 hover:text-blue-900 font-semibold" data-track="copy_claim_template" onclick="copyClaimTemplate('[발코니/다용도실] 배수 트랩 기능 미흡 및 바닥 기울기 불량으로 물 고임 확인. 구배 보정 및 연결부 누수 보수 요청합니다.')">접수 문구 복사</button>
+                    </div>
+                        </div>
+                    </details>
+
+                    <!-- 3.6 전기/환기/난방 분배기 -->
+                    <details class="rounded-2xl shadow-sm border border-slate-200 bg-white/80 scope-accordion" aria-label="전기/환기/난방 분배기 점검">
+                        <summary class="py-3 px-4 flex items-center gap-2 cursor-pointer" aria-controls="scope-mep" aria-expanded="false">
+                            <span class="text-xl">⚡</span>
+                            <span class="font-bold text-primary">전기/환기/난방 분배기</span>
+                            <span class="ml-auto text-xs text-slate-500 hidden md:inline">분전반/차단기 | 환기 전환 | 누수/밸브</span>
+                        </summary>
+                        <div id="scope-mep" class="px-4 pb-4">
+                            <ul class="list-disc pl-5 text-sm text-gray-600 space-y-1 korean-text mb-3">
+                                <li>분전반 라벨·RCD 테스트</li>
+                                <li>환기 흡·배기 전환·역풍 확인</li>
+                                <li>난방 분배기 누수·밸브 상태</li>
+                                <li class="text-xs text-slate-500">증거: 근접 사진 · 측정치 · 판정</li>
+                        </ul>
+                            <ul class="grid md:grid-cols-2 gap-3">
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">분전반 라벨/차단기</div>
+                                        <div class="text-xs text-slate-500">— [체크] 라벨 정합·RCD 테스트 / [장비] 멀티미터 / [판정] 오기재·미작동 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 멀티미터</span>
+                                            <span class="badge">판정: 투입/차단</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">환기 디퓨저 흡·배기</div>
+                                        <div class="text-xs text-slate-500">— [체크] 모드 전환·역풍 / [장비] 육안 / [판정] 역풍·막힘 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 흡/배기</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">난방 분배기 누수/밸브</div>
+                                        <div class="text-xs text-slate-500">— [체크] 연결부·압력 / [장비] 육안 / [판정] 누수 자국 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 누수/개폐</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                </li>
+                                <li class="flex items-start gap-2">
+                                    <span class="w-5 h-5 bg-green-100 text-green-700 rounded-full text-xs flex items-center justify-center mt-1">✓</span>
+                                    <div>
+                                        <div class="font-medium text-sm korean-text">온도조절기</div>
+                                        <div class="text-xs text-slate-500">— [체크] 존별 on/off / [장비] 육안 / [판정] 반응 지연 / [사진] 근</div>
+                                        <div class="flex flex-wrap gap-1 mt-1">
+                                            <span class="badge">장비: 육안</span>
+                                            <span class="badge">판정: 온도 제어</span>
+                                            <span class="chip">근 사진</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                    </div>
+                                </li>
+                        </ul>
+                            <div class="mt-4 flex items-center justify-between">
+                                <p class="text-xs text-slate-500 korean-text">현장 상황에 따라 항목이 증감될 수 있습니다.</p>
+                                <button class="text-sm text-blue-700 hover:text-blue-900 font-semibold" data-track="copy_claim_template" onclick="copyClaimTemplate('[전기/환기/난방] 분전반 라벨 미비/차단기 동작 이상 및 환기 전환 불량 의심. 라벨 정비와 차단기/디퓨저 점검 요청합니다.')">접수 문구 복사</button>
+                            </div>
+                        </div>
+                    </details>
+                    </div>
+
+                <!-- 4) 전문 장비로 더 깊게 (옵션) -->
+                <div class="max-w-5xl mx-auto mt-12">
+                    <h3 class="text-xl font-bold text-primary mb-4 korean-text">전문 장비로 더 깊게</h3>
+                    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="mobile-card">
+                            <div class="font-semibold mb-2 korean-text">열화상 점검</div>
+                            <p class="text-sm text-secondary mb-3 korean-text">결로/누수 의심 패턴 스냅샷 첨부</p>
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="text-slate-500 korean-text">측정 리포트 추가 가능(옵션)</span>
+                                <button class="text-blue-700 hover:text-blue-900 font-semibold" data-track="cta_option_info">자세히</button>
+                            </div>
+                        </div>
+                        <div class="mobile-card">
+                            <div class="font-semibold mb-2 korean-text">라돈/공기질</div>
+                            <p class="text-sm text-secondary mb-3 korean-text">수치 기록 스냅샷</p>
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="text-slate-500 korean-text">측정 리포트 추가 가능(옵션)</span>
+                                <button class="text-blue-700 hover:text-blue-900 font-semibold" data-track="cta_option_info">자세히</button>
+                            </div>
+                        </div>
+                        <div class="mobile-card">
+                            <div class="font-semibold mb-2 korean-text">평활도/수직도</div>
+                            <p class="text-sm text-secondary mb-3 korean-text">게이지 수치 기록</p>
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="text-slate-500 korean-text">측정 리포트 추가 가능(옵션)</span>
+                                <button class="text-blue-700 hover:text-blue-900 font-semibold" data-track="cta_option_info">자세히</button>
+                            </div>
+                        </div>
+                        <div class="mobile-card">
+                            <div class="font-semibold mb-2 korean-text">내시경 배관 점검</div>
+                            <p class="text-sm text-secondary mb-3 korean-text">배수관 내부 상태 캡처</p>
+                            <div class="flex items-center justify-between text-xs">
+                                <span class="text-slate-500 korean-text">측정 리포트 추가 가능(옵션)</span>
+                                <button class="text-blue-700 hover:text-blue-900 font-semibold" data-track="cta_option_info">자세히</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7) 하단 고지 -->
+                <div class="mt-10 bg-blue-50 p-6 rounded-lg text-center">
+                    <p class="text-sm text-blue-700 korean-text">상세 체크리스트는 현장 상황에 따라 항목이 증감될 수 있습니다.</p>
+                    <p class="text-sm text-blue-700 korean-text mt-1">열화상/라돈/내시경 등 계측은 요청 시 별도 측정 리포트로 첨부 가능합니다.</p>
+                    <button class="mt-4 inline-flex items-center gap-2 text-blue-700 hover:text-blue-900 font-semibold" data-track="cta_claim_examples" onclick="showClaimModal()">접수 문구 예시 보기</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section - 4 Steps -->
+        <section class="py-16 sm:py-20 bg-gradient-to-br from-gray-50 to-slate-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-6 korean-text">
+                        점검 프로세스
+                    </h2>
+                    <p class="text-lg text-secondary korean-text">
+                        체계적이고 투명한 4단계 점검 과정
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                    <!-- Step 1 -->
+                    <div class="mobile-card text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                            <span class="text-white text-2xl font-bold">1</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-4 korean-text">예약 및 사전 문진</h3>
+                        <p class="text-secondary korean-text">단지/동·호, 평형, 일정, 키/출입 안내</p>
+                    </div>
+
+                    <!-- Step 2 -->
+                    <div class="mobile-card text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                            <span class="text-white text-2xl font-bold">2</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-4 korean-text">2인 1조 현장 점검</h3>
+                        <p class="text-secondary korean-text">육안+장비, 공간→항목 루트</p>
+                    </div>
+
+                    <!-- Step 3 -->
+                    <div class="mobile-card text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                            <span class="text-white text-2xl font-bold">3</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-4 korean-text">리포트 발행</h3>
+                        <p class="text-secondary korean-text">A4, 사진 2컷, 문제/근거, 권장 조치, 접수 문구</p>
+                    </div>
+
+                    <!-- Step 4 -->
+                    <div class="mobile-card text-center">
+                        <div class="w-16 h-16 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
+                            <span class="text-white text-2xl font-bold">4</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-primary mb-4 korean-text">시공사 접수 가이드</h3>
+                        <p class="text-secondary korean-text">접수 가이드 및 재점검 안내</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Report Sample Section -->
+        <section class="py-16 sm:py-20 bg-gradient-to-br from-blue-50 to-indigo-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-6 korean-text">
+                        리포트 샘플 구조
+                    </h2>
+                    <p class="text-lg text-secondary korean-text">
+                        실제 점검 결과를 어떻게 정리하는지 확인해보세요
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-blue-100 mb-8">
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Sample Report Structure -->
+                        <div class="space-y-6">
+                            <h3 class="text-xl font-bold text-primary mb-4 korean-text">항목 카드 예시</h3>
+                            
+                            <div class="bg-gray-50 p-4 rounded-lg">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="bg-blue-500 text-white px-2 py-1 rounded text-sm font-bold">#001</span>
+                                    <span class="font-semibold text-primary korean-text">거실 창호 좌우 갭/기밀 저하</span>
+                                </div>
+                                
+                                <div class="space-y-3 text-sm text-secondary korean-text">
+                                    <div>
+                                        <strong>사진:</strong> 원/근(2장)
+                                    </div>
+                                    <div>
+                                        <strong>문제:</strong> 거실 창호 좌우 갭/기밀 저하
+                                    </div>
+                                    <div>
+                                        <strong>근거/측정치:</strong> 레벨/수직도 수치, 열화상 패턴
+                                    </div>
+                                    <div>
+                                        <strong>권장조치(시공사 표현):</strong> 창호 프레임 조정 및 실리콘 재시공 필요
+                                    </div>
+                                    <div>
+                                        <strong>시공사 접수 문구:</strong> "거실 창호 좌우 갭으로 인한 기밀성 저하 확인. 프레임 조정 및 실리콘 재시공 요청"
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Report Features -->
+                        <div class="space-y-6">
+                            <h3 class="text-xl font-bold text-primary mb-4 korean-text">리포트 특징</h3>
+                            
+                            <div class="space-y-4">
+                                <div class="flex items-start gap-3">
+                                    <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mt-0.5 flex-shrink-0">✓</span>
+                                    <div class="text-sm text-secondary korean-text">
+                                        <strong>원/근 사진:</strong> 문제 상황을 명확히 보여주는 2장의 사진
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mt-0.5 flex-shrink-0">✓</span>
+                                    <div class="text-sm text-secondary korean-text">
+                                        <strong>측정치 기록:</strong> 과학적 근거가 있는 수치 데이터
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mt-0.5 flex-shrink-0">✓</span>
+                                    <div class="text-sm text-secondary korean-text">
+                                        <strong>시공사 접수 문구:</strong> 그대로 붙여넣기 가능한 정확한 표현
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-3">
+                                    <span class="w-6 h-6 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-xs font-bold mt-0.5 flex-shrink-0">✓</span>
+                                    <div class="text-sm text-secondary korean-text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center">
+                    <a href="#" data-config="kakao_href" target="_blank" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black px-8 py-4 rounded-xl font-bold text-lg transition-all" data-track="cta_sample_request">
+                        💬 리포트 샘플 PDF 요청
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 전문가 자격 증명 섹션 -->
+        <section class="py-16 sm:py-20 bg-gradient-to-br from-slate-50 to-gray-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-6 korean-text">🏆 검증된 전문가 자격</h2>
+                    <p class="text-lg text-secondary korean-text">국가 공인 자격증과 대형 건설사 실무 경험을 보유한 전문가</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8 mb-12">
+                    <div class="mobile-card text-center">
+                        <div class="w-20 h-20 bg-blue-100 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
+                            <span class="text-blue-600 text-3xl">📜</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-3 korean-text">건축기사 자격증</h3>
+                        <div class="space-y-2 text-secondary korean-text">
+                            <p class="text-sm">• 2014년 취득</p>
+                            <p class="text-sm">• 국가 공인 자격</p>
+                            <p class="text-sm">• 건축물 안전진단 전문</p>
+                        </div>
+                        <div class="mt-4 bg-blue-50 p-3 rounded-lg">
+                            <p class="text-xs text-blue-700 font-semibold">자격증 번호: 2024-건축-1234</p>
+                        </div>
+                    </div>
+
+                    <div class="mobile-card text-center">
+                        <div class="w-20 h-20 bg-green-100 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
+                            <span class="text-green-600 text-3xl">🏢</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-3 korean-text">대형 건설사 경력</h3>
+                        <div class="space-y-2 text-secondary korean-text">
+                            <p class="text-sm">• 현대 엔지니어링 공사팀 출신</p>
+                            <p class="text-sm">• 6000세대 직접 시공</p>
+                            <p class="text-sm">• 하자 처리 전문가</p>
+                        </div>
+                        <div class="mt-4 bg-green-50 p-3 rounded-lg">
+                            <p class="text-xs text-green-700 font-semibold">경력 증명서 보유</p>
+                        </div>
+                    </div>
+
+                    <div class="mobile-card text-center">
+                        <div class="w-20 h-20 bg-purple-100 rounded-full mx-auto mb-6 flex items-center justify-center shadow-lg">
+                            <span class="text-purple-600 text-3xl">🎓</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-primary mb-3 korean-text">건축 전문 교육</h3>
+                        <div class="space-y-2 text-secondary korean-text">
+                            <p class="text-sm">• 하자 진단 전문가 과정</p>
+                            <p class="text-sm">• 건축물 안전관리 교육</p>
+                            <p class="text-sm">• 최신 점검 기술 습득</p>
+                        </div>
+                        <div class="mt-4 bg-purple-50 p-3 rounded-lg">
+                            <p class="text-xs text-purple-700 font-semibold">연간 40시간 교육 이수</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 투명한 점검 과정 공개 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold text-center mb-8 korean-text">🔍 투명한 점검 과정</h3>
+                    <div class="space-y-8">
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">1</div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold mb-3 korean-text">사전 상담 (30분)</h4>
+                                <p class="text-gray-600 mb-3 korean-text">도면 분석, 시공사 특성 파악, 점검 범위 협의</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-sm bg-blue-100 text-blue-800 px-3 py-1 rounded-full korean-text">📋 체크리스트 제공</span>
+                                    <span class="text-sm bg-green-100 text-green-800 px-3 py-1 rounded-full korean-text">📞 무료 상담</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">2</div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold mb-3 korean-text">현장 점검 (3-5시간)</h4>
+                                <p class="text-gray-600 mb-3 korean-text">전문장비 4종 활용한 정밀 점검, 실시간 사진 촬영</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-sm bg-green-100 text-green-800 px-3 py-1 rounded-full korean-text">📷 실시간 공유</span>
+                                    <span class="text-sm bg-purple-100 text-purple-800 px-3 py-1 rounded-full korean-text">🔬 과학적 측정</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-6">
+                            <div class="w-12 h-12 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-lg flex-shrink-0">3</div>
+                            <div class="flex-1">
+                                <h4 class="text-lg font-bold mb-3 korean-text">보고서 작성 (당일)</h4>
+                                <p class="text-gray-600 mb-3 korean-text">상세 사진 보고서, 우선순위별 분류, 협의 가이드라인</p>
+                                <div class="flex flex-wrap gap-2">
+                                    <span class="text-sm bg-purple-100 text-purple-800 px-3 py-1 rounded-full korean-text">📊 50페이지 이상</span>
+                                    <span class="text-sm bg-orange-100 text-orange-800 px-3 py-1 rounded-full korean-text">📧 당일 전달</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust & Credibility Section -->
+        <section class="py-16 sm:py-20 bg-gradient-to-br from-green-50 to-emerald-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-6 korean-text">
+                        🛡️ 신뢰할 수 있는 이유
+                    </h2>
+                    <p class="text-lg text-secondary korean-text">
+                        투명한 실적과 검증된 전문성으로 믿을 수 있습니다
+                    </p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+                    <!-- 자격증 -->
+                    <div class="mobile-card text-center">
+                        <div class="w-12 h-12 bg-blue-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-blue-600 text-xl">📜</span>
+                        </div>
+                        <h3 class="font-bold text-primary mb-2 korean-text">건축기사 자격증</h3>
+                        <p class="text-sm text-secondary korean-text">국가 공인 자격증 보유</p>
+                    </div>
+
+                    <!-- 시공사 대응 리포트 -->
+                    <div class="mobile-card text-center">
+                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-green-600 text-xl">📄</span>
+                        </div>
+                        <h3 class="font-bold text-primary mb-2 korean-text">시공사 대응 리포트</h3>
+                        <p class="text-sm text-secondary korean-text">원/근 사진 + 문제/근거 + 권장조치 + 접수 문구</p>
+                    </div>
+
+                    <!-- 계약서 -->
+                    <div class="mobile-card text-center">
+                        <div class="w-12 h-12 bg-purple-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-purple-600 text-xl">📋</span>
+                        </div>
+                        <h3 class="font-bold text-primary mb-2 korean-text">정식 계약서</h3>
+                        <p class="text-sm text-secondary korean-text">법적 보호 받는 서비스</p>
+                    </div>
+
+                    <!-- 서비스 품질 보장 -->
+                    <div class="mobile-card text-center">
+                        <div class="w-12 h-12 bg-orange-100 rounded-xl flex items-center justify-center mx-auto mb-4">
+                            <span class="text-orange-600 text-xl">💯</span>
+                        </div>
+                        <h3 class="font-bold text-primary mb-2 korean-text">서비스 품질 보장</h3>
+                        <p class="text-sm text-secondary korean-text">합리적 사유 시 환불/재점검 정책 안내</p>
+                    </div>
+                </div>
+
+                <!-- 베타 후기 -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold text-primary mb-6 text-center korean-text">💬 베타 후기</h3>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400 text-sm">★★★★★</div>
+                                <span class="ml-2 text-sm text-secondary korean-text">김민수님 | 솔파구 | 84㎡</span>
+                            </div>
+                            <p class="text-secondary korean-text mb-3">
+                                "입주 전 점검에서 총 110개의 하자를 발견해주셨어요. 특히 벽 안쪽 배관 누수 위험은 다른 업체에서는 전혀 못 찾았던 부분인데, 열화상 카메라로 정확히 찾아내셨습니다."
+                            </p>
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <p class="text-green-700 font-bold text-sm korean-text">💰 상당한 절약 효과</p>
+                                <p class="text-xs text-green-600 korean-text">2024.08.15 | 베타 서비스</p>
+                            </div>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400 text-sm">★★★★★</div>
+                                <span class="ml-2 text-sm text-secondary korean-text">이지영님 | 강남구 | 102㎡</span>
+                            </div>
+                            <p class="text-secondary korean-text mb-3">
+                                "전문장비 점검이 정말 꼼꼼해요. 라돈 수치까지 측정해주셔서 안심하고 이사했습니다. 시공사와 협의할 때도 도와주셔서 모든 하자를 무료로 수리받을 수 있었어요!"
+                            </p>
+                            <div class="bg-green-50 p-3 rounded-lg">
+                                <p class="text-green-700 font-bold text-sm korean-text">💰 상당한 절약 효과</p>
+                                <p class="text-xs text-green-600 korean-text">2024.07.22 | 베타 서비스</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 추가 후기 -->
+                    <div class="mt-6 grid md:grid-cols-3 gap-4">
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400 text-xs">★★★★★</div>
+                                <span class="ml-2 text-xs text-secondary korean-text">박성훈님</span>
+                            </div>
+                            <p class="text-xs text-gray-600 korean-text">"시공사 협의 완벽 지원! 상당한 절약 효과"</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400 text-xs">★★★★★</div>
+                                <span class="ml-2 text-xs text-secondary korean-text">최영희님</span>
+                            </div>
+                            <p class="text-xs text-gray-600 korean-text">"재점검까지 무료! 정말 믿을만해요"</p>
+                        </div>
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <div class="flex items-center mb-2">
+                                <div class="flex text-yellow-400 text-xs">★★★★★</div>
+                                <span class="ml-2 text-xs text-secondary korean-text">정민호님</span>
+                            </div>
+                            <p class="text-xs text-gray-600 korean-text">"건설사 출신이라 정말 전문적이에요"</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 보장 및 약속 섹션 -->
+        <section class="py-16 sm:py-20 bg-gradient-to-br from-green-50 to-emerald-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto">
+                    <div class="bg-white border-2 border-green-200 rounded-2xl p-8 shadow-lg">
+                        <h3 class="text-2xl font-bold text-center mb-8 text-green-800 korean-text">💯 HazaCheck 약속</h3>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <span class="text-green-500 text-2xl">✅</span>
+                                    <div>
+                                        <h4 class="text-lg font-bold mb-2 korean-text">100% 만족 보장</h4>
+                                        <p class="text-sm text-gray-600 korean-text">불만족시 전액 환불 (30일 이내)</p>
+                                        <div class="mt-2 text-xs text-green-600 font-semibold">환불 조건: 서비스 미수행시</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <span class="text-green-500 text-2xl">✅</span>
+                                    <div>
+                                        <h4 class="text-lg font-bold mb-2 korean-text">무료 재점검</h4>
+                                        <p class="text-sm text-gray-600 korean-text">하자 수리 후 1회 무료 재점검</p>
+                                        <div class="mt-2 text-xs text-green-600 font-semibold">수리 완료 후 30일 이내</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <span class="text-green-500 text-2xl">✅</span>
+                                    <div>
+                                        <h4 class="text-lg font-bold mb-2 korean-text">24시간 응답</h4>
+                                        <p class="text-sm text-gray-600 korean-text">문의 후 24시간 내 응답 보장</p>
+                                        <div class="mt-2 text-xs text-green-600 font-semibold">평일 평균 2시간 응답</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <span class="text-green-500 text-2xl">✅</span>
+                                    <div>
+                                        <h4 class="text-lg font-bold mb-2 korean-text">3개월 사후관리</h4>
+                                        <p class="text-sm text-gray-600 korean-text">입주 후에도 3개월간 무료 상담</p>
+                                        <div class="mt-2 text-xs text-green-600 font-semibold">전화/카톡 상담 무제한</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="space-y-6">
+                                <div class="flex items-start gap-4">
+                                    <span class="text-green-500 text-2xl">✅</span>
+                                    <div>
+                                        <h4 class="text-lg font-bold mb-2 korean-text">증빙 중심 리포트</h4>
+                                        <p class="text-sm text-gray-600 korean-text">원/근 사진 + 문제/근거 + 권장조치 + 접수 문구</p>
+                                        <div class="mt-2 text-xs text-green-600 font-semibold">리포트 샘플 요청 가능</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <span class="text-green-500 text-2xl">✅</span>
+                                    <div>
+                                        <h4 class="text-lg font-bold mb-2 korean-text">정식 계약서</h4>
+                                        <p class="text-sm text-gray-600 korean-text">법적 보호 받는 서비스</p>
+                                        <div class="mt-2 text-xs text-green-600 font-semibold">서비스 전 계약 체결</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <span class="text-green-500 text-2xl">✅</span>
+                                    <div>
+                                        <h4 class="text-lg font-bold mb-2 korean-text">시공사 협의 지원</h4>
+                                        <p class="text-sm text-gray-600 korean-text">하자 협의 과정 완전 지원</p>
+                                        <div class="mt-2 text-xs text-green-600 font-semibold">필요시 현장 동행</div>
+                                    </div>
+                                </div>
+                                <div class="flex items-start gap-4">
+                                    <span class="text-green-500 text-2xl">✅</span>
+                                    <div>
+                                        <h4 class="text-lg font-bold mb-2 korean-text">비밀보장</h4>
+                                        <p class="text-sm text-gray-600 korean-text">개인정보 완전 보호</p>
+                                        <div class="mt-2 text-xs text-green-600 font-semibold">개인정보보호법 준수</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 경쟁업체 비교 테이블 -->
+        <section class="py-16 sm:py-20 bg-gradient-to-br from-white to-blue-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-5xl mx-auto">
+                    <h3 class="text-2xl sm:text-3xl font-bold text-center mb-8 korean-text">다른 업체와 비교해보세요</h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full border-collapse border border-gray-300 bg-white rounded-lg shadow-lg">
+                            <thead>
+                                <tr class="bg-gray-100">
+                                    <th class="border border-gray-300 p-4 text-left font-bold korean-text">비교항목</th>
+                                    <th class="border border-gray-300 p-4 bg-blue-50 font-bold korean-text">HazaCheck</th>
+                                    <th class="border border-gray-300 p-4 font-bold korean-text">일반 점검업체</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="border border-gray-300 p-4 font-semibold korean-text">점검자 경력</td>
+                                    <td class="border border-gray-300 p-4 bg-blue-50 korean-text">Top 5 건설사 공사팀 출신신</td>
+                                    <td class="border border-gray-300 p-4 korean-text">외부 용역업체</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 p-4 font-semibold korean-text">점검 장비</td>
+                                    <td class="border border-gray-300 p-4 bg-blue-50 korean-text">전문장비 4종 보유</td>
+                                    <td class="border border-gray-300 p-4 korean-text">육안 점검 위주</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 p-4 font-semibold korean-text">보고서</td>
+                                    <td class="border border-gray-300 p-4 bg-blue-50 korean-text">시공사도 보기 편한 보고서</td>
+                                    <td class="border border-gray-300 p-4 korean-text">간단한 체크리스트</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 p-4 font-semibold korean-text">사후 관리</td>
+                                    <td class="border border-gray-300 p-4 bg-blue-50 korean-text">3개월 무료 상담</td>
+                                    <td class="border border-gray-300 p-4 korean-text">점검 후 종료</td>
+                                </tr>
+                                <tr>
+                                    <td class="border border-gray-300 p-4 font-semibold korean-text">시공사 협의</td>
+                                    <td class="border border-gray-300 p-4 bg-blue-50 korean-text">완전 지원 + 동행</td>
+                                    <td class="border border-gray-300 p-4 korean-text">보고서만 제공</td>
+                                </tr>
+                                
+                                <tr>
+                                    <td class="border border-gray-300 p-4 font-semibold korean-text">환불 정책</td>
+                                    <td class="border border-gray-300 p-4 bg-blue-50 korean-text">100% 환불보장</td>
+                                    <td class="border border-gray-300 p-4 korean-text">환불 불가</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transparent Pricing Section -->
+        <section id="pricing" class="py-12 sm:py-16 lg:py-20 bg-gradient-to-br from-white to-blue-50">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-8 sm:mb-12">
+                    <h3 class="text-3xl sm:text-4xl font-bold text-gray-800 mb-3 sm:mb-4 korean-text">
+                        투명한 가격 정책
+                    </h3>
+                    <p class="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto korean-text">
+        2인 1조 점검 · 사진 리포트 · 접수 문구 포함 (수도권 기준 / 지방 +2만원)
+                    </p>
+                </div>
+
+    <!-- 가격 카드 -->
+    <div class="grid gap-6 sm:gap-8 lg:grid-cols-4 max-w-6xl mx-auto">
+      <!-- 59type -->
+                    <div class="mobile-pricing-card">
+        <div class="mb-4 text-center">
+          <h4 class="text-xl sm:text-2xl font-bold text-primary mb-1 korean-text">59type</h4>
+          <div class="text-sm text-secondary mb-2">23–27평형</div>
+          <div class="text-4xl sm:text-5xl font-extrabold hazacheck-text korean-text">189,000원</div>
+                            </div>
+        <ul class="text-left space-y-2 mb-6 text-secondary korean-text">
+          <li>• 2인 1조 현장 점검</li>
+          <li>• 전 공간 기본 점검(작동/마감/전기·환기)</li>
+          <li>• 사진 리포트(원/근 2컷 + 접수 문구)</li>
+                            </ul>
+        <button class="w-full btn-simple btn-primary py-3 px-6 rounded-lg" onclick="scrollToForm()">견적 신청</button>
+                        </div>
+
+      <!-- 74type (인기) -->
+      <div class="mobile-pricing-card featured">
+        <div class="mb-4 text-center">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-600 text-white text-xs font-bold mb-2">인기</div>
+          <h4 class="text-xl sm:text-2xl font-bold text-primary mb-1 korean-text">74type</h4>
+          <div class="text-sm text-secondary mb-2">28–31평형</div>
+          <div class="text-4xl sm:text-5xl font-extrabold hazacheck-text korean-text">209,000원</div>
+        </div>
+        <ul class="text-left space-y-2 mb-6 text-secondary korean-text">
+          <li>• 2인 1조 현장 점검</li>
+          <li>• 전 공간 기본 점검(작동/마감/전기·환기)</li>
+          <li>• 사진 리포트(원/근 2컷 + 접수 문구)</li>
+                            </ul>
+        <button class="w-full btn-simple btn-primary py-3 px-6 rounded-lg" onclick="scrollToForm()">견적 신청</button>
+                    </div>
+
+      <!-- 84type -->
+                    <div class="mobile-pricing-card">
+        <div class="mb-4 text-center">
+          <h4 class="text-xl sm:text-2xl font-bold text-primary mb-1 korean-text">84type</h4>
+          <div class="text-sm text-secondary mb-2">32–36평형</div>
+          <div class="text-4xl sm:text-5xl font-extrabold hazacheck-text korean-text">229,000원</div>
+                            </div>
+        <ul class="text-left space-y-2 mb-6 text-secondary korean-text">
+          <li>• 2인 1조 현장 점검</li>
+          <li>• 전 공간 기본 점검(작동/마감/전기·환기)</li>
+          <li>• 사진 리포트(원/근 2컷 + 접수 문구)</li>
+                            </ul>
+        <button class="w-full btn-simple btn-primary py-3 px-6 rounded-lg" onclick="scrollToForm()">견적 신청</button>
+                    </div>
+
+      <!-- 99type(선택 확장) -->
+                    <div class="mobile-pricing-card">
+        <div class="mb-4 text-center">
+          <h4 class="text-xl sm:text-2xl font-bold text-primary mb-1 korean-text">99type</h4>
+          <div class="text-sm text-secondary mb-2">37–45평형</div>
+          <div class="text-4xl sm:text-5xl font-extrabold hazacheck-text korean-text">269,000원</div>
+                            </div>
+        <ul class="text-left space-y-2 mb-6 text-secondary korean-text">
+          <li>• 2인 1조 현장 점검</li>
+          <li>• 전 공간 기본 점검(작동/마감/전기·환기)</li>
+          <li>• 사진 리포트(원/근 2컷 + 접수 문구)</li>
+        </ul>
+        <button class="w-full btn-simple btn-primary py-3 px-6 rounded-lg" onclick="scrollToForm()">견적 신청</button>
+                        </div>
+    </div>
+
+    <!-- 옵션/정책 바 -->
+    <div class="max-w-4xl mx-auto mt-8 grid sm:grid-cols-3 gap-4">
+      <div class="mobile-card">
+        <h5 class="font-bold text-primary mb-2 korean-text">옵션</h5>
+        <ul class="text-sm text-secondary space-y-1 korean-text">
+          <li>• 시공사 접수 대행 <span class="font-semibold text-gray-800">+50,000원</span></li>
+                            </ul>
+                        </div>
+      <div class="mobile-card">
+        <h5 class="font-bold text-primary mb-2 korean-text">정책</h5>
+        <ul class="text-sm text-secondary space-y-1 korean-text">
+          <li>• 예약금 <span class="font-semibold text-gray-800">100,000원</span> (일정 확정 시)</li>
+          <li>• 수도권 기준 / 지방 <span class="font-semibold text-gray-800">+20,000원</span></li>
+          <li>• 일정 변경/취소 규정은 예약 시 안내</li>
+                            </ul>
+                        </div>
+      <div class="mobile-card">
+        <h5 class="font-bold text-primary mb-2 korean-text">지금 문의</h5>
+        <p class="text-sm text-secondary mb-3 korean-text">오늘·내일 방문 가능 여부를 확인해드립니다.</p>
+        <div class="grid grid-cols-2 gap-2">
+          <a href="#" data-config="phone_href" class="mobile-btn mobile-btn-primary">📞 전화상담</a>
+          <a href="#" data-config="kakao_href" target="_blank" class="mobile-btn mobile-btn-orange">💬 카톡상담</a>
+        </div>
+                    </div>
+                </div>
+
+    <!-- 모바일 하단 고정 바(기존 유지) -->
+                <div class="mobile-contact-bar">
+      <a href="#" data-config="phone_href" class="mobile-contact-btn phone" data-track="cta_sticky_phone">📞 전화</a>
+      <a href="#" data-config="kakao_href" target="_blank" class="mobile-contact-btn kakao" data-track="cta_sticky_kakao">💬 카톡</a>
+      <button class="mobile-contact-btn bg-orange-500 text-white" onclick="scrollToForm()" data-track="cta_sticky_quote">📝 견적</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Policy & Compliance Section -->
+        <section class="py-16 sm:py-20 bg-gradient-to-br from-green-50 to-emerald-50">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center mb-12">
+                    <h2 class="text-3xl sm:text-4xl font-bold text-primary mb-6 korean-text">
+                        정책 및 준수
+                    </h2>
+                    <p class="text-lg text-secondary korean-text">
+                        서비스 신뢰를 위한 원칙과 준수
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <!-- Evidence-based Report Policy -->
+                    <div class="mobile-card">
+                        <h3 class="text-xl font-bold text-primary mb-4 korean-text">증빙 중심 리포트 정책</h3>
+                        <p class="text-secondary korean-text mb-4">과장 표현 없이 증빙 가능한 사실 기반</p>
+                        <div class="bg-green-50 p-4 rounded-lg">
+                            <p class="text-sm text-green-700 font-semibold korean-text">원/근 사진 · 측정치 · 접수 문구 포함</p>
+                            <p class="text-sm text-green-700 font-semibold korean-text">고객 편 점검 원칙</p>
+                        </div>
+                    </div>
+
+                    <!-- Privacy Policy -->
+                    <div class="mobile-card">
+                        <h3 class="text-xl font-bold text-primary mb-4 korean-text">개인정보 최소 수집·보관 정책</h3>
+                        <p class="text-secondary korean-text mb-4">고지</p>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <p class="text-sm text-blue-700 font-semibold korean-text">수집 항목: 이름, 연락처, 주소</p>
+                            <p class="text-sm text-blue-700 font-semibold korean-text">보관 기간: 서비스 완료 후 1년</p>
+                        </div>
+                    </div>
+
+                    <!-- Conflict of Interest -->
+                    <div class="mobile-card">
+                        <h3 class="text-xl font-bold text-primary mb-4 korean-text">이해상충 회피</h3>
+                        <p class="text-secondary korean-text mb-4">고객 편에서 점검</p>
+                        <div class="bg-purple-50 p-4 rounded-lg">
+                            <p class="text-sm text-purple-700 font-semibold korean-text">시공사와의 이해관계 없음</p>
+                            <p class="text-sm text-purple-700 font-semibold korean-text">고객 이익 우선 원칙</p>
+                        </div>
+                    </div>
+
+                    <!-- Legal Compliance -->
+                    <div class="mobile-card">
+                        <h3 class="text-xl font-bold text-primary mb-4 korean-text">법적 준수</h3>
+                        <p class="text-secondary korean-text mb-4">관련 법규 준수</p>
+                        <div class="bg-orange-50 p-4 rounded-lg">
+                            <p class="text-sm text-orange-700 font-semibold korean-text">건축법, 소비자기본법 준수</p>
+                            <p class="text-sm text-orange-700 font-semibold korean-text">개인정보보호법 준수</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl p-8 shadow-lg border border-green-100">
+                    <h3 class="text-xl font-bold text-center mb-6 korean-text">정책 문서</h3>
+                    <div class="grid md:grid-cols-3 gap-4 text-center">
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold korean-text">서비스 약관</a>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold korean-text">개인정보처리방침</a>
+                        <a href="#" class="text-blue-600 hover:text-blue-800 font-semibold korean-text">카톡채널</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 언론 보도 및 인증 섹션 제거됨 | FAQ Section -->
+        <section class="py-16 sm:py-20 bg-gradient-to-br from-purple-50 to-indigo-50">
+            <div class="container mx-auto px-4">
+                <!-- FAQ Section -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <h3 class="text-2xl font-bold text-center mb-8 korean-text">자주 묻는 질문</h3>
+                    <div class="space-y-6">
+                        <div class="border-b border-gray-200 pb-6">
+                            <button class="w-full text-left flex justify-between items-center" onclick="toggleFAQ(this)">
+                                <h4 class="text-lg font-bold text-gray-800 korean-text">소요시간은 얼마나 걸리나요?</h4>
+                                <span class="text-2xl text-gray-400">+</span>
+                            </button>
+                            <div class="hidden mt-4 text-gray-600 korean-text">
+                                <p>평형/옵션에 따라 1.5~3시간(보수 폭)</p>
+                            </div>
+                        </div>
+                        <div class="border-b border-gray-200 pb-6">
+                            <button class="w-full text-left flex justify-between items-center" onclick="toggleFAQ(this)">
+                                <h4 class="text-lg font-bold text-gray-800 korean-text">고객 동행이 필수인가요?</h4>
+                                <span class="text-2xl text-gray-400">+</span>
+                            </button>
+                            <div class="hidden mt-4 text-gray-600 korean-text">
+                                <p>권장하지만 위임 가능합니다.</p>
+                            </div>
+                        </div>
+                        <div class="border-b border-gray-200 pb-6">
+                            <button class="w-full text-left flex justify-between items-center" onclick="toggleFAQ(this)">
+                                <h4 class="text-lg font-bold text-gray-800 korean-text">열쇠/출입은 어떻게 하나요?</h4>
+                                <span class="text-2xl text-gray-400">+</span>
+                            </button>
+                            <div class="hidden mt-4 text-gray-600 korean-text">
+                                <p>사전 안내 필수, 키·카드 필요 시 안내해드립니다.</p>
+                            </div>
+                        </div>
+                        <div class="border-b border-gray-200 pb-6">
+                            <button class="w-full text-left flex justify-between items-center" onclick="toggleFAQ(this)">
+                                <h4 class="text-lg font-bold text-gray-800 korean-text">리포트 수령 시점은 언제인가요?</h4>
+                                <span class="text-2xl text-gray-400">+</span>
+                            </button>
+                            <div class="hidden mt-4 text-gray-600 korean-text">
+                                <p>당일 요약/익일 상세(내부 SLA 표기)</p>
+                            </div>
+                        </div>
+                        <div class="border-b border-gray-200 pb-6">
+                            <button class="w-full text-left flex justify-between items-center" onclick="toggleFAQ(this)">
+                                <h4 class="text-lg font-bold text-gray-800 korean-text">시공사 접수/재점검은 어떻게 하나요?</h4>
+                                <span class="text-2xl text-gray-400">+</span>
+                            </button>
+                            <div class="hidden mt-4 text-gray-600 korean-text">
+                                <p>접수 가이드를 제공하며, 재점검 옵션도 있습니다.</p>
+                            </div>
+                        </div>
+                        <div class="border-b border-gray-200 pb-6">
+                            <button class="w-full text-left flex justify-between items-center" onclick="toggleFAQ(this)">
+                                <h4 class="text-lg font-bold text-gray-800 korean-text">외국인 고객도 이용할 수 있나요?</h4>
+                                <span class="text-2xl text-gray-400">+</span>
+                            </button>
+                            <div class="hidden mt-4 text-gray-600 korean-text">
+                                <p>영어 상담/영문 요약이 가능합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact & CTA Section -->
+        <section id="contact" class="py-16 bg-gradient-to-br from-slate-800 to-slate-900 text-white">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h3 class="text-4xl font-bold mb-4 text-glow">상담 가능 시간 안내</h3>
+                    <p class="text-xl text-gray-300">24시간 상담 접수 | 빠른 답변 지향</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                    <div class="space-y-8">
+                        <div class="bg-gray-800 p-6 rounded-xl">
+                            <h4 class="text-2xl font-bold mb-4 flex items-center">
+                                📞 전화상담
+                            </h4>
+                            <p class="text-gray-300 mb-4">24시간 상담: <a href="#" data-config="phone_href" class="text-blue-400 font-bold"><span data-config="phone_display">010-2600-5800</span></a></p>
+                            <p class="text-sm text-gray-400">"HazaCheck 상담"이라고 말씀하세요</p>
+                        </div>
+                        <div class="bg-gray-800 p-6 rounded-xl">
+                            <h4 class="text-2xl font-bold mb-4 flex items-center">
+                                💬 카카오톡 상담
+                            </h4>
+                            <p class="text-gray-300 mb-4">카톡ID: <span class="text-yellow-400 font-bold" data-config="kakao_id_display">@hazacheck</span></p>
+                            <a href="#" data-config="kakao_href" target="_blank" class="inline-block bg-yellow-400 hover:bg-yellow-500 text-black px-6 py-3 rounded-lg font-bold text-lg transition-all transform hover:scale-105">
+                                💬 카톡으로 바로 문의하기
+                            </a>
+                            <p class="text-sm text-gray-400 mt-2">QR코드 스캔으로 간편 추가</p>
+                        </div>
+                    </div>
+                    <div class="bg-white p-8 rounded-2xl">
+                        <h4 class="text-2xl font-bold text-gray-800 mb-6">📝 온라인 견적 신청</h4>
+                        <form class="space-y-4" onsubmit="handleFormSubmit(event)">
+                            <div>
+                                <input type="text" placeholder="이름" class="w-full p-3 border border-gray-300 rounded-lg text-gray-800" required>
+                            </div>
+                            <div>
+                                <input type="tel" placeholder="연락처" class="w-full p-3 border border-gray-300 rounded-lg text-gray-800" required>
+                            </div>
+                            <div>
+                                <input type="text" placeholder="아파트명" class="w-full p-3 border border-gray-300 rounded-lg text-gray-800" required>
+                            </div>
+                            <div>
+                                <select class="w-full p-3 border border-gray-300 rounded-lg text-gray-800" required>
+                                    <option value="">평수 선택</option>
+                                    <option value="59type">59type (23–27평형)</option>
+                                    <option value="74type">74type (28–31평형)</option>
+                                    <option value="84type">84type (32–36평형)</option>
+                                    <option value="99type">99type (37–45평형)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <input type="date" placeholder="입주예정일" class="w-full p-3 border border-gray-300 rounded-lg text-gray-800" required>
+                            </div>
+                            <div>
+                                <textarea placeholder="특이사항" rows="3" class="w-full p-3 border border-gray-300 rounded-lg text-gray-800"></textarea>
+                            </div>
+                            <button type="submit" class="w-full bg-orange-500 hover:bg-orange-600 text-white py-4 rounded-lg font-bold text-lg transition-colors">
+                                무료 견적 신청하기
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Footer -->
+        <footer class="bg-gray-900 text-white py-12">
+            <div class="container mx-auto px-4">
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <!-- Company Info -->
+                    <div>
+                        <div class="flex items-center space-x-3 mb-4">
+                            <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+                                <span class="text-white font-bold text-lg">🏗️</span>
+                            </div>
+                            <div>
+                                <h1 class="text-2xl font-bold">HazaCheck</h1>
+                                <p class="text-sm text-gray-400">건설사 출신 전문가의 진짜 하자점검</p>
+                            </div>
+                        </div>
+                        <div class="space-y-2 text-sm text-gray-400">
+                            <p><strong>상호:</strong> HazaCheck</p>
+                            <p><strong>대표:</strong> [대표자명]</p>
+                            <p><strong>연락처:</strong> <span data-config="phone_display">010-2600-5800</span></p>
+                            <p><strong>이메일:</strong> <span data-config="email_display">info@hazacheck.com</span></p>
+                            <p><strong>사업자등록번호:</strong> [사업자번호]</p>
+                        </div>
+                    </div>
+
+                    <!-- Legal Links -->
+                    <div>
+                        <h3 class="text-lg font-bold mb-4">법적 정보</h3>
+                        <div class="space-y-2 text-sm text-gray-400">
+                            <a href="#" class="block hover:text-white transition-colors">서비스 약관</a>
+                            <a href="#" class="block hover:text-white transition-colors">개인정보처리방침</a>
+                            <a href="#" class="block hover:text-white transition-colors">카톡채널</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="border-t border-gray-700 pt-8 text-center">
+                    <p class="text-gray-400 mb-2">완벽한 내 집 만들기, HazaCheck와 함께하세요</p>
+                    <p class="text-gray-400 mb-4">※ HazaCheck은 고객 편에서 점검하며, 과장 표현 없이 증빙 가능한 사실에 기반해 리포트를 작성합니다.</p>
+                    <div class="flex justify-center space-x-6 text-sm text-gray-400">
+                                <span data-config="phone_display">📞 010-2600-5800</span>
+                                <span data-config="kakao_id_display">💬 @hazacheck</span>
+                                <span data-config="email_display">📧 info@hazacheck.com</span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Mobile CTA Button -->
+        <button class="mobile-cta-button" onclick="scrollToForm()">
+            🚀 지금 무료견적 받기
+        </button>
+
+        <!-- Mobile Contact Bar -->
+        <div class="mobile-contact-bar">
+                    <a href="#" data-config="phone_href" class="mobile-contact-btn phone">
+                📞 전화문의
+            </a>
+                    <a href="#" data-config="kakao_href" target="_blank" class="mobile-contact-btn kakao">
+                💬 카톡문의
+            </a>
+        </div>
+
+        <!-- 실시간 상담 위젯 -->
+        <div class="fixed bottom-20 right-4 z-50 hidden md:block">
+            <div class="bg-blue-600 text-white p-4 rounded-lg shadow-lg max-w-xs animate-pulse">
+                <div class="flex items-center gap-2 mb-2">
+                    <div class="w-3 h-3 bg-green-400 rounded-full animate-ping"></div>
+                    <span class="font-bold text-sm">전문가 대기중</span>
+                </div>
+                <p class="text-sm mb-3 korean-text">궁금한 점이 있으시면 바로 연결해드릴게요!</p>
+                <button class="w-full bg-white text-blue-600 py-2 rounded font-bold text-sm" onclick="scrollToForm()">
+                    💬 바로 상담하기
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+
+        // Scroll to form function
+        function scrollToForm() {
+            const form = document.querySelector('form');
+            if (form) {
+                form.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Enhanced form submission
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            const button = event.target.querySelector('button[type="submit"]');
+            const originalText = button.textContent;
+
+            // Loading state
+            button.textContent = '전송 중...';
+            button.disabled = true;
+
+            // Simulate API call
+            setTimeout(() => {
+                button.textContent = '전송 완료!';
+                button.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+
+                setTimeout(() => {
+                    alert('견적 신청이 접수되었습니다! 24시간 내에 연락드리겠습니다.');
+                    button.textContent = originalText;
+                    button.disabled = false;
+                    button.style.background = '';
+                    event.target.reset();
+                }, 2000);
+            }, 1500);
+        }
+
+        // Smooth scrolling for anchor links
+        function initSmoothScrolling() {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        }
+
+        // 실시간 카운터 애니메이션
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            
+            function updateCounter() {
+                start += increment;
+                if (start < target) {
+                    element.textContent = Math.floor(start);
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target;
+                }
+            }
+            updateCounter();
+        }
+
+        // FAQ 토글 기능
+        function toggleFAQ(button) {
+            const content = button.nextElementSibling;
+            const icon = button.querySelector('span');
+
+            if (content.classList.contains('hidden')) {
+                content.classList.remove('hidden');
+                content.style.maxHeight = content.scrollHeight + 'px';
+                icon.textContent = '-';
+                icon.style.transform = 'rotate(45deg)';
+            } else {
+                content.style.maxHeight = '0';
+                setTimeout(() => content.classList.add('hidden'), 300);
+                icon.textContent = '+';
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Initialize all features when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            initSmoothScrolling();
+            
+            // 실시간 카운터 애니메이션 시작
+            const counterElement = document.getElementById('inspection-counter');
+            if (counterElement) {
+                animateCounter(counterElement, 15);
+            }
+
+            // 데스크탑에서는 첫 카드만 기본 open, 모바일에서는 모두 접힘 유지 (첫 카드는 위에서 open 속성으로 처리)
+            if (window.matchMedia('(min-width: 768px)').matches) {
+                document.querySelectorAll('.scope-accordion').forEach((d, idx) => {
+                    if (idx > 0) d.removeAttribute('open');
+                });
+            } else {
+                document.querySelectorAll('.scope-accordion').forEach((d, idx) => {
+                    if (idx > 0) d.removeAttribute('open');
+                });
+            }
+
+            // Bind SITE_CONFIG into DOM
+            document.querySelectorAll('[data-config="phone_href"]').forEach(a => a.setAttribute('href', `tel:${SITE_CONFIG.phone}`));
+            document.querySelectorAll('[data-config="kakao_href"]').forEach(a => a.setAttribute('href', SITE_CONFIG.kakaoUrl));
+            document.querySelectorAll('[data-config="phone_display"]').forEach(el => el.textContent = `📞 ${SITE_CONFIG.phone}`);
+            document.querySelectorAll('[data-config="kakao_id_display"]').forEach(el => el.textContent = SITE_CONFIG.kakaoId);
+            document.querySelectorAll('[data-config="email_display"]').forEach(el => el.textContent = `📧 ${SITE_CONFIG.email}`);
+
+            // a11y: sync aria-expanded on details/summary
+            document.querySelectorAll('.scope-accordion').forEach(d => {
+                const summary = d.querySelector('summary');
+                const expanded = d.hasAttribute('open');
+                summary.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                d.addEventListener('toggle', () => {
+                    summary.setAttribute('aria-expanded', d.open ? 'true' : 'false');
+                });
+            });
+        });
+
+        // 접수 문구 복사 기능
+        function copyClaimTemplate(text) {
+            try {
+                navigator.clipboard.writeText(text);
+                alert('접수 문구가 복사되었습니다. 카톡/접수창에 붙여넣기 하세요.');
+            } catch (e) {
+                const ta = document.createElement('textarea');
+                ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+                alert('접수 문구가 복사되었습니다. 카톡/접수창에 붙여넣기 하세요.');
+            }
+        }
+
+        // 접수 문구 모달
+        function showClaimModal() {
+            const modal = document.getElementById('claimModal');
+            if (modal) modal.classList.remove('hidden');
+        }
+        function closeClaimModal() {
+            const modal = document.getElementById('claimModal');
+            if (modal) modal.classList.add('hidden');
+        }
+    </script>
+
+    <!-- Claim Templates Modal -->
+    <div id="claimModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center">
+        <div class="bg-white rounded-2xl p-6 max-w-lg w-full mx-4">
+            <div class="flex items-center justify-between mb-4">
+                <h4 class="text-xl font-bold text-gray-800 korean-text">시공사 접수 문구 예시</h4>
+                <button class="text-gray-500 hover:text-gray-700" onclick="closeClaimModal()">✕</button>
+            </div>
+            <div class="space-y-4 text-sm text-gray-700 korean-text">
+                <div class="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                    <div class="font-semibold text-gray-800 mb-1">[창호]</div>
+                    <p>거실 창호 좌측 프레임-벽체 이격으로 기밀 저하 우려. 실리콘 재시공 및 수평 재조정 요청합니다.</p>
+                    <div class="mt-2 text-right">
+                        <button class="text-blue-700 hover:text-blue-900 font-semibold text-xs" data-track="copy_claim_template" onclick="copyClaimTemplate('거실 창호 좌측 프레임-벽체 이격으로 기밀 저하 우려. 실리콘 재시공 및 수평 재조정 요청합니다.')">복사</button>
+                    </div>
+                </div>
+                <div class="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                    <div class="font-semibold text-gray-800 mb-1">[욕실]</div>
+                    <p>공용욕실 바닥 구배 불량으로 물 고임 발생. 배수구 방향 재시공 요청합니다.</p>
+                    <div class="mt-2 text-right">
+                        <button class="text-blue-700 hover:text-blue-900 font-semibold text-xs" data-track="copy_claim_template" onclick="copyClaimTemplate('공용욕실 바닥 구배 불량으로 물 고임 발생. 배수구 방향 재시공 요청합니다.')">복사</button>
+                    </div>
+                </div>
+                <div class="p-3 rounded-lg bg-slate-50 border border-slate-200">
+                    <div class="font-semibold text-gray-800 mb-1">[주방]</div>
+                    <p>하부장 문짝 수평 불량 및 간섭. 힌지 조정 및 문짝 재시공 요청합니다.</p>
+                    <div class="mt-2 text-right">
+                        <button class="text-blue-700 hover:text-blue-900 font-semibold text-xs" data-track="copy_claim_template" onclick="copyClaimTemplate('하부장 문짝 수평 불량 및 간섭. 힌지 조정 및 문짝 재시공 요청합니다.')">복사</button>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-4 text-right">
+                <button class="px-4 py-2 rounded-lg bg-slate-800 text-white font-semibold" onclick="closeClaimModal()">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "HazaCheck",
+        "url": "https://hazacheck.com",
+        "logo": "https://hazacheck.com/logo.png",
+        "description": "건설사 출신 전문가의 신축 아파트 사전 점검 서비스",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+82-10-2600-5800",
+            "contactType": "customer service",
+            "availableLanguage": ["Korean", "English"]
+        },
+        "sameAs": [
+            "https://pf.kakao.com/_hazacheck",
+            "https://instagram.com/hazacheck"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "KR"
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "소요시간은 얼마나 걸리나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "평형/옵션에 따라 1.5~3시간(보수 폭)"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "고객 동행이 필수인가요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "권장하지만 위임 가능합니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "열쇠/출입은 어떻게 하나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "사전 안내 필수, 키·카드 필요 시 안내해드립니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "리포트 수령 시점은 언제인가요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "당일 요약/익일 상세(내부 SLA 표기)"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "시공사 접수/재점검은 어떻게 하나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "접수 가이드를 제공하며, 재점검 옵션도 있습니다."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "외국인 고객도 이용할 수 있나요?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "영어 상담/영문 요약이 가능합니다."
+                }
+            }
+        ]
+    }
+    </script>
+</body>
+</html>
