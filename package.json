@@ -1,0 +1,27 @@
+{
+  "name": "hazacheck-home",
+  "version": "1.0.0",
+  "description": "하자체크 홈페이지 - 아파트 하자 점검 서비스",
+  "main": "index.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo 'No build step required for static site'",
+    "deploy": "vercel --prod"
+  },
+  "keywords": [
+    "hazacheck",
+    "아파트",
+    "하자점검",
+    "입주점검"
+  ],
+  "author": "(주)우주체크",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/postgres": "^0.5.1"
+  },
+  "devDependencies": {
+    "vercel": "^33.0.0"
+  }
+}
+
+

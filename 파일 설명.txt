@@ -1,0 +1,46 @@
+파일 위치C:\MyProject\hazacheck_home_ver5\images\logo
+  - logo.png (투명 배경)
+  - logo-white.png (다크 배경용)
+  - logo-dark.png (밝은 배경용)
+  - favicon.png
+
+
+파일위치:C:\MyProject\hazacheck_home_ver5\videos
+ 히어로 섹션 배경 영상 "신축 아파트 샷_전경_영상_날.mp4" "hero-background.mp4"
+"신축 아파트 샷_전경_영상_코너 바닥 점검.mp4" "inspection-floor-corner.mp4"
+ "신축 아파트 샷_전경_영상_수평측정.mp4" "inspection-level-measurement.mp4"
+"신축 아파트 샷_전경_영상_열화상카메라 점검.mp4" "inspection-thermal-camera.mp4"
+"대표가 직접 하자 점검을 하고 있는 영상" "ceo-inspection-action.mp4"
+
+
+파일 위치:C:\MyProject\hazacheck_home_ver5\images\defects
+
+원본: 타일 뒤채움  
+파일명:defect-tile-filling.png
+설명: 타일 뒤 채움 불량
+
+원본: 배관내부 백화
+파일명: defect-pipe-interior-efflorescence.jpg
+설명: 배관 내부 백화 현상 (클로즈업)
+
+원본: 바닥 물고임
+파일명: defect-floor-water.jpg
+설명: 화장실 바닥에 물고임 현상
+
+원본: 면귀 누수
+파일명:defect-corner-leakage.jpg
+설명: 모서리 부분 누수 하자
+
+
+원본: 도배 들뜸
+파일명:defect-wallpaper-lifting.jpg
+설명: 벽지 들뜸 현상
+
+
+원본: 마루 들뜸
+파일명:defect-floor-lifting.jpg
+설명: 마루 바닥재 들뜸
+
+파일 위치:C:\MyProject\hazacheck_home_ver5\images
+카카오톡 QR 코드 사진
+kakao-qr-code.png

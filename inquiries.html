@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="하자체크 문의하기 - 아파트 하자 점검 문의 및 예약">
+    <title>문의하기 - 하자체크</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo/Favicon.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/inquiries.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <img src="images/logo/logo.png" alt="하자체크 로고" class="logo-img">
+                </a>
+
+                <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html#home" class="nav-link">홈</a></li>
+                    <li><a href="index.html#about" class="nav-link">서비스 소개</a></li>
+                    <li><a href="index.html#pricing" class="nav-link">가격안내</a></li>
+                    <li><a href="index.html#cases" class="nav-link">점검사례</a></li>
+                    <li><a href="index.html#process" class="nav-link">점검과정</a></li>
+                    <li><a href="index.html#company" class="nav-link">회사소개</a></li>
+                    <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+                    <li><a href="inquiries.html" class="nav-link nav-cta">문의하기</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Inquiry Page Header -->
+    <section class="inquiry-header">
+        <div class="container">
+            <h1 class="page-title">문의하기</h1>
+            <p class="page-subtitle">하루 2세대 한정으로 대표가 직접 점검합니다.<br>빠른 예약을 원하신다면 지금 문의해주세요.</p>
+        </div>
+    </section>
+
+    <!-- Contact Methods -->
+    <section class="contact-quick">
+        <div class="container">
+            <div class="contact-grid">
+                <a href="tel:010-2900-5200" class="contact-card phone">
+                    <div class="contact-icon">📞</div>
+                    <h3>전화 상담</h3>
+                    <p class="contact-value">010-2900-5200</p>
+                    <span class="contact-action">전화 걸기 →</span>
+                </a>
+
+                <div class="contact-card kakao">
+                    <div class="contact-icon">💬</div>
+                    <h3>카카오톡 상담</h3>
+                    <p class="contact-value">@hazacheck</p>
+                    <span class="contact-action">카카오톡 열기 →</span>
+                </div>
+
+                <a href="mailto:hazacheck@gmail.com" class="contact-card email">
+                    <div class="contact-icon">✉️</div>
+                    <h3>이메일 문의</h3>
+                    <p class="contact-value">hazacheck@gmail.com</p>
+                    <span class="contact-action">이메일 보내기 →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inquiry Form Section -->
+    <section class="inquiry-form-section">
+        <div class="container">
+            <div class="form-wrapper">
+                <div class="form-header">
+                    <h2>온라인 문의 작성</h2>
+                    <p>아래 양식을 작성해주시면 빠른 시일 내에 연락드리겠습니다.</p>
+                </div>
+
+                <!-- 가격 정보 표시 (가격 계산기에서 온 경우) -->
+                <div class="price-info-card" id="priceInfoCard" style="display: none;">
+                    <div class="price-info-header">
+                        <h3>💰 선택하신 견적 정보</h3>
+                        <button type="button" class="close-price-info" id="closePriceInfo">×</button>
+                    </div>
+                    <div class="price-info-content">
+                        <div class="price-summary">
+                            <div class="price-item">
+                                <span class="price-label">세대 크기:</span>
+                                <span class="price-value" id="priceSize">-</span>
+                            </div>
+                            <div class="price-item">
+                                <span class="price-label">기본 비용:</span>
+                                <span class="price-value" id="priceBase">-</span>
+                            </div>
+                            <div class="price-item" id="priceOptionsContainer" style="display: none;">
+                                <span class="price-label">추가 옵션:</span>
+                                <div class="price-options" id="priceOptions"></div>
+                            </div>
+                            <div class="price-item price-total">
+                                <span class="price-label">총 예상 비용:</span>
+                                <span class="price-value" id="priceTotal">-</span>
+                            </div>
+                        </div>
+                        <p class="price-note">※ 이 정보는 문의 내용에 자동으로 포함됩니다.</p>
+                    </div>
+                </div>
+
+                <form id="inquiryForm" class="inquiry-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">이름 <span class="required">*</span></label>
+                            <input type="text" id="name" name="name" required placeholder="홍길동">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="phone">연락처 <span class="required">*</span></label>
+                            <input type="tel" id="phone" name="phone" required placeholder="010-0000-0000">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">이메일</label>
+                            <input type="email" id="email" name="email" placeholder="example@email.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="apartment">아파트명 <span class="required">*</span></label>
+                            <input type="text" id="apartment" name="apartment" required placeholder="예: 안산 센트럴푸르지오">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="size">전용면적 <span class="required">*</span></label>
+                            <select id="size" name="size" required>
+                                <option value="">선택해주세요</option>
+                                <option value="58">58타입 이하 (~58m²)</option>
+                                <option value="74">74타입 (59~74m²)</option>
+                                <option value="84">84타입 (75~84m²)</option>
+                                <option value="104">104타입 (85~104m²)</option>
+                                <option value="over">104m² 이상 (별도 견적)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="moveInDate">희망 점검일 <span class="required">*</span></label>
+                            <input type="date" id="moveInDate" name="moveInDate" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="options">추가 옵션 선택</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="options" value="하자 접수 대행 (+5만원)">
+                                <span>하자 접수 대행 (+5만원)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="options" value="사후관리 재점검 (+10만원)">
+                                <span>사후관리 재점검 (+10만원)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="options" value="VR 360° 촬영 (+5만원)">
+                                <span>VR 360° 촬영 (+5만원)</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" name="options" value="실측 서비스 (+5만원)">
+                                <span>실측 서비스 (+5만원)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="message">문의 내용</label>
+                        <textarea id="message" name="message" rows="6" placeholder="점검 관련 궁금한 사항이나 특별히 요청하실 내용을 자유롭게 작성해주세요."></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label class="checkbox-label privacy-check">
+                            <input type="checkbox" name="privacy" required>
+                            <span>개인정보 수집 및 이용에 동의합니다. <span class="required">*</span></span>
+                        </label>
+                        <p class="privacy-text">
+                            수집 항목: 이름, 연락처, 이메일, 아파트명<br>
+                            수집 목적: 하자 점검 서비스 문의 및 상담<br>
+                            보유 기간: 문의 완료 후 1년
+                        </p>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary btn-lg">문의 접수하기</button>
+                        <button type="reset" class="btn btn-secondary">다시 작성</button>
+                    </div>
+                </form>
+
+                <div class="form-success" id="formSuccess">
+                    <div class="success-icon">✓</div>
+                    <h3>문의가 접수되었습니다!</h3>
+                    <p>빠른 시일 내에 담당자가 연락드리겠습니다.<br>감사합니다.</p>
+                    <button class="btn btn-primary" onclick="location.reload()">추가 문의 작성</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inquiry List Section -->
+    <section class="inquiry-list-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>💬 최근 문의 내역</h2>
+                <p>다른 고객님들의 문의와 답변을 확인하실 수 있습니다</p>
+            </div>
+
+            <div class="inquiry-board">
+                <div class="board-stats">
+                    <div class="stat-item">
+                        <span class="stat-number" id="totalInquiries">5</span>
+                        <span class="stat-label">총 문의</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="answeredInquiries">3</span>
+                        <span class="stat-label">답변완료</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="pendingInquiries">2</span>
+                        <span class="stat-label">답변대기</span>
+                    </div>
+                </div>
+
+                <div class="inquiry-list">
+                    <div class="inquiry-item answered">
+                        <div class="inquiry-header">
+                            <div class="inquiry-meta">
+                                <span class="inquiry-status status-answered">
+                                    <span class="status-icon">✓</span>
+                                    답변완료
+                                </span>
+                                <span class="inquiry-date">2025-09-28</span>
+                            </div>
+                            <div class="inquiry-title-section">
+                                <h3 class="inquiry-title">김**님 - 평택 고덕 센트럴 푸르지오 84타입 점검 문의</h3>
+                                <div class="inquiry-tags">
+                                    <span class="tag tag-size">84타입</span>
+                                    <span class="tag tag-location">평택</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inquiry-content">
+                            <div class="question-section">
+                                <div class="section-label">❓ 질문</div>
+                                <p>입주 예정일이 10월 15일인데, 사전점검 기간이 9월 말부터라고 들었습니다. 10월 5일경 점검 가능할까요?</p>
+                            </div>
+                            <div class="answer-section">
+                                <div class="section-label">💬 답변</div>
+                                <p>안녕하세요, 하자체크입니다. 10월 5일 점검 가능합니다. 현재 해당 날짜 오전/오후 모두 예약 가능한 상태이니 편하신 시간으로 말씀해주시면 일정 확정해드리겠습니다. 감사합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inquiry-item answered">
+                        <div class="inquiry-header">
+                            <div class="inquiry-meta">
+                                <span class="inquiry-status status-answered">
+                                    <span class="status-icon">✓</span>
+                                    답변완료
+                                </span>
+                                <span class="inquiry-date">2025-09-26</span>
+                            </div>
+                            <div class="inquiry-title-section">
+                                <h3 class="inquiry-title">이**님 - 시흥 은계 센트럴 아이파크 74타입 점검 문의</h3>
+                                <div class="inquiry-tags">
+                                    <span class="tag tag-size">74타입</span>
+                                    <span class="tag tag-location">시흥</span>
+                                    <span class="tag tag-service">하자접수대행</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inquiry-content">
+                            <div class="question-section">
+                                <div class="section-label">❓ 질문</div>
+                                <p>하자 접수 대행 서비스는 어떤 방식으로 진행되나요? 제가 현장에 없어도 되나요?</p>
+                            </div>
+                            <div class="answer-section">
+                                <div class="section-label">💬 답변</div>
+                                <p>하자 접수 대행 서비스는 점검 후 발견된 하자를 저희가 건설사 고객센터에 직접 접수해드리는 서비스입니다. 고객님께서 현장에 계시지 않아도 점검 후 보고서를 기반으로 모든 하자를 빠짐없이 접수해드립니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inquiry-item answered">
+                        <div class="inquiry-header">
+                            <div class="inquiry-meta">
+                                <span class="inquiry-status status-answered">
+                                    <span class="status-icon">✓</span>
+                                    답변완료
+                                </span>
+                                <span class="inquiry-date">2025-09-24</span>
+                            </div>
+                            <div class="inquiry-title-section">
+                                <h3 class="inquiry-title">박**님 - 수원 영통 힐스테이트 59타입 점검 문의</h3>
+                                <div class="inquiry-tags">
+                                    <span class="tag tag-size">74타입</span>
+                                    <span class="tag tag-location">수원</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inquiry-content">
+                            <div class="question-section">
+                                <div class="section-label">❓ 질문</div>
+                                <p>59평방미터 세대인데 비용은 어떻게 되나요? 58타입과 74타입 사이라 헷갈리네요.</p>
+                            </div>
+                            <div class="answer-section">
+                                <div class="section-label">💬 답변</div>
+                                <p>59m²는 74타입에 해당하여 20만 9천원입니다. 전용면적 기준으로 59~74m²까지가 74타입 가격이 적용됩니다. 추가 문의사항 있으시면 언제든 연락 주세요!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inquiry-item pending">
+                        <div class="inquiry-header">
+                            <div class="inquiry-meta">
+                                <span class="inquiry-status status-pending">
+                                    <span class="status-icon">⏳</span>
+                                    답변대기
+                                </span>
+                                <span class="inquiry-date">2025-09-30</span>
+                            </div>
+                            <div class="inquiry-title-section">
+                                <h3 class="inquiry-title">최**님 - 안산 센트럴 푸르지오 104타입 점검 문의</h3>
+                                <div class="inquiry-tags">
+                                    <span class="tag tag-size">104타입</span>
+                                    <span class="tag tag-location">안산</span>
+                                    <span class="tag tag-service">VR촬영</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inquiry-content">
+                            <div class="question-section">
+                                <div class="section-label">❓ 질문</div>
+                                <p>104타입 점검 예약하고 싶습니다. 10월 중순 가능할까요? VR 촬영도 함께 원합니다.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inquiry-item pending">
+                        <div class="inquiry-header">
+                            <div class="inquiry-meta">
+                                <span class="inquiry-status status-pending">
+                                    <span class="status-icon">⏳</span>
+                                    답변대기
+                                </span>
+                                <span class="inquiry-date">2025-10-01</span>
+                            </div>
+                            <div class="inquiry-title-section">
+                                <h3 class="inquiry-title">정**님 - 화성 동탄 센트럴파크 푸르지오 84타입 점검 문의</h3>
+                                <div class="inquiry-tags">
+                                    <span class="tag tag-size">84타입</span>
+                                    <span class="tag tag-location">화성</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inquiry-content">
+                            <div class="question-section">
+                                <div class="section-label">❓ 질문</div>
+                                <p>처음 아파트 구매라 하자 점검이 꼭 필요할지 고민됩니다. 신축 아파트도 하자가 많이 나오나요?</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="inquiry-notice">
+                <h4>📌 문의 안내</h4>
+                <ul>
+                    <li>문의 접수 후 영업일 기준 1일 이내 답변드립니다.</li>
+                    <li>급한 문의는 전화(010-2900-5200) 또는 카카오톡(@hazacheck)으로 연락 주세요.</li>
+                    <li>개인정보 보호를 위해 이름과 아파트명은 일부 가려서 표시됩니다.</li>
+                    <li>하루 2세대 한정이므로 희망 날짜가 있으시면 최대한 빠른 예약을 권장드립니다.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="images/logo/logo-white.png" alt="하자체크 로고">
+                    <p class="footer-slogan">입주 전, 하자를 완벽하게</p>
+                </div>
+
+                <div class="footer-info">
+                    <div class="footer-section">
+                        <h4>회사정보</h4>
+                        <ul>
+                            <li>법인명: (주)우주체크</li>
+                            <li>브랜드명: 하자체크 (HazaCheck)</li>
+                            <li>사업자등록번호: 696-04-03387</li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>연락처</h4>
+                        <ul>
+                            <li>전화: <a href="tel:010-2900-5200">010-2900-5200</a></li>
+                            <li>이메일: <a href="mailto:hazacheck@gmail.com">hazacheck@gmail.com</a></li>
+                            <li>카카오톡: @hazacheck</li>
+                        </ul>
+                    </div>
+
+                    <div class="footer-section">
+                        <h4>주소</h4>
+                        <ul>
+                            <li>경기도 안산시 단원구</li>
+                            <li>동산로 63, 4층 31호</li>
+                            <li>(원시동)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2025 (주)우주체크. All rights reserved.</p>
+                <p>HazaCheck - Professional Apartment Inspection Service</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" id="scrollToTop" aria-label="맨 위로">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </button>
+
+    <!-- JavaScript -->
+    <script src="js/script.js"></script>
+    <script src="js/inquiries.js"></script>
+</body>
+</html>
