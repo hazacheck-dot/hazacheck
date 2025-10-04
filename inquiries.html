@@ -50,38 +50,151 @@
     <!-- Inquiry Page Header -->
     <section class="inquiry-header">
         <div class="container">
-            <h1 class="page-title">상담 현황</h1>
-            <p class="page-subtitle">입주 전 필수! 하자 상담 현황을 확인해보세요.</p>
+            <h1 class="page-title">상담 현황 목록</h1>
+            <p class="page-subtitle">최신 상담 문의 내역을 확인하세요</p>
 
-            <!-- 문의 현황 통계 -->
-            <div class="board-stats" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
-                <div class="stat-item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; text-align: center; color: white;">
-                    <div style="font-size: 3rem; margin-bottom: 10px;">💬</div>
-                    <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 5px;">9,629<span style="font-size: 1.2rem;">건</span></div>
-                    <div style="font-size: 1rem; opacity: 0.9;">상담신청</div>
-                </div>
-                <div class="stat-item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 30px; border-radius: 15px; text-align: center; color: white;">
-                    <div style="font-size: 3rem; margin-bottom: 10px;">✅</div>
-                    <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 5px;">9,619<span style="font-size: 1.2rem;">건</span></div>
-                    <div style="font-size: 1rem; opacity: 0.9;">상담완료</div>
-                </div>
-                <div class="stat-item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 30px; border-radius: 15px; text-align: center; color: white;">
-                    <div style="font-size: 3rem; margin-bottom: 10px;">📅</div>
-                    <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 5px;">9,419<span style="font-size: 1.2rem;">건</span></div>
-                    <div style="font-size: 1rem; opacity: 0.9;">예약완료</div>
-                </div>
-            </div>
-
-            <!-- 문의 신청 버튼 -->
-            <div class="header-cta" style="margin-top: 50px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                <a href="https://open.kakao.com/o/s84OO5Th" target="_blank" class="btn btn-kakao btn-lg" style="min-width: 220px;">💬 카카오톡 상담하기</a>
-                <a href="#inquiryForm" class="btn btn-primary btn-lg" style="min-width: 220px;">📝 온라인 문의하기</a>
+            <!-- 상단 액션 버튼 -->
+            <div class="header-actions" style="margin-top: 30px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;">
+                <button onclick="openInquiryModal()" class="btn btn-primary btn-lg" style="min-width: 180px;">📝 상담신청</button>
+                <button onclick="refreshInquiries()" class="btn btn-secondary btn-lg" style="min-width: 180px;">🔄 조회하기</button>
             </div>
         </div>
     </section>
 
-    <!-- Inquiry Form Section -->
-    <section class="inquiry-form-section" id="inquiryForm">
+    <!-- Inquiry Table Section -->
+    <section class="inquiry-table-section" style="padding: 60px 0; background: #f8f9fa;">
+        <div class="container">
+            <div class="table-wrapper" style="background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                <table class="inquiry-table" style="width: 100%; border-collapse: collapse;">
+                    <thead style="background: #2563eb; color: white;">
+                        <tr>
+                            <th style="padding: 16px; text-align: center; font-weight: 600;">번호</th>
+                            <th style="padding: 16px; text-align: left; font-weight: 600;">아파트명</th>
+                            <th style="padding: 16px; text-align: center; font-weight: 600;">이름</th>
+                            <th style="padding: 16px; text-align: center; font-weight: 600;">날짜</th>
+                            <th style="padding: 16px; text-align: center; font-weight: 600;">상태</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inquiryTableBody">
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 16px; text-align: center;">9629</td>
+                            <td style="padding: 16px; text-align: left; font-weight: 500;">파동스위첸</td>
+                            <td style="padding: 16px; text-align: center;">권**</td>
+                            <td style="padding: 16px; text-align: center;">2025. 10. 3.</td>
+                            <td style="padding: 16px; text-align: center;">
+                                <button onclick="viewInquiry(9629)" class="btn-status" style="padding: 6px 16px; background: #2563eb; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">상담문의</button>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 16px; text-align: center;">9628</td>
+                            <td style="padding: 16px; text-align: left; font-weight: 500;">E편한세상 명덕역퍼스트마크</td>
+                            <td style="padding: 16px; text-align: center;">임**</td>
+                            <td style="padding: 16px; text-align: center;">2025. 10. 3.</td>
+                            <td style="padding: 16px; text-align: center;">
+                                <button onclick="viewInquiry(9628)" class="btn-status" style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">상담완료</button>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 16px; text-align: center;">9627</td>
+                            <td style="padding: 16px; text-align: left; font-weight: 500;">작오역 하리버낸시</td>
+                            <td style="padding: 16px; text-align: center;">이**</td>
+                            <td style="padding: 16px; text-align: center;">2025. 10. 2.</td>
+                            <td style="padding: 16px; text-align: center;">
+                                <button onclick="viewInquiry(9627)" class="btn-status" style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">상담완료</button>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 16px; text-align: center;">9626</td>
+                            <td style="padding: 16px; text-align: left; font-weight: 500;">평택 고덕 센트럴 푸르지오</td>
+                            <td style="padding: 16px; text-align: center;">김**</td>
+                            <td style="padding: 16px; text-align: center;">2025. 9. 28.</td>
+                            <td style="padding: 16px; text-align: center;">
+                                <button onclick="viewInquiry(9626)" class="btn-status" style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">상담완료</button>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #e5e7eb;">
+                            <td style="padding: 16px; text-align: center;">9625</td>
+                            <td style="padding: 16px; text-align: left; font-weight: 500;">시흥 은계 센트럴 아이파크</td>
+                            <td style="padding: 16px; text-align: center;">박**</td>
+                            <td style="padding: 16px; text-align: center;">2025. 9. 26.</td>
+                            <td style="padding: 16px; text-align: center;">
+                                <button onclick="viewInquiry(9625)" class="btn-status" style="padding: 6px 16px; background: #10b981; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">상담완료</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- 페이지네이션 -->
+            <div class="pagination" style="margin-top: 30px; display: flex; justify-content: center; gap: 8px;">
+                <button class="btn-page" style="padding: 8px 12px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer;">이전</button>
+                <button class="btn-page active" style="padding: 8px 12px; border: 1px solid #2563eb; background: #2563eb; color: white; border-radius: 6px; cursor: pointer;">1</button>
+                <button class="btn-page" style="padding: 8px 12px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer;">2</button>
+                <button class="btn-page" style="padding: 8px 12px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer;">3</button>
+                <button class="btn-page" style="padding: 8px 12px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer;">다음</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inquiry Modal Popup -->
+    <div id="inquiryModal" class="modal" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); overflow: auto;">
+        <div class="modal-content" style="background-color: white; margin: 5% auto; padding: 0; border-radius: 12px; width: 90%; max-width: 600px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <div class="modal-header" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; padding: 20px; border-radius: 12px 12px 0 0; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="margin: 0; font-size: 1.5rem;">📝 상담 신청</h2>
+                <span onclick="closeInquiryModal()" style="font-size: 2rem; font-weight: bold; cursor: pointer; color: white;">&times;</span>
+            </div>
+            <div class="modal-body" style="padding: 30px;">
+                <!-- 가격 정보 표시 (메인에서 온 경우) -->
+                <div id="modalPriceInfo" style="display: none; background: #f0f9ff; border-left: 4px solid #2563eb; padding: 15px; margin-bottom: 20px; border-radius: 6px;">
+                    <h4 style="margin: 0 0 10px 0; color: #1d4ed8;">💰 시뮬레이션 견적</h4>
+                    <div id="modalPriceDetails" style="font-size: 0.95rem; color: #374151;"></div>
+                </div>
+
+                <form id="inquiryModalForm">
+                    <div style="display: grid; gap: 16px;">
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">이름 <span style="color: #dc2626;">*</span></label>
+                            <input type="text" id="modalName" required placeholder="홍길동" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">연락처 <span style="color: #dc2626;">*</span></label>
+                            <input type="tel" id="modalPhone" required placeholder="010-0000-0000" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">아파트명 <span style="color: #dc2626;">*</span></label>
+                            <input type="text" id="modalApartment" required placeholder="예: 안산 센트럴푸르지오" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">전용면적 <span style="color: #dc2626;">*</span></label>
+                            <select id="modalSize" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
+                                <option value="">선택해주세요</option>
+                                <option value="58">58타입 이하 (~58m²)</option>
+                                <option value="74">74타입 (59~74m²)</option>
+                                <option value="84">84타입 (75~84m²)</option>
+                                <option value="104">104타입 (85~104m²)</option>
+                                <option value="over">104m² 이상</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">희망 점검일 <span style="color: #dc2626;">*</span></label>
+                            <input type="date" id="modalDate" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">문의 내용</label>
+                            <textarea id="modalMessage" rows="4" placeholder="문의하실 내용을 입력해주세요" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; resize: vertical;"></textarea>
+                        </div>
+                    </div>
+                    <div style="margin-top: 24px; display: flex; gap: 12px;">
+                        <button type="submit" style="flex: 1; padding: 14px; background: #2563eb; color: white; border: none; border-radius: 6px; font-size: 1.1rem; font-weight: 600; cursor: pointer;">상담 신청하기</button>
+                        <button type="button" onclick="closeInquiryModal()" style="padding: 14px 24px; background: #6b7280; color: white; border: none; border-radius: 6px; font-size: 1.1rem; cursor: pointer;">취소</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hidden Old Form Section -->
+    <section class="inquiry-form-section" id="inquiryForm" style="display: none;">
         <div class="container">
             <div class="form-wrapper">
                 <div class="form-header">

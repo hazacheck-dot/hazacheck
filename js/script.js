@@ -207,20 +207,24 @@ function saveCalculationAndInquire() {
         alert('타입을 먼저 선택해주세요.');
         return;
     }
-    
+
+    const totalPrice = basePrice + selectedOptions.reduce((sum, opt) => sum + opt.price, 0);
+    const optionNames = selectedOptions.map(opt => opt.name);
+
     const calculationData = {
         size: selectedSize,
-        basePrice: basePrice,
-        options: selectedOptions,
-        totalPrice: basePrice + selectedOptions.reduce((sum, opt) => sum + opt.price, 0),
+        sizeValue: selectedSize,
+        basePrice: `₩${basePrice.toLocaleString()}`,
+        options: optionNames,
+        totalPrice: `₩${totalPrice.toLocaleString()}`,
         timestamp: new Date().toISOString()
     };
-    
+
     // Save to localStorage
     localStorage.setItem('hazacheck_calculation', JSON.stringify(calculationData));
-    
-    // Redirect to inquiry page
-    window.location.href = 'inquiries.html';
+
+    // Redirect to inquiry page with auto-open modal parameter
+    window.location.href = 'inquiries.html?openModal=true';
 }
 
 // Inquiry with price button
@@ -385,3 +389,133 @@ const handleResize = debounce(() => {
 }, 250);
 
 window.addEventListener('resize', handleResize);
+
+
+// ===================================
+// Inquiry Modal Functions
+// ===================================
+
+// 모달 열기
+function openInquiryModal() {
+    const modal = document.getElementById('inquiryModal');
+    if (modal) {
+        modal.style.display = 'block';
+        document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+
+        // localStorage에서 가격 정보 가져오기 (메인에서 넘어온 경우)
+        const savedData = localStorage.getItem('hazacheck_calculation');
+        if (savedData) {
+            try {
+                const data = JSON.parse(savedData);
+                displayModalPriceInfo(data);
+                // 사용 후 삭제
+                localStorage.removeItem('hazacheck_calculation');
+            } catch (e) {
+                console.error('가격 정보 파싱 실패:', e);
+            }
+        }
+    }
+}
+
+// 페이지 로드시 자동으로 모달 열기 (메인에서 넘어온 경우)
+document.addEventListener('DOMContentLoaded', function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('openModal') === 'true') {
+        // URL에서 파라미터 제거
+        window.history.replaceState({}, document.title, window.location.pathname);
+        // 모달 열기
+        setTimeout(() => openInquiryModal(), 300);
+    }
+});
+
+// 모달 닫기
+function closeInquiryModal() {
+    const modal = document.getElementById('inquiryModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto'; // 배경 스크롤 복원
+    }
+}
+
+// 모달 가격 정보 표시
+function displayModalPriceInfo(data) {
+    const priceInfo = document.getElementById('modalPriceInfo');
+    const priceDetails = document.getElementById('modalPriceDetails');
+    
+    if (priceInfo && priceDetails) {
+        let html = '<div>';
+        html += '<p><strong>세대 크기:</strong> ' + data.size + '타입</p>';
+        html += '<p><strong>기본 비용:</strong> ' + data.basePrice + '</p>';
+        if (data.options && data.options.length > 0) {
+            html += '<p><strong>추가 옵션:</strong> ' + data.options.join(', ') + '</p>';
+        }
+        html += '<p style="font-size: 1.2rem; font-weight: 700; color: #2563eb; margin-top: 10px;"><strong>총 예상 비용:</strong> ' + data.totalPrice + '</p>';
+        html += '</div>';
+        
+        priceDetails.innerHTML = html;
+        priceInfo.style.display = 'block';
+        
+        // 폼에 자동 입력
+        document.getElementById('modalSize').value = data.sizeValue || '';
+    }
+}
+
+// 문의 상세 보기
+function viewInquiry(id) {
+    alert('문의 ID: ' + id + '\n\n문의 상세 정보를 표시합니다.\n(구현 예정)');
+}
+
+// 문의 목록 새로고침
+function refreshInquiries() {
+    location.reload();
+}
+
+// 모달 외부 클릭시 닫기
+window.onclick = function(event) {
+    const modal = document.getElementById('inquiryModal');
+    if (event.target == modal) {
+        closeInquiryModal();
+    }
+}
+
+// 모달 폼 제출 처리
+const modalForm = document.getElementById('inquiryModalForm');
+if (modalForm) {
+    modalForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            name: document.getElementById('modalName').value,
+            phone: document.getElementById('modalPhone').value,
+            apartment: document.getElementById('modalApartment').value,
+            size: document.getElementById('modalSize').value,
+            moveInDate: document.getElementById('modalDate').value,
+            message: document.getElementById('modalMessage').value
+        };
+        
+        try {
+            const response = await fetch('/api/inquiries', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                alert('상담 신청이 완료되었습니다\!\n빠른 시일 내에 연락드리겠습니다.');
+                closeInquiryModal();
+                modalForm.reset();
+                location.reload();
+            } else {
+                alert('오류: ' + result.message);
+            }
+        } catch (error) {
+            console.error('제출 오류:', error);
+            alert('상담 신청 중 오류가 발생했습니다.\n잠시 후 다시 시도해주세요.');
+        }
+    });
+}
+
