@@ -51,42 +51,42 @@
     <section class="inquiry-header">
         <div class="container">
             <h1 class="page-title">상담 현황</h1>
-            <p class="page-subtitle">입주 전 필수! 하방 상담 현황을 확인해보세요.</p>
+            <p class="page-subtitle">입주 전 필수! 하자 상담 현황을 확인해보세요.</p>
 
             <!-- 문의 현황 통계 -->
-            <div class="board-stats" style="margin-top: 40px;">
-                <div class="stat-item">
-                    <span class="stat-icon">💬</span>
-                    <span class="stat-number" id="headerTotalInquiries">9629</span>
-                    <span class="stat-label">상담신청</span>
+            <div class="board-stats" style="margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                <div class="stat-item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; text-align: center; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">💬</div>
+                    <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 5px;">9,629<span style="font-size: 1.2rem;">건</span></div>
+                    <div style="font-size: 1rem; opacity: 0.9;">상담신청</div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-icon">✅</span>
-                    <span class="stat-number" id="headerAnsweredInquiries">9619</span>
-                    <span class="stat-label">상담완료</span>
+                <div class="stat-item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 30px; border-radius: 15px; text-align: center; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">✅</div>
+                    <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 5px;">9,619<span style="font-size: 1.2rem;">건</span></div>
+                    <div style="font-size: 1rem; opacity: 0.9;">상담완료</div>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-icon">📅</span>
-                    <span class="stat-number" id="headerPendingInquiries">9419</span>
-                    <span class="stat-label">예약완료</span>
+                <div class="stat-item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 30px; border-radius: 15px; text-align: center; color: white;">
+                    <div style="font-size: 3rem; margin-bottom: 10px;">📅</div>
+                    <div style="font-size: 2.5rem; font-weight: 700; margin-bottom: 5px;">9,419<span style="font-size: 1.2rem;">건</span></div>
+                    <div style="font-size: 1rem; opacity: 0.9;">예약완료</div>
                 </div>
             </div>
 
             <!-- 문의 신청 버튼 -->
-            <div class="header-cta" style="margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                <a href="#inquiryForm" class="btn btn-primary btn-lg" style="min-width: 200px;">📝 상담신청</a>
-                <a href="#recentInquiries" class="btn btn-secondary btn-lg" style="min-width: 200px;">👀 조회하기</a>
+            <div class="header-cta" style="margin-top: 50px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="https://open.kakao.com/o/s84OO5Th" target="_blank" class="btn btn-kakao btn-lg" style="min-width: 220px;">💬 카카오톡 상담하기</a>
+                <a href="#inquiryForm" class="btn btn-primary btn-lg" style="min-width: 220px;">📝 온라인 문의하기</a>
             </div>
         </div>
     </section>
 
     <!-- Inquiry Form Section -->
-    <section class="inquiry-form-section">
+    <section class="inquiry-form-section" id="inquiryForm">
         <div class="container">
             <div class="form-wrapper">
                 <div class="form-header">
-                    <h2>온라인 문의 작성</h2>
-                    <p>아래 양식을 작성해주시면 빠른 시일 내에 연락드리겠습니다.</p>
+                    <h2>📝 온라인 상담 신청</h2>
+                    <p>아래 양식을 작성해주시면 24시간 내에 연락드리겠습니다.</p>
                 </div>
 
                 <!-- 가격 정보 표시 (가격 계산기에서 온 경우) -->
@@ -211,13 +211,10 @@
                 </div>
 
                 <!-- 빠른 문의 방법 -->
-                <div class="quick-contact-options" style="margin-top: 50px; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; text-align: center;">
-                    <h3 style="color: white; margin-bottom: 10px;">💬 더 빠른 상담을 원하시나요?</h3>
-                    <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px;">카카오톡으로 실시간 상담받으세요!</p>
-                    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-                        <a href="https://open.kakao.com/o/s84OO5Th" target="_blank" class="btn btn-kakao btn-lg" style="min-width: 200px;">💬 카카오톡 상담하기</a>
-                        <a href="#inquiryForm" class="btn btn-primary btn-lg" style="min-width: 200px; background: white; color: #667eea;">📝 온라인 문의하기</a>
-                    </div>
+                <div class="quick-contact-options" style="margin-top: 50px; padding: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; text-align: center;">
+                    <h3 style="color: white; margin-bottom: 15px; font-size: 1.5rem;">💬 더 빠른 상담을 원하시나요?</h3>
+                    <p style="color: rgba(255,255,255,0.95); margin-bottom: 30px; font-size: 1.1rem;">카카오톡으로 실시간 상담받으세요! 평균 5분 이내 답변</p>
+                    <a href="https://open.kakao.com/o/s84OO5Th" target="_blank" class="btn btn-kakao btn-lg" style="min-width: 250px; font-size: 1.1rem; padding: 16px 32px;">💬 카카오톡 바로 상담하기</a>
                 </div>
             </div>
         </div>
@@ -232,21 +229,6 @@
             </div>
 
             <div class="inquiry-board">
-                <div class="board-stats">
-                    <div class="stat-item">
-                        <span class="stat-number" id="totalInquiries">5</span>
-                        <span class="stat-label">총 문의</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="answeredInquiries">3</span>
-                        <span class="stat-label">답변완료</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="pendingInquiries">2</span>
-                        <span class="stat-label">답변대기</span>
-                    </div>
-                </div>
-
                 <div class="inquiry-list">
                     <div class="inquiry-item answered">
                         <div class="inquiry-header">
