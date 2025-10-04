@@ -19,7 +19,7 @@ navLinks.forEach(link => {
 });
 
 // ===================================
-// Navbar Scroll Effect
+// Navbar Scroll Effect with Auto-Hide (Mobile)
 // ===================================
 const navbar = document.getElementById('navbar');
 let lastScroll = 0;
@@ -27,10 +27,25 @@ let lastScroll = 0;
 window.addEventListener('scroll', () => {
     const currentScroll = window.pageYOffset;
 
+    // Add shadow when scrolled
     if (currentScroll > 100) {
         navbar.classList.add('scrolled');
     } else {
         navbar.classList.remove('scrolled');
+    }
+
+    // Auto-hide navbar on mobile when scrolling down
+    if (window.innerWidth <= 768) {
+        if (currentScroll > lastScroll && currentScroll > 150) {
+            // Scrolling down - hide navbar
+            navbar.classList.add('hidden');
+        } else if (currentScroll < lastScroll) {
+            // Scrolling up - show navbar
+            navbar.classList.remove('hidden');
+        }
+    } else {
+        // Always show on desktop
+        navbar.classList.remove('hidden');
     }
 
     lastScroll = currentScroll;
