@@ -50,35 +50,32 @@
     <!-- Inquiry Page Header -->
     <section class="inquiry-header">
         <div class="container">
-            <h1 class="page-title">문의하기</h1>
-            <p class="page-subtitle">하루 2세대 한정으로 대표가 직접 점검합니다.<br>빠른 예약을 원하신다면 지금 문의해주세요.</p>
-        </div>
-    </section>
+            <h1 class="page-title">상담 현황</h1>
+            <p class="page-subtitle">입주 전 필수! 하방 상담 현황을 확인해보세요.</p>
 
-    <!-- Contact Methods -->
-    <section class="contact-quick">
-        <div class="container">
-            <div class="contact-grid">
-                <a href="tel:010-2900-5200" class="contact-card phone">
-                    <div class="contact-icon">📞</div>
-                    <h3>전화 상담</h3>
-                    <p class="contact-value">010-2900-5200</p>
-                    <span class="contact-action">전화 걸기 →</span>
-                </a>
+            <!-- 문의 현황 통계 -->
+            <div class="board-stats" style="margin-top: 40px;">
+                <div class="stat-item">
+                    <span class="stat-icon">💬</span>
+                    <span class="stat-number" id="headerTotalInquiries">9629</span>
+                    <span class="stat-label">상담신청</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">✅</span>
+                    <span class="stat-number" id="headerAnsweredInquiries">9619</span>
+                    <span class="stat-label">상담완료</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-icon">📅</span>
+                    <span class="stat-number" id="headerPendingInquiries">9419</span>
+                    <span class="stat-label">예약완료</span>
+                </div>
+            </div>
 
-                <a href="https://open.kakao.com/o/s84OO5Th" target="_blank" class="contact-card kakao">
-                    <div class="contact-icon">💬</div>
-                    <h3>카카오톡 상담</h3>
-                    <p class="contact-value">@hazacheck</p>
-                    <span class="contact-action">카카오톡 열기 →</span>
-                </a>
-
-                <a href="mailto:hazacheck@gmail.com" class="contact-card email">
-                    <div class="contact-icon">✉️</div>
-                    <h3>이메일 문의</h3>
-                    <p class="contact-value">hazacheck@gmail.com</p>
-                    <span class="contact-action">이메일 보내기 →</span>
-                </a>
+            <!-- 문의 신청 버튼 -->
+            <div class="header-cta" style="margin-top: 40px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="#inquiryForm" class="btn btn-primary btn-lg" style="min-width: 200px;">📝 상담신청</a>
+                <a href="#recentInquiries" class="btn btn-secondary btn-lg" style="min-width: 200px;">👀 조회하기</a>
             </div>
         </div>
     </section>
@@ -212,12 +209,22 @@
                     <p>빠른 시일 내에 담당자가 연락드리겠습니다.<br>감사합니다.</p>
                     <button class="btn btn-primary" onclick="location.reload()">추가 문의 작성</button>
                 </div>
+
+                <!-- 빠른 문의 방법 -->
+                <div class="quick-contact-options" style="margin-top: 50px; padding: 30px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; text-align: center;">
+                    <h3 style="color: white; margin-bottom: 10px;">💬 더 빠른 상담을 원하시나요?</h3>
+                    <p style="color: rgba(255,255,255,0.9); margin-bottom: 25px;">카카오톡으로 실시간 상담받으세요!</p>
+                    <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                        <a href="https://open.kakao.com/o/s84OO5Th" target="_blank" class="btn btn-kakao btn-lg" style="min-width: 200px;">💬 카카오톡 상담하기</a>
+                        <a href="#inquiryForm" class="btn btn-primary btn-lg" style="min-width: 200px; background: white; color: #667eea;">📝 온라인 문의하기</a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Inquiry List Section -->
-    <section class="inquiry-list-section">
+    <section class="inquiry-list-section" id="recentInquiries">
         <div class="container">
             <div class="section-header">
                 <h2>💬 최근 문의 내역</h2>
