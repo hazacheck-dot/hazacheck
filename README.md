@@ -59,12 +59,25 @@
 hazacheck_home_ver5/
 ├── index.html              # 메인 페이지
 ├── inquiries.html          # 문의 페이지
+├── admin.html              # 관리자 페이지
 ├── css/
 │   ├── style.css          # 메인 스타일
-│   └── inquiries.css      # 문의 페이지 스타일
+│   ├── inquiries.css      # 문의 페이지 스타일
+│   └── admin.css          # 관리자 페이지 스타일
 ├── js/
 │   ├── script.js          # 메인 JavaScript
-│   └── inquiries.js       # 문의 폼 JavaScript
+│   ├── inquiries.js       # 문의 폼 JavaScript
+│   └── admin.js           # 관리자 페이지 JavaScript
+├── api/                    # 백엔드 API
+│   ├── inquiries.js       # 문의 접수/조회 API
+│   ├── admin/
+│   │   └── inquiries.js   # 관리자 문의 관리 API
+│   └── telegram-notify.js # 텔레그램 알림 유틸리티
+├── scripts/                # 유틸리티 스크립트
+│   ├── setup-env.js       # 환경변수 설정 도우미
+│   ├── test-api.js        # API 테스트 스크립트
+│   ├── test-admin-api.js  # 관리자 API 테스트 스크립트
+│   └── init-db.sql        # 데이터베이스 초기화 스크립트
 ├── images/
 │   ├── logo/              # 로고 파일 (4종)
 │   ├── defects/           # 하자 사례 이미지 (6개)
@@ -75,7 +88,10 @@ hazacheck_home_ver5/
 │   ├── inspection-floor-corner.mp4      # 바닥 코너 점검
 │   ├── inspection-level-measurement.mp4 # 수평 측정
 │   └── inspection-thermal-camera.mp4    # 열화상 카메라
-└── README.md               # 프로젝트 설명서
+├── package.json            # 프로젝트 설정
+├── vercel.json            # Vercel 배포 설정
+├── env.example.txt        # 환경변수 예시
+└── README.md              # 프로젝트 설명서
 ```
 
 ## 🚀 사용 방법
@@ -86,14 +102,14 @@ hazacheck_home_ver5/
 # 패키지 설치
 npm install
 
+# 환경변수 설정 (대화형 설정)
+npm run setup-env
+
 # Vercel CLI 설치 및 로그인 (처음 한 번만)
 npx vercel login
 
 # 프로젝트 연결
 npx vercel link
-
-# 환경 변수 다운로드
-npx vercel env pull .env.local
 
 # 로컬 개발 서버 실행
 npm run dev
@@ -101,7 +117,20 @@ npm run dev
 
 브라우저에서 `http://localhost:3000` 접속
 
-### 2. Vercel 배포
+### 2. API 테스트
+
+```bash
+# 기본 API 테스트
+npm run test-api
+
+# 관리자 API 테스트 (토큰 필요)
+npm run test-admin http://localhost:3000 your-admin-token
+
+# 프로덕션 환경 테스트
+npm run test-api https://your-domain.vercel.app
+```
+
+### 3. Vercel 배포
 
 ```bash
 # GitHub에 푸시하면 자동 배포됨
@@ -202,6 +231,8 @@ npx vercel --prod
 - ✅ Postgres 데이터베이스 연동
 - ✅ 문의 접수/조회 API
 - ✅ 관리자 API (문의 관리)
+- ✅ 텔레그램 알림 시스템
+- ✅ 관리자 페이지 (admin.html)
 
 ### 향후 개선 사항
 - 이메일 알림 시스템
@@ -216,6 +247,7 @@ npx vercel --prod
 
 ## 📚 추가 문서
 
+- **[백엔드 설정 가이드](./BACKEND_SETUP_GUIDE.md)**: 백엔드 API 설정 및 배포 가이드
 - **[배포 가이드](./DEPLOYMENT_GUIDE.md)**: Vercel 배포 상세 가이드
 - **[API 문서](./API_DOCUMENTATION.md)**: 백엔드 API 사용법
 

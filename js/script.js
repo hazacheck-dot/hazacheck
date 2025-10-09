@@ -92,6 +92,13 @@ sizeOptions.forEach(option => {
         selectedSize = option.dataset.size;
         basePrice = parseInt(option.dataset.price);
 
+        // Check if "104m² 이상" is selected
+        if (selectedSize === 'over') {
+            // Show alert for custom quote
+            alert('104m² 이상은 별도 견적이 필요합니다.\n문의하기를 통해 정확한 견적을 받아보세요.');
+            // Still show output but with special message
+        }
+
         // Calculate and display result
         updatePriceCalculation();
     });
@@ -115,94 +122,75 @@ function updatePriceCalculation() {
         if (checkbox.checked) {
             const price = parseInt(checkbox.dataset.price);
             optionsTotal += price;
-            const optionName = checkbox.parentElement.querySelector('.option-name').textContent;
+            const optionName = checkbox.dataset.name;
             selectedOptions.push({ name: optionName, price: price });
         }
     });
 
     const totalPrice = basePrice + optionsTotal;
 
-    // Display result
-    displayPriceResult(totalPrice, optionsTotal);
-    
-    // Display summary
-    displayPriceSummary(totalPrice, optionsTotal);
+    // Display output
+    displayPriceOutput(totalPrice);
 }
 
-function displayPriceResult(total, optionsTotal) {
-    const sizeTypeName = `${selectedSize}타입`;
+function displayPriceOutput(total) {
+    const output = document.getElementById('calculatorOutput');
+    const outputSize = document.getElementById('outputSize');
+    const outputBasePrice = document.getElementById('outputBasePrice');
+    const outputTotalPrice = document.getElementById('outputTotalPrice');
+    const outputOptionsContainer = document.getElementById('outputOptions');
 
-    let html = `
-        <div class="result-content active">
-            <div class="result-row">
-                <span class="result-label">선택한 타입</span>
-                <span class="result-value">${sizeTypeName}</span>
-            </div>
-            <div class="result-row">
-                <span class="result-label">기본 점검 비용</span>
-                <span class="result-value">₩${basePrice.toLocaleString()}</span>
-            </div>
-    `;
+    // Show output
+    output.style.display = 'block';
 
-    if (selectedOptions.length > 0) {
-        selectedOptions.forEach(opt => {
-            html += `
-                <div class="result-row">
-                    <span class="result-label">${opt.name}</span>
-                    <span class="result-value">₩${opt.price.toLocaleString()}</span>
-                </div>
-            `;
-        });
+    // Update size
+    if (selectedSize === 'over') {
+        outputSize.textContent = '104m² 이상 (별도 견적)';
+    } else {
+        outputSize.textContent = `${selectedSize}타입`;
     }
 
-    html += `
-            <div class="result-row">
-                <span class="result-label">총 비용</span>
-                <span class="result-value">₩${total.toLocaleString()}</span>
-            </div>
-        </div>
-    `;
-
-    calculatorResult.innerHTML = html;
-}
-
-function displayPriceSummary(total, optionsTotal) {
-    const summary = document.getElementById('calculatorSummary');
-    const summaryBasePrice = document.getElementById('summaryBasePrice');
-    const summaryTotalPrice = document.getElementById('summaryTotalPrice');
-    const summaryOptionsContainer = document.getElementById('summaryOptions');
-    
-    // Show summary
-    summary.style.display = 'block';
-    
     // Update base price
-    summaryBasePrice.textContent = `₩${basePrice.toLocaleString()}`;
-    
+    if (selectedSize === 'over') {
+        outputBasePrice.textContent = '별도 문의';
+    } else {
+        outputBasePrice.textContent = `₩${basePrice.toLocaleString()}`;
+    }
+
     // Update options
     let optionsHtml = '';
     if (selectedOptions.length > 0) {
         selectedOptions.forEach(opt => {
             optionsHtml += `
-                <div class="summary-row summary-option">
-                    <span class="summary-label">+ ${opt.name}</span>
-                    <span class="summary-value">₩${opt.price.toLocaleString()}</span>
+                <div class="output-row">
+                    <span class="output-label">+ ${opt.name}</span>
+                    <span class="output-value">₩${opt.price.toLocaleString()}</span>
                 </div>
             `;
         });
     }
-    summaryOptionsContainer.innerHTML = optionsHtml;
-    
+    outputOptionsContainer.innerHTML = optionsHtml;
+
     // Update total
-    summaryTotalPrice.textContent = `₩${total.toLocaleString()}`;
-    
-    // Smooth scroll to summary
+    if (selectedSize === 'over') {
+        outputTotalPrice.textContent = '별도 문의';
+    } else {
+        outputTotalPrice.textContent = `₩${total.toLocaleString()}`;
+    }
+
+    // Smooth scroll to output
     setTimeout(() => {
-        summary.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        output.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }, 100);
 }
 
 // Save calculation data and redirect to inquiry page
 function saveCalculationAndInquire() {
+    console.log('saveCalculationAndInquire 호출됨');
+    console.log('selectedSize:', selectedSize);
+    console.log('basePrice:', basePrice);
+    console.log('selectedOptions:', selectedOptions);
+
     if (!selectedSize) {
         alert('타입을 먼저 선택해주세요.');
         return;
@@ -211,27 +199,63 @@ function saveCalculationAndInquire() {
     const totalPrice = basePrice + selectedOptions.reduce((sum, opt) => sum + opt.price, 0);
     const optionNames = selectedOptions.map(opt => opt.name);
 
+    let sizeText, basePriceText, totalPriceText;
+
+    if (selectedSize === 'over') {
+        sizeText = '104m² 이상 (별도 견적)';
+        basePriceText = '별도 문의';
+        totalPriceText = '별도 문의';
+    } else {
+        sizeText = `${selectedSize}타입`;
+        basePriceText = `₩${basePrice.toLocaleString()}`;
+        totalPriceText = `₩${totalPrice.toLocaleString()}`;
+    }
+
     const calculationData = {
-        size: selectedSize,
+        size: sizeText,
         sizeValue: selectedSize,
-        basePrice: `₩${basePrice.toLocaleString()}`,
-        options: optionNames,
-        totalPrice: `₩${totalPrice.toLocaleString()}`,
+        basePrice: basePrice,
+        basePriceFormatted: basePriceText,
+        options: selectedOptions,
+        optionNames: optionNames,
+        totalPrice: totalPrice,
+        totalPriceFormatted: totalPriceText,
         timestamp: new Date().toISOString()
     };
 
+    console.log('저장할 데이터:', calculationData);
+
     // Save to localStorage
-    localStorage.setItem('hazacheck_calculation', JSON.stringify(calculationData));
+    try {
+        localStorage.setItem('hazacheck_calculation', JSON.stringify(calculationData));
+        console.log('localStorage 저장 완료');
+
+        // 저장 확인
+        const saved = localStorage.getItem('hazacheck_calculation');
+        console.log('저장된 데이터 확인:', saved);
+    } catch (e) {
+        console.error('localStorage 저장 실패:', e);
+    }
 
     // Redirect to inquiry page with auto-open modal parameter
-    window.location.href = 'inquiries.html?openModal=true';
+    console.log('문의 페이지로 이동...');
+    window.location.href = 'inquiries.html?calculation=true';
 }
 
-// Inquiry with price button
-const inquiryWithPriceBtn = document.getElementById('inquiryWithPrice');
-if (inquiryWithPriceBtn) {
-    inquiryWithPriceBtn.addEventListener('click', saveCalculationAndInquire);
-}
+// Inquiry with price button - DOMContentLoaded 후에 실행
+document.addEventListener('DOMContentLoaded', function() {
+    const inquiryWithPriceBtn = document.getElementById('inquiryWithPrice');
+    console.log('inquiryWithPrice 버튼:', inquiryWithPriceBtn);
+    if (inquiryWithPriceBtn) {
+        inquiryWithPriceBtn.addEventListener('click', function(e) {
+            console.log('문의하기 버튼 클릭됨');
+            e.preventDefault(); // 기본 동작 방지
+            saveCalculationAndInquire();
+        });
+    } else {
+        console.log('inquiryWithPrice 버튼을 찾을 수 없습니다 (이 페이지에 없을 수 있음)');
+    }
+});
 
 // ===================================
 // FAQ Accordion
@@ -287,15 +311,19 @@ const observerOptions = {
 const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+            // CSS 클래스를 추가하여 애니메이션 트리거
+            entry.target.classList.add('animate-in');
+            // 한 번 애니메이션이 실행되면 관찰을 중단
+            observer.unobserve(entry.target);
         }
     });
 }, observerOptions);
 
-// Observe elements with animation classes
-const animatedElements = document.querySelectorAll('.trust-card, .case-card, .equipment-card, .process-step');
-animatedElements.forEach(el => {
+// Process steps animation is now handled in initializeProcessSteps()
+
+// Other animated elements
+const otherAnimatedElements = document.querySelectorAll('.trust-card, .case-card, .equipment-card');
+otherAnimatedElements.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(30px)';
     el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
@@ -351,7 +379,31 @@ document.addEventListener('DOMContentLoaded', () => {
     heroElements.forEach((el, index) => {
         el.style.animationDelay = `${index * 0.2}s`;
     });
+
+    // Initialize process steps animation
+    initializeProcessSteps();
 });
+
+// Process steps animation initialization
+function initializeProcessSteps() {
+    const processSteps = document.querySelectorAll('.process-step');
+
+    // 모든 process-step에 js-loading 클래스 추가 (fallback 방지)
+    processSteps.forEach((step, index) => {
+        step.classList.add('js-loading');
+
+        // 인라인 스타일 제거 (CSS가 우선되도록)
+        step.style.opacity = '';
+        step.style.transform = '';
+        step.style.transition = '';
+
+        // transition delay만 설정 (거의 즉시 표시)
+        step.style.transitionDelay = `${index * 0.05}s`;
+
+        // 관찰 시작
+        observer.observe(step);
+    });
+}
 
 // ===================================
 // Performance: Lazy Loading Videos
@@ -397,30 +449,42 @@ window.addEventListener('resize', handleResize);
 
 // 모달 열기
 function openInquiryModal() {
+    console.log('openInquiryModal 호출됨');
     const modal = document.getElementById('inquiryModal');
+    console.log('inquiryModal 요소:', modal);
+
     if (modal) {
         modal.style.display = 'block';
         document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
 
-        // localStorage에서 가격 정보 가져오기 (메인에서 넘어온 경우)
+        // localStorage에서 가격 정보 가져오기 (항상 체크)
         const savedData = localStorage.getItem('hazacheck_calculation');
+        console.log('localStorage 데이터:', savedData);
+
         if (savedData) {
             try {
                 const data = JSON.parse(savedData);
-                displayModalPriceInfo(data);
-                // 사용 후 삭제
-                localStorage.removeItem('hazacheck_calculation');
+                console.log('파싱된 가격 정보:', data);
+
+                // DOM이 준비될 때까지 약간 대기
+                setTimeout(() => {
+                    displayModalPriceInfo(data);
+                }, 200);
             } catch (e) {
                 console.error('가격 정보 파싱 실패:', e);
             }
+        } else {
+            console.log('저장된 가격 정보 없음 - localStorage가 비어있습니다');
         }
+    } else {
+        console.error('inquiryModal 요소를 찾을 수 없습니다!');
     }
 }
 
 // 페이지 로드시 자동으로 모달 열기 (메인에서 넘어온 경우)
 document.addEventListener('DOMContentLoaded', function() {
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('openModal') === 'true') {
+    if (urlParams.get('calculation') === 'true') {
         // URL에서 파라미터 제거
         window.history.replaceState({}, document.title, window.location.pathname);
         // 모달 열기
@@ -439,25 +503,100 @@ function closeInquiryModal() {
 
 // 모달 가격 정보 표시
 function displayModalPriceInfo(data) {
+    console.log('displayModalPriceInfo 호출됨, 데이터:', data);
+
     const priceInfo = document.getElementById('modalPriceInfo');
     const priceDetails = document.getElementById('modalPriceDetails');
-    
-    if (priceInfo && priceDetails) {
-        let html = '<div>';
-        html += '<p><strong>세대 크기:</strong> ' + data.size + '타입</p>';
-        html += '<p><strong>기본 비용:</strong> ' + data.basePrice + '</p>';
-        if (data.options && data.options.length > 0) {
-            html += '<p><strong>추가 옵션:</strong> ' + data.options.join(', ') + '</p>';
-        }
-        html += '<p style="font-size: 1.2rem; font-weight: 700; color: #2563eb; margin-top: 10px;"><strong>총 예상 비용:</strong> ' + data.totalPrice + '</p>';
-        html += '</div>';
-        
-        priceDetails.innerHTML = html;
-        priceInfo.style.display = 'block';
-        
-        // 폼에 자동 입력
-        document.getElementById('modalSize').value = data.sizeValue || '';
+
+    console.log('priceInfo 요소:', priceInfo);
+    console.log('priceDetails 요소:', priceDetails);
+
+    if (!priceInfo || !priceDetails) {
+        console.error('가격 정보 표시 요소를 찾을 수 없습니다!');
+        return;
     }
+
+    // 가격 정보 표시
+    let html = '<div style="line-height: 1.8;">';
+    html += '<p style="margin: 8px 0;"><strong>📏 세대 크기:</strong> ' + data.size + '</p>';
+    html += '<p style="margin: 8px 0;"><strong>💵 기본 비용:</strong> ' + data.basePriceFormatted + '</p>';
+
+    if (data.options && data.options.length > 0) {
+        html += '<p style="margin: 8px 0;"><strong>⭐ 추가 옵션:</strong></p>';
+        html += '<ul style="margin: 4px 0 8px 20px; padding-left: 0;">';
+        data.options.forEach(opt => {
+            html += '<li style="margin: 4px 0;">• ' + opt.name + ' (+₩' + opt.price.toLocaleString() + ')</li>';
+        });
+        html += '</ul>';
+    }
+
+    html += '<div style="margin-top: 16px; padding-top: 16px; border-top: 2px solid #2563eb;">';
+    html += '<p style="font-size: 1.3rem; font-weight: 700; color: #2563eb; margin: 0;"><strong>💰 총 예상 비용: ' + data.totalPriceFormatted + '</strong></p>';
+    html += '</div>';
+    html += '</div>';
+
+    priceDetails.innerHTML = html;
+    priceInfo.style.display = 'block';
+    console.log('가격 정보 표시 완료');
+
+    // 약간의 딜레이를 주고 폼 입력
+    setTimeout(() => {
+        // 폼에 자동 입력 - 세대 크기
+        const sizeSelect = document.getElementById('modalSize');
+        console.log('modalSize 요소:', sizeSelect, '값 설정:', data.sizeValue);
+        if (sizeSelect) {
+            sizeSelect.value = data.sizeValue || '';
+            console.log('세대 크기 설정됨:', sizeSelect.value);
+        }
+
+        // 폼에 자동 입력 - 옵션 체크박스
+        console.log('옵션 이름들:', data.optionNames);
+        if (data.optionNames && data.optionNames.length > 0) {
+            data.optionNames.forEach(optionName => {
+                console.log('옵션 처리:', optionName);
+                if (optionName === '하자 접수 대행') {
+                    const checkbox = document.getElementById('modalOption1');
+                    if (checkbox) {
+                        checkbox.checked = true;
+                        console.log('modalOption1 체크됨');
+                    }
+                } else if (optionName === '사후관리 재점검') {
+                    const checkbox = document.getElementById('modalOption2');
+                    if (checkbox) {
+                        checkbox.checked = true;
+                        console.log('modalOption2 체크됨');
+                    }
+                } else if (optionName === 'VR 360° 촬영') {
+                    const checkbox = document.getElementById('modalOption3');
+                    if (checkbox) {
+                        checkbox.checked = true;
+                        console.log('modalOption3 체크됨');
+                    }
+                } else if (optionName === '실측 서비스') {
+                    const checkbox = document.getElementById('modalOption4');
+                    if (checkbox) {
+                        checkbox.checked = true;
+                        console.log('modalOption4 체크됨');
+                    }
+                }
+            });
+        }
+
+        // 문의 내용에 가격 정보 자동 추가
+        const messageTextarea = document.getElementById('modalMessage');
+        console.log('modalMessage 요소:', messageTextarea);
+        if (messageTextarea && !messageTextarea.value) {
+            let message = `[가격 시뮬레이션을 통한 문의]\n`;
+            message += `세대 크기: ${data.size}\n`;
+            message += `기본 비용: ${data.basePriceFormatted}\n`;
+            if (data.optionNames && data.optionNames.length > 0) {
+                message += `추가 옵션: ${data.optionNames.join(', ')}\n`;
+            }
+            message += `총 예상 비용: ${data.totalPriceFormatted}\n\n`;
+            messageTextarea.value = message;
+            console.log('문의 내용 설정됨');
+        }
+    }, 100);
 }
 
 // 문의 상세 보기
@@ -483,16 +622,34 @@ const modalForm = document.getElementById('inquiryModalForm');
 if (modalForm) {
     modalForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
+
+        // 선택된 옵션 수집
+        const selectedOptions = [];
+        const optionCheckboxes = [
+            document.getElementById('modalOption1'),
+            document.getElementById('modalOption2'),
+            document.getElementById('modalOption3'),
+            document.getElementById('modalOption4')
+        ];
+
+        optionCheckboxes.forEach(checkbox => {
+            if (checkbox && checkbox.checked) {
+                selectedOptions.push(checkbox.value);
+            }
+        });
+
         const formData = {
             name: document.getElementById('modalName').value,
             phone: document.getElementById('modalPhone').value,
             apartment: document.getElementById('modalApartment').value,
             size: document.getElementById('modalSize').value,
             moveInDate: document.getElementById('modalDate').value,
-            message: document.getElementById('modalMessage').value
+            message: document.getElementById('modalMessage').value,
+            options: selectedOptions
         };
-        
+
+        console.log('제출 데이터:', formData);
+
         try {
             const response = await fetch('/api/inquiries', {
                 method: 'POST',
@@ -501,11 +658,14 @@ if (modalForm) {
                 },
                 body: JSON.stringify(formData)
             });
-            
+
             const result = await response.json();
-            
+
             if (result.success) {
-                alert('상담 신청이 완료되었습니다\!\n빠른 시일 내에 연락드리겠습니다.');
+                // localStorage 정리
+                localStorage.removeItem('hazacheck_calculation');
+
+                alert('상담 신청이 완료되었습니다!\n빠른 시일 내에 연락드리겠습니다.');
                 closeInquiryModal();
                 modalForm.reset();
                 location.reload();
