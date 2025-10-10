@@ -998,15 +998,47 @@
         padding: 40px 0 60px !important;
     }
 
-    .inquiry-list-section .section-header h4 {
-        font-size: 1.15rem !important;
-        margin-bottom: 16px;
+    /* 안내 박스 모바일 최적화 */
+    .inquiry-info-box {
+        padding: 24px 20px !important;
+        margin-bottom: 32px !important;
+        border-radius: 12px !important;
     }
 
-    .inquiry-list-section ul li {
-        font-size: 0.95rem !important;
-        line-height: 1.7;
+    .inquiry-info-box h3 {
+        font-size: 1.25rem !important;
+        margin-bottom: 16px !important;
+        gap: 8px !important;
+    }
+
+    .inquiry-info-box h3 span {
+        font-size: 1.5rem !important;
+    }
+
+    .inquiry-info-box ul {
+        gap: 2px;
+    }
+
+    .inquiry-info-box li {
         padding: 10px 0 10px 24px !important;
+        font-size: 0.9rem !important;
+        line-height: 1.6 !important;
+        border-bottom-width: 1px !important;
+    }
+
+    .inquiry-info-box li:last-child {
+        border-bottom: none !important;
+    }
+
+    .inquiry-info-box li span {
+        left: 2px !important;
+        font-size: 0.9rem !important;
+    }
+
+    .inquiry-info-box strong {
+        font-size: 0.9rem !important;
+        padding: 2px 6px !important;
+        display: inline !important;
     }
 
     /* 기존 스타일 유지 */
