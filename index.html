@@ -159,237 +159,6 @@
         </div>
     </section>
 
-    <!-- Pricing Calculator Section -->
-    <section class="pricing-section" id="pricing">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">투명한 가격, 합리적인 비용</h2>
-                <p class="section-subtitle">전용면적에 따른 명확한 가격 체계</p>
-            </div>
-
-            <div class="pricing-calculator">
-                <div class="calculator-header">
-                    <h3>💰 실시간 가격 시뮬레이션</h3>
-                    <p>세대 크기와 옵션을 선택하면 즉시 총 비용을 확인할 수 있습니다</p>
-                </div>
-
-                <div class="calculator-layout">
-                    <!-- 입력 영역 -->
-                    <div class="calculator-input">
-                        <div class="size-selector">
-                            <h4>🏠 세대 크기 선택</h4>
-                            <div class="size-options-grid">
-                                <div class="size-option" data-size="58" data-price="189000">
-                                    <div class="size-badge">58타입</div>
-                                    <div class="size-area">~58m²</div>
-                                    <div class="size-price">₩189,000</div>
-                                </div>
-                                <div class="size-option" data-size="74" data-price="209000">
-                                    <div class="size-badge">74타입</div>
-                                    <div class="size-area">59~74m²</div>
-                                    <div class="size-price">₩209,000</div>
-                                </div>
-                                <div class="size-option" data-size="84" data-price="229000">
-                                    <div class="size-badge">84타입</div>
-                                    <div class="size-area">75~84m²</div>
-                                    <div class="size-price">₩229,000</div>
-                                </div>
-                                <div class="size-option" data-size="104" data-price="249000">
-                                    <div class="size-badge">104타입</div>
-                                    <div class="size-area">85~104m²</div>
-                                    <div class="size-price">₩249,000</div>
-                                </div>
-                                <div class="size-option" data-size="over" data-price="0">
-                                    <div class="size-badge">104m² 이상</div>
-                                    <div class="size-area">별도 견적</div>
-                                    <div class="size-price">문의 필요</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="premium-options">
-                            <h4>⭐ 추가 옵션 (선택사항)</h4>
-                            <div class="option-grid">
-                                <label class="option-item">
-                                    <input type="checkbox" class="option-checkbox" data-price="50000" data-name="하자 접수 대행">
-                                    <div class="option-content">
-                                        <div class="option-name">하자 접수 대행</div>
-                                        <div class="option-price">+₩50,000</div>
-                                    </div>
-                                </label>
-                                <label class="option-item">
-                                    <input type="checkbox" class="option-checkbox" data-price="100000" data-name="사후관리 재점검">
-                                    <div class="option-content">
-                                        <div class="option-name">사후관리 재점검</div>
-                                        <div class="option-price">+₩100,000</div>
-                                    </div>
-                                </label>
-                                <label class="option-item">
-                                    <input type="checkbox" class="option-checkbox" data-price="50000" data-name="VR 360° 촬영">
-                                    <div class="option-content">
-                                        <div class="option-name">VR 360° 촬영</div>
-                                        <div class="option-price">+₩50,000</div>
-                                    </div>
-                                </label>
-                                <label class="option-item">
-                                    <input type="checkbox" class="option-checkbox" data-price="50000" data-name="실측 서비스">
-                                    <div class="option-content">
-                                        <div class="option-name">실측 서비스</div>
-                                        <div class="option-price">+₩50,000</div>
-                                    </div>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 결과 영역 -->
-                    <div class="calculator-output" id="calculatorOutput" style="display: none;">
-                        <div class="output-header">
-                            <h3>📊 견적 결과</h3>
-                        </div>
-                        <div class="output-content">
-                            <div class="output-row">
-                                <span class="output-label">선택한 타입</span>
-                                <span class="output-value" id="outputSize">-</span>
-                            </div>
-                            <div class="output-row">
-                                <span class="output-label">기본 점검 비용</span>
-                                <span class="output-value" id="outputBasePrice">₩0</span>
-                            </div>
-                            <div id="outputOptions"></div>
-                            <div class="output-divider"></div>
-                            <div class="output-row output-total">
-                                <span class="output-label">총 예상 비용</span>
-                                <span class="output-value" id="outputTotalPrice">₩0</span>
-                            </div>
-                            <div class="output-actions">
-                                <button class="btn btn-primary btn-lg" id="inquiryWithPrice">이 가격으로 문의하기 →</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="included-services">
-                    <h4>✅ 기본 서비스 포함사항</h4>
-                    <div class="services-grid">
-                        <div class="service-item">
-                            <span class="service-icon">👨‍💼</span>
-                            <span class="service-text">전문가 현장 점검 (2시간)</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-icon">📱</span>
-                            <span class="service-text">자체 개발 앱 기반 자동화 보고서</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-icon">🗃️</span>
-                            <span class="service-text">하자 유형 DB 활용</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-icon">📸</span>
-                            <span class="service-text">사진/동영상 증빙 자료</span>
-                        </div>
-                        <div class="service-item">
-                            <span class="service-icon">📄</span>
-                            <span class="service-text">당일 리포트 제공</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="pricing-note">
-                    <p>※ 전용면적 104m² 이상은 별도 문의 바랍니다.</p>
-                    <p>※ 모든 가격은 부가세 포함 금액입니다.</p>
-                </div>
-
-                <div class="cta-wrapper">
-                    <a href="inquiries.html" class="btn btn-secondary btn-lg">바로 문의하기</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Defect Cases Section -->
-    <section class="cases-section" id="cases">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">실제 발견된 하자 사례</h2>
-                <p class="section-subtitle">전문가의 눈으로 찾아낸 하자들을 확인하세요</p>
-            </div>
-
-            <div class="cases-grid">
-                <div class="case-card">
-                    <div class="case-image">
-                        <img src="images/defects/defect-tile-filling.jpg" alt="타일 뒤 채움 불량">
-                        <div class="case-badge severity-high">심각</div>
-                    </div>
-                    <div class="case-content">
-                        <h3>타일 뒤 채움 불량</h3>
-                        <p>타일 뒤 채움이 제대로 되지 않아 향후 탈락 위험이 있습니다. 조기 발견으로 재시공 요청했습니다.</p>
-                    </div>
-                </div>
-
-                <div class="case-card">
-                    <div class="case-image">
-                        <img src="images/defects/defect-pipe-interior-efflorescence.png" alt="배관 내부 백화">
-                        <div class="case-badge severity-high">심각</div>
-                    </div>
-                    <div class="case-content">
-                        <h3>배관 내부 백화 현상</h3>
-                        <p>배관 내부에 백화 현상이 발생하여 누수 가능성이 있습니다. 전문 장비로만 확인 가능한 하자입니다.</p>
-                    </div>
-                </div>
-
-                <div class="case-card">
-                    <div class="case-image">
-                        <img src="images/defects/defect-floor-water.png" alt="바닥 물고임">
-                        <div class="case-badge severity-medium">주의</div>
-                    </div>
-                    <div class="case-content">
-                        <h3>화장실 바닥 물고임</h3>
-                        <p>화장실 바닥 경사가 잘못되어 물이 고이는 현상이 발견되었습니다. 평탄도 측정으로 발견했습니다.</p>
-                    </div>
-                </div>
-
-                <div class="case-card">
-                    <div class="case-image">
-                        <img src="images/defects/defect-corner-leakage.png" alt="모서리 누수">
-                        <div class="case-badge severity-high">심각</div>
-                    </div>
-                    <div class="case-content">
-                        <h3>모서리 부분 누수 하자</h3>
-                        <p>모서리 면귀 부분에서 누수 흔적이 발견되었습니다. 열화상 카메라로 습기를 감지했습니다.</p>
-                    </div>
-                </div>
-
-                <div class="case-card">
-                    <div class="case-image">
-                        <img src="images/defects/defect-wallpaper-lifting.jpg" alt="도배 들뜸">
-                        <div class="case-badge severity-low">경미</div>
-                    </div>
-                    <div class="case-content">
-                        <h3>벽지 들뜸 현상</h3>
-                        <p>벽지가 들뜨는 현상이 여러 곳에서 발견되었습니다. 시공 불량으로 재작업이 필요합니다.</p>
-                    </div>
-                </div>
-
-                <div class="case-card">
-                    <div class="case-image">
-                        <img src="images/defects/defect-floor-lifting.jpg" alt="마루 들뜸">
-                        <div class="case-badge severity-medium">주의</div>
-                    </div>
-                    <div class="case-content">
-                        <h3>마루 바닥재 들뜸</h3>
-                        <p>마루 바닥재가 들뜨는 현상으로 소리가 발생합니다. 접착 불량으로 부분 재시공 필요합니다.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cases-cta">
-                <p class="cta-text">이런 하자들을 놓치지 않으려면?</p>
-                <a href="inquiries.html" class="btn btn-primary btn-lg">지금 점검 신청하기</a>
-            </div>
-        </div>
-    </section>
-
     <!-- Inspection Process Section -->
     <section class="process-section" id="process">
         <div class="container">
@@ -617,6 +386,237 @@
                     <h3>자체 개발 점검 앱</h3>
                     <p>6,000세대 경험을 바탕으로 개발한 체크리스트 앱으로 빠짐없이 점검합니다.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Calculator Section -->
+    <section class="pricing-section" id="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">투명한 가격, 합리적인 비용</h2>
+                <p class="section-subtitle">전용면적에 따른 명확한 가격 체계</p>
+            </div>
+
+            <div class="pricing-calculator">
+                <div class="calculator-header">
+                    <h3>💰 실시간 가격 시뮬레이션</h3>
+                    <p>세대 크기와 옵션을 선택하면 즉시 총 비용을 확인할 수 있습니다</p>
+                </div>
+
+                <div class="calculator-layout">
+                    <!-- 입력 영역 -->
+                    <div class="calculator-input">
+                        <div class="size-selector">
+                            <h4>🏠 세대 크기 선택</h4>
+                            <div class="size-options-grid">
+                                <div class="size-option" data-size="58" data-price="189000">
+                                    <div class="size-badge">58타입</div>
+                                    <div class="size-area">~58m²</div>
+                                    <div class="size-price">₩189,000</div>
+                                </div>
+                                <div class="size-option" data-size="74" data-price="209000">
+                                    <div class="size-badge">74타입</div>
+                                    <div class="size-area">59~74m²</div>
+                                    <div class="size-price">₩209,000</div>
+                                </div>
+                                <div class="size-option" data-size="84" data-price="229000">
+                                    <div class="size-badge">84타입</div>
+                                    <div class="size-area">75~84m²</div>
+                                    <div class="size-price">₩229,000</div>
+                                </div>
+                                <div class="size-option" data-size="104" data-price="249000">
+                                    <div class="size-badge">104타입</div>
+                                    <div class="size-area">85~104m²</div>
+                                    <div class="size-price">₩249,000</div>
+                                </div>
+                                <div class="size-option" data-size="over" data-price="0">
+                                    <div class="size-badge">104m² 이상</div>
+                                    <div class="size-area">별도 견적</div>
+                                    <div class="size-price">문의 필요</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="premium-options">
+                            <h4>⭐ 추가 옵션 (선택사항)</h4>
+                            <div class="option-grid">
+                                <label class="option-item">
+                                    <input type="checkbox" class="option-checkbox" data-price="50000" data-name="하자 접수 대행">
+                                    <div class="option-content">
+                                        <div class="option-name">하자 접수 대행</div>
+                                        <div class="option-price">+₩50,000</div>
+                                    </div>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" class="option-checkbox" data-price="100000" data-name="사후관리 재점검">
+                                    <div class="option-content">
+                                        <div class="option-name">사후관리 재점검</div>
+                                        <div class="option-price">+₩100,000</div>
+                                    </div>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" class="option-checkbox" data-price="50000" data-name="VR 360° 촬영">
+                                    <div class="option-content">
+                                        <div class="option-name">VR 360° 촬영</div>
+                                        <div class="option-price">+₩50,000</div>
+                                    </div>
+                                </label>
+                                <label class="option-item">
+                                    <input type="checkbox" class="option-checkbox" data-price="50000" data-name="실측 서비스">
+                                    <div class="option-content">
+                                        <div class="option-name">실측 서비스</div>
+                                        <div class="option-price">+₩50,000</div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 결과 영역 -->
+                    <div class="calculator-output" id="calculatorOutput" style="display: none;">
+                        <div class="output-header">
+                            <h3>📊 견적 결과</h3>
+                        </div>
+                        <div class="output-content">
+                            <div class="output-row">
+                                <span class="output-label">선택한 타입</span>
+                                <span class="output-value" id="outputSize">-</span>
+                            </div>
+                            <div class="output-row">
+                                <span class="output-label">기본 점검 비용</span>
+                                <span class="output-value" id="outputBasePrice">₩0</span>
+                            </div>
+                            <div id="outputOptions"></div>
+                            <div class="output-divider"></div>
+                            <div class="output-row output-total">
+                                <span class="output-label">총 예상 비용</span>
+                                <span class="output-value" id="outputTotalPrice">₩0</span>
+                            </div>
+                            <div class="output-actions">
+                                <button class="btn btn-primary btn-lg" id="inquiryWithPrice">이 가격으로 문의하기 →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="included-services">
+                    <h4>✅ 기본 서비스 포함사항</h4>
+                    <div class="services-grid">
+                        <div class="service-item">
+                            <span class="service-icon">👨‍💼</span>
+                            <span class="service-text">전문가 현장 점검 (2시간)</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">📱</span>
+                            <span class="service-text">자체 개발 앱 기반 자동화 보고서</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">🗃️</span>
+                            <span class="service-text">하자 유형 DB 활용</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">📸</span>
+                            <span class="service-text">사진/동영상 증빙 자료</span>
+                        </div>
+                        <div class="service-item">
+                            <span class="service-icon">📄</span>
+                            <span class="service-text">당일 리포트 제공</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pricing-note">
+                    <p>※ 전용면적 104m² 이상은 별도 문의 바랍니다.</p>
+                    <p>※ 모든 가격은 부가세 포함 금액입니다.</p>
+                </div>
+
+                <div class="cta-wrapper">
+                    <a href="inquiries.html" class="btn btn-secondary btn-lg">바로 문의하기</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Defect Cases Section -->
+    <section class="cases-section" id="cases">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">실제 발견된 하자 사례</h2>
+                <p class="section-subtitle">전문가의 눈으로 찾아낸 하자들을 확인하세요</p>
+            </div>
+
+            <div class="cases-grid">
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="images/defects/defect-tile-filling.jpg" alt="타일 뒤 채움 불량">
+                        <div class="case-badge severity-high">심각</div>
+                    </div>
+                    <div class="case-content">
+                        <h3>타일 뒤 채움 불량</h3>
+                        <p>타일 뒤 채움이 제대로 되지 않아 향후 탈락 위험이 있습니다. 조기 발견으로 재시공 요청했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="images/defects/defect-pipe-interior-efflorescence.png" alt="배관 내부 백화">
+                        <div class="case-badge severity-high">심각</div>
+                    </div>
+                    <div class="case-content">
+                        <h3>배관 내부 백화 현상</h3>
+                        <p>배관 내부에 백화 현상이 발생하여 누수 가능성이 있습니다. 전문 장비로만 확인 가능한 하자입니다.</p>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="images/defects/defect-floor-water.png" alt="바닥 물고임">
+                        <div class="case-badge severity-medium">주의</div>
+                    </div>
+                    <div class="case-content">
+                        <h3>화장실 바닥 물고임</h3>
+                        <p>화장실 바닥 경사가 잘못되어 물이 고이는 현상이 발견되었습니다. 평탄도 측정으로 발견했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="images/defects/defect-corner-leakage.png" alt="모서리 누수">
+                        <div class="case-badge severity-high">심각</div>
+                    </div>
+                    <div class="case-content">
+                        <h3>모서리 부분 누수 하자</h3>
+                        <p>모서리 면귀 부분에서 누수 흔적이 발견되었습니다. 열화상 카메라로 습기를 감지했습니다.</p>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="images/defects/defect-wallpaper-lifting.jpg" alt="도배 들뜸">
+                        <div class="case-badge severity-low">경미</div>
+                    </div>
+                    <div class="case-content">
+                        <h3>벽지 들뜸 현상</h3>
+                        <p>벽지가 들뜨는 현상이 여러 곳에서 발견되었습니다. 시공 불량으로 재작업이 필요합니다.</p>
+                    </div>
+                </div>
+
+                <div class="case-card">
+                    <div class="case-image">
+                        <img src="images/defects/defect-floor-lifting.jpg" alt="마루 들뜸">
+                        <div class="case-badge severity-medium">주의</div>
+                    </div>
+                    <div class="case-content">
+                        <h3>마루 바닥재 들뜸</h3>
+                        <p>마루 바닥재가 들뜨는 현상으로 소리가 발생합니다. 접착 불량으로 부분 재시공 필요합니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cases-cta">
+                <p class="cta-text">이런 하자들을 놓치지 않으려면?</p>
+                <a href="inquiries.html" class="btn btn-primary btn-lg">지금 점검 신청하기</a>
             </div>
         </div>
     </section>
