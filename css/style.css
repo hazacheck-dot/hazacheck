@@ -1521,36 +1521,9 @@ h4 { font-size: 1.25rem; }
     background: var(--bg-gray);
 }
 
-.company-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 60px;
-    align-items: start;
-}
-
-.company-image {
-    position: sticky;
-    top: 120px;
-}
-
-.company-logo-placeholder {
-    background: white;
-    border-radius: 20px;
-    padding: 80px 40px;
+.company-section .section-header {
     text-align: center;
-    box-shadow: var(--shadow-lg);
-}
-
-.logo-icon {
-    font-size: 6rem;
-    margin-bottom: 20px;
-}
-
-.company-content {
-    background: white;
-    padding: 50px;
-    border-radius: 20px;
-    box-shadow: var(--shadow-lg);
+    margin-bottom: 60px;
 }
 
 .company-badge {
@@ -1564,85 +1537,186 @@ h4 { font-size: 1.25rem; }
     margin-bottom: 16px;
 }
 
-.company-title {
-    font-size: 2rem;
-    margin-bottom: 8px;
-}
-
-.company-name {
-    font-size: 1.5rem;
-    color: var(--text-secondary);
-    margin-bottom: 40px;
-}
-
-.company-info,
-.company-description,
-.company-values {
-    margin-bottom: 40px;
-}
-
-.company-info h4,
-.company-description h4,
-.company-values h4 {
-    font-size: 1.25rem;
-    margin-bottom: 20px;
+.company-section .section-title {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
     color: var(--text-primary);
 }
 
-.company-info ul {
+.company-name {
+    font-size: 1.75rem;
+    color: var(--text-secondary);
+    font-weight: 700;
+    margin-bottom: 0;
+}
+
+.company-content-wrapper {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* Company Description Box */
+.company-description-box {
+    background: linear-gradient(135deg, var(--primary-color), #1e40af);
+    padding: 50px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow: var(--shadow-xl);
+    position: relative;
+    overflow: hidden;
+}
+
+.company-description-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="40" fill="rgba(255,255,255,0.05)"/></svg>');
+    opacity: 0.3;
+}
+
+.company-icon {
+    font-size: 3rem;
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.company-description-box blockquote {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 35px;
+    border-left: 4px solid rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    font-style: italic;
+    color: white;
+    line-height: 1.8;
+    font-size: 1.125rem;
+    margin: 0;
+    position: relative;
+}
+
+.company-description-box blockquote strong {
+    color: white;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Company Info Grid */
+.company-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.company-info-card,
+.company-values-card {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    transition: all var(--transition-normal);
+}
+
+.company-info-card:hover,
+.company-values-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+.company-info-card h4,
+.company-values-card h4 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.info-icon {
+    font-size: 1.75rem;
+}
+
+/* Company Info List */
+.company-info-card ul {
     list-style: none;
 }
 
-.company-info li {
-    padding: 12px 0;
-    padding-left: 32px;
-    position: relative;
+.company-info-card li {
+    padding: 16px 0;
+    border-bottom: 1px solid var(--bg-gray);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.company-info-card li:last-child {
+    border-bottom: none;
+}
+
+.info-label {
     color: var(--text-secondary);
-    line-height: 1.7;
+    font-weight: 500;
+    min-width: 80px;
 }
 
-.company-info li::before {
-    content: '▸';
-    position: absolute;
-    left: 0;
-    color: var(--primary-color);
-    font-weight: 900;
+.info-value {
+    color: var(--text-primary);
+    font-weight: 600;
+    text-align: right;
+    flex: 1;
 }
 
-blockquote {
-    background: var(--bg-gray);
-    padding: 30px;
-    border-left: 4px solid var(--primary-color);
-    border-radius: 8px;
-    font-style: italic;
-    color: var(--text-secondary);
-    line-height: 1.8;
-}
-
-.values-items {
+/* Company Values */
+.values-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
 }
 
 .value-item {
-    text-align: center;
-    padding: 24px;
+    display: flex;
+    align-items: start;
+    gap: 12px;
+    padding: 20px;
     background: var(--bg-gray);
     border-radius: 12px;
+    transition: all var(--transition-normal);
+}
+
+.value-item:hover {
+    background: #e0f2fe;
 }
 
 .value-number {
-    display: block;
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 900;
     color: var(--primary-color);
-    margin-bottom: 12px;
+    line-height: 1;
+    min-width: 40px;
 }
 
-.value-item p {
+.value-content {
+    flex: 1;
+}
+
+.value-content strong {
+    display: block;
+    font-size: 1.125rem;
+    margin-bottom: 6px;
+    color: var(--text-primary);
+}
+
+.value-content p {
     color: var(--text-secondary);
     line-height: 1.6;
+    font-size: 0.95rem;
+    margin: 0;
 }
 
 /* ===================================
@@ -2071,16 +2145,13 @@ blockquote {
         order: 3;
     }
 
-    .company-wrapper {
+    /* Company Section - Tablet */
+    .company-info-grid {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 24px;
     }
 
-    .company-image {
-        position: static;
-    }
-
-    .values-items {
+    .values-grid {
         grid-template-columns: 1fr;
     }
 }
@@ -3128,8 +3199,81 @@ blockquote {
     }
 
 
-    .company-content {
+    /* Company Section - Mobile */
+    .company-section .section-title {
+        font-size: 1.75rem;
+    }
+
+    .company-name {
+        font-size: 1.25rem;
+    }
+
+    .company-description-box {
         padding: 30px 20px;
+        margin-bottom: 30px;
+    }
+
+    .company-icon {
+        font-size: 2rem;
+        margin-bottom: 16px;
+    }
+
+    .company-description-box blockquote {
+        padding: 24px;
+        font-size: 1rem;
+    }
+
+    .company-info-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .company-info-card,
+    .company-values-card {
+        padding: 25px 20px;
+    }
+
+    .company-info-card h4,
+    .company-values-card h4 {
+        font-size: 1.25rem;
+        margin-bottom: 20px;
+    }
+
+    .company-info-card li {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px 0;
+    }
+
+    .info-label {
+        font-size: 0.875rem;
+    }
+
+    .info-value {
+        text-align: left;
+        font-size: 1rem;
+    }
+
+    .values-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .value-item {
+        padding: 16px;
+    }
+
+    .value-number {
+        font-size: 1.5rem;
+    }
+
+    .value-content strong {
+        font-size: 1rem;
+    }
+
+    .value-content p {
+        font-size: 0.875rem;
     }
 
     .cta-title {
