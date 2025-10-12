@@ -541,61 +541,103 @@ function displayModalPriceInfo(data) {
 
     // 약간의 딜레이를 주고 폼 입력
     setTimeout(() => {
+        console.log('=== 폼 자동 입력 시작 ===');
+
         // 폼에 자동 입력 - 세대 크기
         const sizeSelect = document.getElementById('modalSize');
-        console.log('modalSize 요소:', sizeSelect, '값 설정:', data.sizeValue);
+        console.log('1. modalSize 요소:', sizeSelect);
+        console.log('2. 설정할 값 (data.sizeValue):', data.sizeValue);
+
         if (sizeSelect) {
             sizeSelect.value = data.sizeValue || '';
-            console.log('세대 크기 설정됨:', sizeSelect.value);
+            console.log('3. 설정 후 실제 값:', sizeSelect.value);
+
+            // 시각적 피드백 추가
+            if (sizeSelect.value) {
+                sizeSelect.style.backgroundColor = '#e0f2fe';
+                setTimeout(() => sizeSelect.style.backgroundColor = '', 2000);
+            }
+        } else {
+            console.error('❌ modalSize select 요소를 찾을 수 없습니다!');
         }
 
         // 폼에 자동 입력 - 옵션 체크박스
-        console.log('옵션 이름들:', data.optionNames);
+        console.log('4. 옵션 자동 체크 시작');
+        console.log('5. data.optionNames:', data.optionNames);
+        console.log('6. data.options:', data.options);
+
+        // 옵션 매핑 (더 robust하게)
+        const optionMapping = {
+            '하자 접수 대행': 'modalOption1',
+            '사후관리 재점검': 'modalOption2',
+            'VR 360° 촬영': 'modalOption3',
+            '실측 서비스': 'modalOption4'
+        };
+
         if (data.optionNames && data.optionNames.length > 0) {
-            data.optionNames.forEach(optionName => {
-                console.log('옵션 처리:', optionName);
-                if (optionName === '하자 접수 대행') {
-                    const checkbox = document.getElementById('modalOption1');
+            console.log(`7. 총 ${data.optionNames.length}개 옵션 처리 시작`);
+
+            data.optionNames.forEach((optionName, index) => {
+                console.log(`  [${index + 1}] 옵션 이름: "${optionName}"`);
+
+                const checkboxId = optionMapping[optionName];
+                console.log(`  → 매핑된 ID: ${checkboxId}`);
+
+                if (checkboxId) {
+                    const checkbox = document.getElementById(checkboxId);
+                    console.log(`  → 체크박스 요소:`, checkbox);
+
                     if (checkbox) {
                         checkbox.checked = true;
-                        console.log('modalOption1 체크됨');
+                        console.log(`  ✅ ${optionName} 체크 완료!`);
+
+                        // 시각적 피드백
+                        const label = checkbox.closest('label');
+                        if (label) {
+                            label.style.backgroundColor = '#e0f2fe';
+                            label.style.borderColor = '#2563eb';
+                            setTimeout(() => {
+                                label.style.backgroundColor = '';
+                                label.style.borderColor = '';
+                            }, 2000);
+                        }
+                    } else {
+                        console.error(`  ❌ ${checkboxId} 요소를 찾을 수 없습니다!`);
                     }
-                } else if (optionName === '사후관리 재점검') {
-                    const checkbox = document.getElementById('modalOption2');
-                    if (checkbox) {
-                        checkbox.checked = true;
-                        console.log('modalOption2 체크됨');
-                    }
-                } else if (optionName === 'VR 360° 촬영') {
-                    const checkbox = document.getElementById('modalOption3');
-                    if (checkbox) {
-                        checkbox.checked = true;
-                        console.log('modalOption3 체크됨');
-                    }
-                } else if (optionName === '실측 서비스') {
-                    const checkbox = document.getElementById('modalOption4');
-                    if (checkbox) {
-                        checkbox.checked = true;
-                        console.log('modalOption4 체크됨');
-                    }
+                } else {
+                    console.warn(`  ⚠️ "${optionName}"에 대한 매핑을 찾을 수 없습니다`);
                 }
             });
+        } else {
+            console.log('7. 선택된 옵션 없음');
         }
 
         // 문의 내용에 가격 정보 자동 추가
+        console.log('8. 문의 내용 자동 입력 시작');
         const messageTextarea = document.getElementById('modalMessage');
-        console.log('modalMessage 요소:', messageTextarea);
-        if (messageTextarea && !messageTextarea.value) {
-            let message = `[가격 시뮬레이션을 통한 문의]\n`;
-            message += `세대 크기: ${data.size}\n`;
-            message += `기본 비용: ${data.basePriceFormatted}\n`;
-            if (data.optionNames && data.optionNames.length > 0) {
-                message += `추가 옵션: ${data.optionNames.join(', ')}\n`;
+        console.log('9. modalMessage 요소:', messageTextarea);
+
+        if (messageTextarea) {
+            if (!messageTextarea.value || messageTextarea.value.trim() === '') {
+                let message = `[💰 가격 시뮬레이션 견적]\n\n`;
+                message += `📏 세대 크기: ${data.size}\n`;
+                message += `💵 기본 비용: ${data.basePriceFormatted}\n`;
+                if (data.optionNames && data.optionNames.length > 0) {
+                    message += `⭐ 추가 옵션: ${data.optionNames.join(', ')}\n`;
+                }
+                message += `\n💰 총 예상 비용: ${data.totalPriceFormatted}\n\n`;
+                message += `위 견적으로 상담 문의드립니다.`;
+
+                messageTextarea.value = message;
+                console.log('10. ✅ 문의 내용 자동 입력 완료!');
+            } else {
+                console.log('10. 문의 내용이 이미 있어서 건너뜀');
             }
-            message += `총 예상 비용: ${data.totalPriceFormatted}\n\n`;
-            messageTextarea.value = message;
-            console.log('문의 내용 설정됨');
+        } else {
+            console.error('❌ modalMessage textarea를 찾을 수 없습니다!');
         }
+
+        console.log('=== 폼 자동 입력 완료 ===');
     }, 100);
 }
 
