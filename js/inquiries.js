@@ -349,44 +349,54 @@ async function loadRecentInquiries() {
 }
 
 function displayRecentInquiries(inquiries) {
-    const inquiryList = document.querySelector('.inquiry-list');
-    if (!inquiryList || inquiries.length === 0) return;
+    const inquiryTableBody = document.getElementById('inquiryTableBody');
+    if (!inquiryTableBody || inquiries.length === 0) return;
 
     const statusText = {
-        'pending': '대기중',
-        'answered': '답변완료',
-        'completed': '완료',
+        'pending': '상담문의',
+        'answered': '상담완료',
+        'completed': '상담완료',
         'cancelled': '취소'
     };
 
-    const statusClass = {
-        'pending': 'status-pending',
-        'answered': 'status-answered',
-        'completed': 'status-answered',
-        'cancelled': 'status-cancelled'
+    const statusColor = {
+        'pending': '#2563eb',
+        'answered': '#10b981',
+        'completed': '#10b981',
+        'cancelled': '#6b7280'
     };
 
-    const sizeText = {
-        '58': '58타입',
-        '74': '74타입',
-        '84': '84타입',
-        '104': '104타입',
-        'over': '104타입 이상'
-    };
+    // 이름 마스킹 함수
+    function maskName(name) {
+        if (!name || name.length === 0) return '**';
+        if (name.length === 1) return name + '*';
+        return name.charAt(0) + '**';
+    }
+
+    // 날짜 포맷팅 함수 (YYYY-MM-DD 또는 ISO 형식 → YYYY. MM. DD.)
+    function formatDate(dateStr) {
+        if (!dateStr) return '';
+        const date = new Date(dateStr);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}. ${month}. ${day}.`;
+    }
 
     const html = inquiries.map(inquiry => `
-        <div class="inquiry-item">
-            <div class="inquiry-header">
-                <div class="inquiry-info">
-                    <span class="inquiry-status ${statusClass[inquiry.status] || 'status-pending'}">${statusText[inquiry.status] || '대기중'}</span>
-                    <h3 class="inquiry-title">${inquiry.name}님 - ${inquiry.apartment} ${sizeText[inquiry.size] || inquiry.size} 점검 문의</h3>
-                </div>
-                <span class="inquiry-date">${inquiry.created_at}</span>
-            </div>
-        </div>
+        <tr style="border-bottom: 1px solid #e5e7eb;">
+            <td style="padding: 16px; text-align: center;">${inquiry.id}</td>
+            <td style="padding: 16px; text-align: left; font-weight: 500;">${inquiry.apartment}</td>
+            <td style="padding: 16px; text-align: center;">${maskName(inquiry.name)}</td>
+            <td style="padding: 16px; text-align: center;">${formatDate(inquiry.created_at)}</td>
+            <td style="padding: 16px; text-align: center;">
+                <button onclick="viewInquiry(${inquiry.id})" class="btn-status" style="padding: 6px 16px; background: ${statusColor[inquiry.status] || '#2563eb'}; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">${statusText[inquiry.status] || '상담문의'}</button>
+            </td>
+        </tr>
     `).join('');
 
-    inquiryList.innerHTML = html;
+    inquiryTableBody.innerHTML = html;
+    console.log('문의 목록 업데이트 완료:', inquiries.length, '개');
 }
 
 // ===================================
