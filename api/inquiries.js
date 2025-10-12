@@ -1,8 +1,7 @@
 // Vercel Serverless Function - 문의 접수 API
 // Path: /api/inquiries
 
-import { sql } from '@vercel/postgres';
-import { sendTelegramNotification } from './telegram-notify.js';
+const { sql } = require('@vercel/postgres');
 
 // CORS 헤더 설정
 const corsHeaders = {
@@ -11,7 +10,7 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // CORS preflight 요청 처리
   if (req.method === 'OPTIONS') {
     return res.status(200).json({});
@@ -60,8 +59,12 @@ export default async function handler(req, res) {
         RETURNING id, name, apartment, size, created_at
       `;
 
-      // 텔레그램 알림 발송
-      await sendTelegramNotification(result.rows[0]);
+      // 텔레그램 알림 발송 (선택사항)
+      try {
+        await sendTelegramNotification(result.rows[0]);
+      } catch (err) {
+        console.log('텔레그램 알림 실패 (계속 진행):', err.message);
+      }
 
       return res.status(201).json({
         success: true,
