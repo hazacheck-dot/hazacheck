@@ -386,11 +386,11 @@ function displayRecentInquiries(inquiries) {
     const html = inquiries.map(inquiry => `
         <tr style="border-bottom: 1px solid #e5e7eb;">
             <td style="padding: 16px; text-align: center;">${inquiry.id}</td>
-            <td style="padding: 16px; text-align: left; font-weight: 500;">${inquiry.apartment}</td>
+            <td style="padding: 16px; text-align: left; font-weight: 500; max-width: 300px; word-wrap: break-word; word-break: keep-all; line-height: 1.4;">${inquiry.apartment}</td>
             <td style="padding: 16px; text-align: center;">${maskName(inquiry.name)}</td>
-            <td style="padding: 16px; text-align: center;">${formatDate(inquiry.created_at)}</td>
+            <td style="padding: 16px; text-align: center; white-space: nowrap;">${formatDate(inquiry.created_at)}</td>
             <td style="padding: 16px; text-align: center;">
-                <button onclick="viewInquiry(${inquiry.id})" class="btn-status" style="padding: 6px 16px; background: ${statusColor[inquiry.status] || '#2563eb'}; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem;">${statusText[inquiry.status] || '상담문의'}</button>
+                <button onclick="viewInquiry(${inquiry.id})" class="btn-status" style="padding: 6px 16px; background: ${statusColor[inquiry.status] || '#2563eb'}; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; white-space: nowrap;">${statusText[inquiry.status] || '상담문의'}</button>
             </td>
         </tr>
     `).join('');

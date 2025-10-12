@@ -643,7 +643,7 @@ if (modalForm) {
             phone: document.getElementById('modalPhone').value,
             apartment: document.getElementById('modalApartment').value,
             size: document.getElementById('modalSize').value,
-            moveInDate: document.getElementById('modalDate').value,
+            move_in_date: document.getElementById('modalDate').value,  // API 스키마와 일치
             message: document.getElementById('modalMessage').value,
             options: selectedOptions
         };
