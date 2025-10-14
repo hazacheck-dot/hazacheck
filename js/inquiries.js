@@ -600,15 +600,24 @@ function showMyInquiriesModal() {
                 </div>
                 <div class="modal-body" style="padding: 32px;">
                     <div id="phoneInputSection">
-                        <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #374151; font-size: 1.05rem;">전화번호</label>
-                        <input type="tel" id="lookupPhone" placeholder="010-0000-0000"
-                            style="width: 100%; padding: 14px; border: 2px solid #d1d5db; border-radius: 10px; font-size: 1.1rem; transition: all 0.2s;"
-                            onfocus="this.style.borderColor='#2563eb'; this.style.boxShadow='0 0 0 3px rgba(37, 99, 235, 0.1)'"
-                            onblur="this.style.borderColor='#d1d5db'; this.style.boxShadow='none'">
-                        <p style="margin-top: 12px; font-size: 0.9rem; color: #6b7280; line-height: 1.5;">
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #374151; font-size: 1.05rem;">전화번호</label>
+                            <input type="tel" id="lookupPhone" placeholder="010-0000-0000"
+                                style="width: 100%; padding: 14px; border: 2px solid #d1d5db; border-radius: 10px; font-size: 1.1rem; transition: all 0.2s;"
+                                onfocus="this.style.borderColor='#2563eb'; this.style.boxShadow='0 0 0 3px rgba(37, 99, 235, 0.1)'"
+                                onblur="this.style.borderColor='#d1d5db'; this.style.boxShadow='none'">
+                        </div>
+                        <div style="margin-bottom: 20px;">
+                            <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #374151; font-size: 1.05rem;">비밀번호</label>
+                            <input type="password" id="lookupPassword" placeholder="숫자 4자리" maxlength="4" pattern="[0-9]{4}" inputmode="numeric"
+                                style="width: 100%; padding: 14px; border: 2px solid #d1d5db; border-radius: 10px; font-size: 1.1rem; transition: all 0.2s;"
+                                onfocus="this.style.borderColor='#2563eb'; this.style.boxShadow='0 0 0 3px rgba(37, 99, 235, 0.1)'"
+                                onblur="this.style.borderColor='#d1d5db'; this.style.boxShadow='none'">
+                        </div>
+                        <p style="margin-bottom: 24px; font-size: 0.9rem; color: #6b7280; line-height: 1.5;">
                             <span style="color: #2563eb; font-weight: 600;">💡 TIP:</span> 문의 시 입력하신 전화번호를 정확히 입력해주세요.
                         </p>
-                        <div style="margin-top: 24px; display: flex; gap: 10px;">
+                        <div style="display: flex; gap: 10px;">
                             <button onclick="searchMyInquiries()" style="flex: 1; padding: 14px; background: #2563eb; color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s;">
                                 🔍 조회하기
                             </button>
@@ -650,8 +659,20 @@ function showMyInquiriesModal() {
         e.target.value = value;
     });
 
+    // Password input - numbers only
+    const passwordInput = document.getElementById('lookupPassword');
+    passwordInput.addEventListener('input', function(e) {
+        this.value = this.value.replace(/[^0-9]/g, '').slice(0, 4);
+    });
+
     // Enter key to search
     phoneInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            passwordInput.focus();
+        }
+    });
+
+    passwordInput.addEventListener('keypress', function(e) {
         if (e.key === 'Enter') {
             searchMyInquiries();
         }
@@ -670,8 +691,11 @@ function closeMyInquiriesModal() {
 
 async function searchMyInquiries() {
     const phoneInput = document.getElementById('lookupPhone');
+    const passwordInput = document.getElementById('lookupPassword');
     const phone = phoneInput.value.trim();
+    const password = passwordInput.value.trim();
 
+    // 전화번호 검증
     if (!phone) {
         alert('전화번호를 입력해주세요.');
         phoneInput.focus();
@@ -685,12 +709,31 @@ async function searchMyInquiries() {
         return;
     }
 
+    // 비밀번호 검증
+    if (!password) {
+        alert('비밀번호를 입력해주세요.');
+        passwordInput.focus();
+        return;
+    }
+
+    if (!/^\d{4}$/.test(password)) {
+        alert('비밀번호는 숫자 4자리로 입력해주세요.');
+        passwordInput.focus();
+        return;
+    }
+
     try {
-        const response = await fetch(`/api/inquiries?phone=${encodeURIComponent(phone)}`);
+        const response = await fetch(`/api/inquiries?phone=${encodeURIComponent(phone)}&password=${encodeURIComponent(password)}`);
         const result = await response.json();
 
         if (response.ok && result.success) {
-            displayMyInquiries(result.data);
+            if (result.data.length === 0) {
+                alert('전화번호 또는 비밀번호가 일치하지 않습니다.');
+                passwordInput.value = '';
+                passwordInput.focus();
+            } else {
+                displayMyInquiries(result.data);
+            }
         } else {
             alert(result.message || '문의 내역 조회에 실패했습니다.');
         }

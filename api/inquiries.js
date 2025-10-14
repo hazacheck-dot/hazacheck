@@ -169,7 +169,7 @@ module.exports = async function handler(req, res) {
   // GET: 문의 내역 조회
   if (req.method === 'GET') {
     try {
-      const { phone } = req.query;
+      const { phone, password } = req.query;
 
       // 전화번호가 제공된 경우: 본인 문의 내역 조회
       if (phone) {
@@ -182,7 +182,45 @@ module.exports = async function handler(req, res) {
           });
         }
 
-        // 전화번호로 본인 문의 내역 조회 (전체 정보 제공)
+        // 비밀번호가 제공된 경우: 비밀번호로 인증
+        if (password) {
+          if (!/^\d{4}$/.test(password)) {
+            return res.status(400).json({
+              success: false,
+              message: '비밀번호는 숫자 4자리로 입력해주세요.',
+            });
+          }
+
+          // 전화번호와 비밀번호로 본인 문의 내역 조회
+          const result = await sql`
+            SELECT
+              id,
+              name,
+              phone,
+              email,
+              apartment,
+              size,
+              move_in_date,
+              options,
+              message,
+              status,
+              admin_response,
+              TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
+              TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
+            FROM inquiries
+            WHERE (phone = ${phone} OR phone = ${phoneDigits})
+              AND password = ${password}
+            ORDER BY created_at DESC
+          `;
+
+          return res.status(200).json({
+            success: true,
+            data: result.rows,
+            count: result.rows.length,
+          });
+        }
+
+        // 비밀번호 없이 전화번호만 제공된 경우 (하위 호환성)
         const result = await sql`
           SELECT
             id,
@@ -199,7 +237,8 @@ module.exports = async function handler(req, res) {
             TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
             TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
           FROM inquiries
-          WHERE phone = ${phone} OR phone = ${phoneDigits}
+          WHERE (phone = ${phone} OR phone = ${phoneDigits})
+            AND password IS NULL
           ORDER BY created_at DESC
         `;
 
