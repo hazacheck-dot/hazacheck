@@ -10,6 +10,74 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+// 텔레그램 알림 전송 함수
+async function sendTelegramNotification(inquiry) {
+  const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+  const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+
+  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
+    console.log('텔레그램 환경변수가 설정되지 않았습니다.');
+    return;
+  }
+
+  // 옵션 파싱
+  let optionsText = '없음';
+  try {
+    const options = typeof inquiry.options === 'string' ? JSON.parse(inquiry.options) : inquiry.options;
+    if (options && options.length > 0) {
+      optionsText = options.join(', ');
+    }
+  } catch (e) {
+    optionsText = inquiry.options || '없음';
+  }
+
+  // 메시지 내용 구성
+  let messageText = `
+🔔 *새로운 문의가 접수되었습니다!*
+
+📋 *문의 정보*
+━━━━━━━━━━━━━━━
+👤 이름: ${inquiry.name}
+📞 연락처: ${inquiry.phone}
+${inquiry.email ? `📧 이메일: ${inquiry.email}` : ''}
+🏢 아파트: ${inquiry.apartment}
+📐 평형: ${inquiry.size}타입
+📅 희망 점검일: ${inquiry.move_in_date || '미정'}
+➕ 추가옵션: ${optionsText}
+🆔 문의번호: #${inquiry.id}
+⏰ 접수시간: ${new Date(inquiry.created_at).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}
+  `.trim();
+
+  // 문의 내용이 있으면 추가
+  if (inquiry.message && inquiry.message.trim()) {
+    messageText += `\n\n💬 *문의내용:*\n${inquiry.message.substring(0, 200)}${inquiry.message.length > 200 ? '...' : ''}`;
+  }
+
+  messageText += `\n\n[📱 관리자 페이지에서 상세보기](https://www.hazacheck.com/admin.html?id=${inquiry.id})`;
+
+  const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+  const response = await fetch(telegramUrl, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      chat_id: TELEGRAM_CHAT_ID,
+      text: messageText,
+      parse_mode: 'Markdown',
+      disable_web_page_preview: true,
+    }),
+  });
+
+  if (!response.ok) {
+    const error = await response.text();
+    throw new Error(`텔레그램 API 오류: ${error}`);
+  }
+
+  return response.json();
+}
+
 module.exports = async function handler(req, res) {
   // CORS preflight 요청 처리
   if (req.method === 'OPTIONS') {
@@ -56,7 +124,7 @@ module.exports = async function handler(req, res) {
       const result = await sql`
         INSERT INTO inquiries (name, phone, email, apartment, size, move_in_date, options, message, status, created_at)
         VALUES (${name}, ${phone}, ${email || null}, ${apartment}, ${size}, ${moveInDate}, ${optionsJson}, ${message || ''}, 'pending', NOW())
-        RETURNING id, name, apartment, size, created_at
+        RETURNING id, name, phone, email, apartment, size, move_in_date, options, message, created_at
       `;
 
       // 텔레그램 알림 발송 (선택사항)
