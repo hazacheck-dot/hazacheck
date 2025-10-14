@@ -226,7 +226,7 @@ module.exports = async function handler(req, res) {
                 options,
                 message,
                 status,
-                admin_response,
+                admin_note,
                 TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
                 TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
               FROM inquiries
@@ -248,7 +248,7 @@ module.exports = async function handler(req, res) {
                 options,
                 message,
                 status,
-                admin_response,
+                admin_note,
                 TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
                 TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
               FROM inquiries
@@ -279,7 +279,7 @@ module.exports = async function handler(req, res) {
               options,
               message,
               status,
-              admin_response,
+              admin_note,
               TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
               TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
             FROM inquiries
@@ -301,7 +301,7 @@ module.exports = async function handler(req, res) {
               options,
               message,
               status,
-              admin_response,
+              admin_note,
               TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
               TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
             FROM inquiries

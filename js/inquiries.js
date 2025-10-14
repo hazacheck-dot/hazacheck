@@ -836,14 +836,14 @@ function displayMyInquiries(inquiries) {
                     </div>
                 </div>
 
-                ${inquiry.admin_response ? `
+                ${inquiry.admin_note ? `
                 <div style="background: #ecfdf5; border-left: 4px solid #10b981; padding: 16px; border-radius: 8px;">
                     <div style="font-weight: 600; color: #059669; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
                         <span style="font-size: 1.2rem;">💬</span>
-                        관리자 답변
+                        관리자 메모
                     </div>
-                    <p style="margin: 0; color: #065f46; line-height: 1.6; white-space: pre-wrap;">${inquiry.admin_response}</p>
-                    ${inquiry.updated_at ? `<p style="margin: 8px 0 0 0; font-size: 0.85rem; color: #059669;">답변일: ${inquiry.updated_at}</p>` : ''}
+                    <p style="margin: 0; color: #065f46; line-height: 1.6; white-space: pre-wrap;">${inquiry.admin_note}</p>
+                    ${inquiry.updated_at ? `<p style="margin: 8px 0 0 0; font-size: 0.85rem; color: #059669;">메모일: ${inquiry.updated_at}</p>` : ''}
                 </div>
                 ` : `
                 <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 12px; border-radius: 8px;">
