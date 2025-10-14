@@ -231,7 +231,7 @@ module.exports = async function handler(req, res) {
                 TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
               FROM inquiries
               WHERE (phone = ${phone} OR phone = ${phoneDigits})
-                AND (password = ${password} OR password IS NULL)
+                AND (password = ${password} OR password IS NULL OR password = '')
               ORDER BY created_at DESC
             `;
           } catch (e) {
@@ -284,7 +284,7 @@ module.exports = async function handler(req, res) {
               TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
             FROM inquiries
             WHERE (phone = ${phone} OR phone = ${phoneDigits})
-              AND password IS NULL
+              AND (password IS NULL OR password = '')
             ORDER BY created_at DESC
           `;
         } catch (e) {
