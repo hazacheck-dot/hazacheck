@@ -225,21 +225,28 @@ function saveCalculationAndInquire() {
 
     console.log('저장할 데이터:', calculationData);
 
-    // Save to localStorage
+    // Save to localStorage & sessionStorage (fallback)
     try {
-        localStorage.setItem('hazacheck_calculation', JSON.stringify(calculationData));
-        console.log('localStorage 저장 완료');
-
-        // 저장 확인
-        const saved = localStorage.getItem('hazacheck_calculation');
-        console.log('저장된 데이터 확인:', saved);
+        const serialized = JSON.stringify(calculationData);
+        localStorage.setItem('hazacheck_calculation', serialized);
+        sessionStorage.setItem('hazacheck_calculation', serialized);
+        console.log('localStorage/sessionStorage 저장 완료');
     } catch (e) {
-        console.error('localStorage 저장 실패:', e);
+        console.error('localStorage/sessionStorage 저장 실패:', e);
     }
 
-    // Redirect to inquiry page with auto-open modal parameter
-    console.log('문의 페이지로 이동...');
-    window.location.href = 'inquiries.html?calculation=true';
+    // Fallback: URL 파라미터에도 안전하게 인코딩하여 전달 (서브도메인 차이 등 대비)
+    let encoded = '';
+    try {
+        encoded = encodeURIComponent(btoa(unescape(encodeURIComponent(JSON.stringify(calculationData)))));
+    } catch (e) {
+        console.warn('URL 인코딩 실패: ', e);
+    }
+
+    // Redirect to same origin to 유지 (www 여부 차이 방지)
+    const targetUrl = `${window.location.origin}/inquiries.html?calculation=true${encoded ? `&calc=${encoded}` : ''}`;
+    console.log('문의 페이지로 이동...', targetUrl);
+    window.location.href = targetUrl;
 }
 
 // Inquiry with price button - DOMContentLoaded 후에 실행

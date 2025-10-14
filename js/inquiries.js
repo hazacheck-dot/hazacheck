@@ -879,6 +879,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Load recent inquiries from API
     loadRecentInquiries();
 
-    // Load calculation data from price calculator
+    // Load calculation data from price calculator (with fallbacks)
+    try {
+        // URL parameter fallback (calc)
+        const params = new URLSearchParams(window.location.search);
+        const calcParam = params.get('calc');
+        if (!localStorage.getItem('hazacheck_calculation') && calcParam) {
+            try {
+                const json = decodeURIComponent(escape(atob(decodeURIComponent(calcParam))));
+                localStorage.setItem('hazacheck_calculation', json);
+            } catch (e) {
+                console.warn('calc 파라미터 복원 실패:', e);
+            }
+        }
+
+        // sessionStorage → localStorage 승격
+        if (!localStorage.getItem('hazacheck_calculation')) {
+            const sessionSaved = sessionStorage.getItem('hazacheck_calculation');
+            if (sessionSaved) {
+                localStorage.setItem('hazacheck_calculation', sessionSaved);
+            }
+        }
+    } catch (e) {
+        console.warn('가격 정보 복원 중 오류:', e);
+    }
+
     loadCalculationData();
 });
