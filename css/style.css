@@ -1294,7 +1294,7 @@ h4 { font-size: 1.25rem; }
 
 .step-duration {
     background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
-    color: white;
+    color: #000000;
     padding: 8px 16px;
     border-radius: 20px;
     font-size: 0.9rem;

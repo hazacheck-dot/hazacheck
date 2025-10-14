@@ -82,14 +82,55 @@ module.exports = async function handler(req, res) {
     }
   }
 
-  // GET: 최근 문의 내역 조회 (공개용)
+  // GET: 문의 내역 조회
   if (req.method === 'GET') {
     try {
+      const { phone } = req.query;
+
+      // 전화번호가 제공된 경우: 본인 문의 내역 조회
+      if (phone) {
+        const phoneDigits = phone.replace(/\D/g, '');
+
+        if (phoneDigits.length < 10 || phoneDigits.length > 11) {
+          return res.status(400).json({
+            success: false,
+            message: '올바른 전화번호 형식이 아닙니다.',
+          });
+        }
+
+        // 전화번호로 본인 문의 내역 조회 (전체 정보 제공)
+        const result = await sql`
+          SELECT
+            id,
+            name,
+            phone,
+            email,
+            apartment,
+            size,
+            move_in_date,
+            options,
+            message,
+            status,
+            admin_response,
+            TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
+            TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
+          FROM inquiries
+          WHERE phone = ${phone} OR phone = ${phoneDigits}
+          ORDER BY created_at DESC
+        `;
+
+        return res.status(200).json({
+          success: true,
+          data: result.rows,
+          count: result.rows.length,
+        });
+      }
+
+      // 전화번호가 없는 경우: 최근 문의 내역 조회 (공개용, 마스킹)
       const limit = parseInt(req.query.limit) || 5;
 
-      // 개인정보 보호를 위해 이름과 아파트명 마스킹
       const result = await sql`
-        SELECT 
+        SELECT
           id,
           CONCAT(SUBSTRING(name, 1, 1), '**') as name,
           CONCAT(

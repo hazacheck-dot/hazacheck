@@ -478,14 +478,259 @@ function showCalculationNotification(data) {
 }
 
 // ===================================
+// My Inquiry Lookup
+// ===================================
+function showMyInquiriesModal() {
+    const modal = document.createElement('div');
+    modal.id = 'myInquiriesModal';
+    modal.innerHTML = `
+        <div class="modal" style="display: flex; position: fixed; z-index: 10001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); align-items: center; justify-content: center; overflow: auto;">
+            <div class="modal-content" style="background-color: white; margin: 20px; padding: 0; border-radius: 16px; width: 90%; max-width: 500px; box-shadow: 0 8px 32px rgba(0,0,0,0.3); animation: slideIn 0.3s ease-out;">
+                <div class="modal-header" style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; padding: 24px; border-radius: 16px 16px 0 0;">
+                    <h2 style="margin: 0; font-size: 1.5rem; display: flex; align-items: center; gap: 10px;">
+                        <span style="font-size: 1.8rem;">📱</span>
+                        내 문의 조회
+                    </h2>
+                    <p style="margin: 10px 0 0 0; font-size: 0.95rem; opacity: 0.9;">등록하신 전화번호로 문의 내역을 확인하세요</p>
+                </div>
+                <div class="modal-body" style="padding: 32px;">
+                    <div id="phoneInputSection">
+                        <label style="display: block; margin-bottom: 10px; font-weight: 600; color: #374151; font-size: 1.05rem;">전화번호</label>
+                        <input type="tel" id="lookupPhone" placeholder="010-0000-0000"
+                            style="width: 100%; padding: 14px; border: 2px solid #d1d5db; border-radius: 10px; font-size: 1.1rem; transition: all 0.2s;"
+                            onfocus="this.style.borderColor='#2563eb'; this.style.boxShadow='0 0 0 3px rgba(37, 99, 235, 0.1)'"
+                            onblur="this.style.borderColor='#d1d5db'; this.style.boxShadow='none'">
+                        <p style="margin-top: 12px; font-size: 0.9rem; color: #6b7280; line-height: 1.5;">
+                            <span style="color: #2563eb; font-weight: 600;">💡 TIP:</span> 문의 시 입력하신 전화번호를 정확히 입력해주세요.
+                        </p>
+                        <div style="margin-top: 24px; display: flex; gap: 10px;">
+                            <button onclick="searchMyInquiries()" style="flex: 1; padding: 14px; background: #2563eb; color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+                                🔍 조회하기
+                            </button>
+                            <button onclick="closeMyInquiriesModal()" style="padding: 14px 20px; background: #f3f4f6; color: #374151; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.2s;">
+                                취소
+                            </button>
+                        </div>
+                    </div>
+                    <div id="myInquiriesResult" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+        <style>
+            @keyframes slideIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        </style>
+    `;
+
+    document.body.appendChild(modal);
+
+    // Phone input formatting
+    const phoneInput = document.getElementById('lookupPhone');
+    phoneInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 11) value = value.slice(0, 11);
+        if (value.length > 6) {
+            value = value.replace(/(\d{3})(\d{4})(\d{0,4})/, '$1-$2-$3');
+        } else if (value.length > 3) {
+            value = value.replace(/(\d{3})(\d{0,4})/, '$1-$2');
+        }
+        e.target.value = value;
+    });
+
+    // Enter key to search
+    phoneInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchMyInquiries();
+        }
+    });
+
+    // Focus on input
+    setTimeout(() => phoneInput.focus(), 100);
+}
+
+function closeMyInquiriesModal() {
+    const modal = document.getElementById('myInquiriesModal');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+async function searchMyInquiries() {
+    const phoneInput = document.getElementById('lookupPhone');
+    const phone = phoneInput.value.trim();
+
+    if (!phone) {
+        alert('전화번호를 입력해주세요.');
+        phoneInput.focus();
+        return;
+    }
+
+    const phoneDigits = phone.replace(/\D/g, '');
+    if (phoneDigits.length < 10 || phoneDigits.length > 11) {
+        alert('올바른 전화번호 형식이 아닙니다.');
+        phoneInput.focus();
+        return;
+    }
+
+    try {
+        const response = await fetch(`/api/inquiries?phone=${encodeURIComponent(phone)}`);
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+            displayMyInquiries(result.data);
+        } else {
+            alert(result.message || '문의 내역 조회에 실패했습니다.');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        alert('문의 내역 조회 중 오류가 발생했습니다. 다시 시도해주세요.');
+    }
+}
+
+function displayMyInquiries(inquiries) {
+    const phoneInputSection = document.getElementById('phoneInputSection');
+    const resultSection = document.getElementById('myInquiriesResult');
+
+    phoneInputSection.style.display = 'none';
+    resultSection.style.display = 'block';
+
+    if (inquiries.length === 0) {
+        resultSection.innerHTML = `
+            <div style="text-align: center; padding: 40px 20px;">
+                <div style="font-size: 4rem; margin-bottom: 20px;">📭</div>
+                <h3 style="margin: 0 0 10px 0; color: #374151; font-size: 1.3rem;">문의 내역이 없습니다</h3>
+                <p style="margin: 0; color: #6b7280; line-height: 1.6;">
+                    입력하신 전화번호로 등록된 문의가 없습니다.<br>
+                    전화번호를 확인하시거나 새로운 문의를 남겨주세요.
+                </p>
+                <button onclick="closeMyInquiriesModal()" style="margin-top: 24px; padding: 12px 32px; background: #2563eb; color: white; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer;">
+                    확인
+                </button>
+            </div>
+        `;
+        return;
+    }
+
+    const statusText = {
+        'pending': '상담문의',
+        'answered': '상담완료',
+        'completed': '상담완료',
+        'cancelled': '취소'
+    };
+
+    const statusColor = {
+        'pending': '#2563eb',
+        'answered': '#10b981',
+        'completed': '#10b981',
+        'cancelled': '#6b7280'
+    };
+
+    const inquiriesHtml = inquiries.map(inquiry => {
+        const options = inquiry.options ? JSON.parse(inquiry.options) : [];
+        const optionsText = options.length > 0 ? options.join(', ') : '없음';
+
+        return `
+            <div style="background: #f9fafb; border: 2px solid #e5e7eb; border-radius: 12px; padding: 20px; margin-bottom: 16px;">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+                    <div>
+                        <div style="display: inline-block; background: ${statusColor[inquiry.status]}; color: white; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; font-weight: 600; margin-bottom: 8px;">
+                            ${statusText[inquiry.status] || '상담문의'}
+                        </div>
+                        <h3 style="margin: 0; font-size: 1.15rem; color: #111827;">문의 #${inquiry.id}</h3>
+                    </div>
+                    <span style="font-size: 0.9rem; color: #6b7280; white-space: nowrap;">${inquiry.created_at}</span>
+                </div>
+
+                <div style="background: white; border-radius: 8px; padding: 16px; margin-bottom: 12px;">
+                    <div style="display: grid; gap: 12px;">
+                        <div style="display: flex; gap: 12px;">
+                            <span style="min-width: 80px; font-weight: 600; color: #6b7280;">이름:</span>
+                            <span style="color: #111827;">${inquiry.name}</span>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <span style="min-width: 80px; font-weight: 600; color: #6b7280;">연락처:</span>
+                            <span style="color: #111827;">${inquiry.phone}</span>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <span style="min-width: 80px; font-weight: 600; color: #6b7280;">아파트:</span>
+                            <span style="color: #111827; font-weight: 500;">${inquiry.apartment}</span>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <span style="min-width: 80px; font-weight: 600; color: #6b7280;">평형:</span>
+                            <span style="color: #111827;">${inquiry.size}타입</span>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <span style="min-width: 80px; font-weight: 600; color: #6b7280;">희망일:</span>
+                            <span style="color: #111827;">${inquiry.move_in_date || '-'}</span>
+                        </div>
+                        <div style="display: flex; gap: 12px;">
+                            <span style="min-width: 80px; font-weight: 600; color: #6b7280;">추가옵션:</span>
+                            <span style="color: #111827;">${optionsText}</span>
+                        </div>
+                        ${inquiry.message ? `
+                        <div style="display: flex; gap: 12px; padding-top: 12px; border-top: 1px solid #e5e7eb;">
+                            <span style="min-width: 80px; font-weight: 600; color: #6b7280;">문의내용:</span>
+                            <span style="color: #374151; line-height: 1.6; white-space: pre-wrap;">${inquiry.message}</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+
+                ${inquiry.admin_response ? `
+                <div style="background: #ecfdf5; border-left: 4px solid #10b981; padding: 16px; border-radius: 8px;">
+                    <div style="font-weight: 600; color: #059669; margin-bottom: 8px; display: flex; align-items: center; gap: 6px;">
+                        <span style="font-size: 1.2rem;">💬</span>
+                        관리자 답변
+                    </div>
+                    <p style="margin: 0; color: #065f46; line-height: 1.6; white-space: pre-wrap;">${inquiry.admin_response}</p>
+                    ${inquiry.updated_at ? `<p style="margin: 8px 0 0 0; font-size: 0.85rem; color: #059669;">답변일: ${inquiry.updated_at}</p>` : ''}
+                </div>
+                ` : `
+                <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 12px; border-radius: 8px;">
+                    <p style="margin: 0; color: #92400e; font-size: 0.95rem;">
+                        ⏳ 답변 대기 중입니다. 빠른 시일 내에 연락드리겠습니다.
+                    </p>
+                </div>
+                `}
+            </div>
+        `;
+    }).join('');
+
+    resultSection.innerHTML = `
+        <div style="margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="margin: 0; color: #111827; font-size: 1.3rem;">내 문의 내역 (${inquiries.length}건)</h3>
+            <button onclick="closeMyInquiriesModal()" style="padding: 8px 16px; background: #f3f4f6; color: #374151; border: none; border-radius: 6px; font-size: 0.95rem; font-weight: 600; cursor: pointer;">
+                닫기
+            </button>
+        </div>
+        <div style="max-height: 60vh; overflow-y: auto;">
+            ${inquiriesHtml}
+        </div>
+    `;
+}
+
+// Global function for refresh button
+window.refreshInquiries = function() {
+    showMyInquiriesModal();
+};
+
+// ===================================
 // Initialize
 // ===================================
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Inquiries page loaded successfully!');
-    
+
     // Load recent inquiries from API
     loadRecentInquiries();
-    
+
     // Load calculation data from price calculator
     loadCalculationData();
 });
