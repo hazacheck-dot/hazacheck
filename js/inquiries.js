@@ -332,15 +332,22 @@ inquiryItems.forEach(item => {
 });
 
 // ===================================
-// Load Recent Inquiries from API
+// Load Recent Inquiries from API (with Pagination)
 // ===================================
-async function loadRecentInquiries() {
+let currentPage = 1;
+const itemsPerPage = 10;
+let allInquiries = [];
+
+async function loadRecentInquiries(page = 1) {
     try {
-        const response = await fetch('/api/inquiries?limit=5');
+        const response = await fetch('/api/inquiries?limit=100');
         const result = await response.json();
 
         if (response.ok && result.success) {
-            displayRecentInquiries(result.data);
+            allInquiries = result.data;
+            currentPage = page;
+            displayRecentInquiries(allInquiries, page);
+            renderPagination(allInquiries.length, page);
         }
     } catch (error) {
         console.error('최근 문의 내역 로드 오류:', error);
@@ -348,9 +355,26 @@ async function loadRecentInquiries() {
     }
 }
 
-function displayRecentInquiries(inquiries) {
+function displayRecentInquiries(inquiries, page = 1) {
     const inquiryTableBody = document.getElementById('inquiryTableBody');
-    if (!inquiryTableBody || inquiries.length === 0) return;
+    if (!inquiryTableBody) return;
+
+    // 페이지에 해당하는 데이터만 추출
+    const startIndex = (page - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const pageInquiries = inquiries.slice(startIndex, endIndex);
+
+    if (pageInquiries.length === 0) {
+        inquiryTableBody.innerHTML = `
+            <tr>
+                <td colspan="5" style="padding: 60px 20px; text-align: center; color: #6b7280;">
+                    <div style="font-size: 3rem; margin-bottom: 16px;">📭</div>
+                    <div style="font-size: 1.1rem; font-weight: 500;">문의 내역이 없습니다</div>
+                </td>
+            </tr>
+        `;
+        return;
+    }
 
     const statusText = {
         'pending': '상담문의',
@@ -383,7 +407,7 @@ function displayRecentInquiries(inquiries) {
         return `${year}. ${month}. ${day}.`;
     }
 
-    const html = inquiries.map(inquiry => `
+    const html = pageInquiries.map(inquiry => `
         <tr style="border-bottom: 1px solid #e5e7eb;">
             <td style="padding: 16px; text-align: center;">${inquiry.id}</td>
             <td style="padding: 16px; text-align: left; font-weight: 500; max-width: 300px; word-wrap: break-word; word-break: keep-all; line-height: 1.4;">${inquiry.apartment}</td>
@@ -396,8 +420,89 @@ function displayRecentInquiries(inquiries) {
     `).join('');
 
     inquiryTableBody.innerHTML = html;
-    console.log('문의 목록 업데이트 완료:', inquiries.length, '개');
+    console.log(`문의 목록 업데이트 완료: 페이지 ${page}, ${pageInquiries.length}개 표시 (전체 ${inquiries.length}개)`);
 }
+
+// 페이지네이션 렌더링
+function renderPagination(totalItems, currentPage) {
+    const paginationContainer = document.getElementById('paginationContainer');
+    if (!paginationContainer) return;
+
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+    }
+
+    let html = '';
+
+    // 이전 버튼
+    if (currentPage > 1) {
+        html += `<button onclick="changePage(${currentPage - 1})" style="padding: 8px 12px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer; font-size: 0.95rem; transition: all 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='white'">이전</button>`;
+    } else {
+        html += `<button disabled style="padding: 8px 12px; border: 1px solid #e5e7eb; background: #f9fafb; color: #9ca3af; border-radius: 6px; cursor: not-allowed; font-size: 0.95rem;">이전</button>`;
+    }
+
+    // 페이지 번호 버튼
+    const maxButtons = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+    let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+
+    if (endPage - startPage < maxButtons - 1) {
+        startPage = Math.max(1, endPage - maxButtons + 1);
+    }
+
+    // 첫 페이지
+    if (startPage > 1) {
+        html += `<button onclick="changePage(1)" style="padding: 8px 12px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer; font-size: 0.95rem; transition: all 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='white'">1</button>`;
+        if (startPage > 2) {
+            html += `<span style="padding: 8px 4px; color: #6b7280;">...</span>`;
+        }
+    }
+
+    // 페이지 번호들
+    for (let i = startPage; i <= endPage; i++) {
+        if (i === currentPage) {
+            html += `<button style="padding: 8px 12px; border: 1px solid #2563eb; background: #2563eb; color: white; border-radius: 6px; cursor: default; font-size: 0.95rem; font-weight: 600;">${i}</button>`;
+        } else {
+            html += `<button onclick="changePage(${i})" style="padding: 8px 12px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer; font-size: 0.95rem; transition: all 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='white'">${i}</button>`;
+        }
+    }
+
+    // 마지막 페이지
+    if (endPage < totalPages) {
+        if (endPage < totalPages - 1) {
+            html += `<span style="padding: 8px 4px; color: #6b7280;">...</span>`;
+        }
+        html += `<button onclick="changePage(${totalPages})" style="padding: 8px 12px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer; font-size: 0.95rem; transition: all 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='white'">${totalPages}</button>`;
+    }
+
+    // 다음 버튼
+    if (currentPage < totalPages) {
+        html += `<button onclick="changePage(${currentPage + 1})" style="padding: 8px 12px; border: 1px solid #e5e7eb; background: white; border-radius: 6px; cursor: pointer; font-size: 0.95rem; transition: all 0.2s;" onmouseover="this.style.background='#f3f4f6'" onmouseout="this.style.background='white'">다음</button>`;
+    } else {
+        html += `<button disabled style="padding: 8px 12px; border: 1px solid #e5e7eb; background: #f9fafb; color: #9ca3af; border-radius: 6px; cursor: not-allowed; font-size: 0.95rem;">다음</button>`;
+    }
+
+    paginationContainer.innerHTML = html;
+}
+
+// 페이지 변경
+function changePage(page) {
+    currentPage = page;
+    displayRecentInquiries(allInquiries, page);
+    renderPagination(allInquiries.length, page);
+
+    // 테이블 상단으로 스크롤
+    const tableSection = document.querySelector('.inquiry-table-section');
+    if (tableSection) {
+        tableSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
+// Global function
+window.changePage = changePage;
 
 // ===================================
 // Load Calculation Data from Main Page
