@@ -610,31 +610,6 @@ function displayModalPriceInfo(data) {
             console.log('7. 선택된 옵션 없음');
         }
 
-        // 문의 내용에 가격 정보 자동 추가
-        console.log('8. 문의 내용 자동 입력 시작');
-        const messageTextarea = document.getElementById('modalMessage');
-        console.log('9. modalMessage 요소:', messageTextarea);
-
-        if (messageTextarea) {
-            if (!messageTextarea.value || messageTextarea.value.trim() === '') {
-                let message = `[💰 가격 시뮬레이션 견적]\n\n`;
-                message += `📏 세대 크기: ${data.size}\n`;
-                message += `💵 기본 비용: ${data.basePriceFormatted}\n`;
-                if (data.optionNames && data.optionNames.length > 0) {
-                    message += `⭐ 추가 옵션: ${data.optionNames.join(', ')}\n`;
-                }
-                message += `\n💰 총 예상 비용: ${data.totalPriceFormatted}\n\n`;
-                message += `위 견적으로 상담 문의드립니다.`;
-
-                messageTextarea.value = message;
-                console.log('10. ✅ 문의 내용 자동 입력 완료!');
-            } else {
-                console.log('10. 문의 내용이 이미 있어서 건너뜀');
-            }
-        } else {
-            console.error('❌ modalMessage textarea를 찾을 수 없습니다!');
-        }
-
         console.log('=== 폼 자동 입력 완료 ===');
     }, 100);
 }
@@ -701,6 +676,7 @@ if (modalForm) {
             apartment: document.getElementById('modalApartment').value,
             size: document.getElementById('modalSize').value,
             move_in_date: document.getElementById('modalDate').value,  // API 스키마와 일치
+            preferred_time: document.getElementById('modalTime').value,
             message: document.getElementById('modalMessage').value,
             password: password,
             agree_privacy: agreePrivacy,

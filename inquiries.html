@@ -149,61 +149,78 @@
                 <form id="inquiryModalForm">
                     <div style="display: grid; gap: 16px;">
                         <div>
-                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">이름 <span style="color: #dc2626;">*</span></label>
-                            <input type="text" id="modalName" required placeholder="홍길동" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif;">이름 <span style="color: #dc2626;">*</span></label>
+                            <input type="text" id="modalName" required placeholder="홍길동" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; font-family: 'Noto Sans KR', sans-serif;">
                         </div>
                         <div>
-                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">연락처 <span style="color: #dc2626;">*</span></label>
-                            <input type="tel" id="modalPhone" required placeholder="010-0000-0000" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif;">연락처 <span style="color: #dc2626;">*</span></label>
+                            <input type="tel" id="modalPhone" required placeholder="010-0000-0000" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; font-family: 'Noto Sans KR', sans-serif;">
                         </div>
                         <div>
-                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">아파트명 <span style="color: #dc2626;">*</span></label>
-                            <input type="text" id="modalApartment" required placeholder="예: 안산 센트럴푸르지오" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif;">아파트명 <span style="color: #dc2626;">*</span></label>
+                            <input type="text" id="modalApartment" required placeholder="예: 안산 센트럴푸르지오" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; font-family: 'Noto Sans KR', sans-serif;">
                         </div>
                         <div>
-                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">전용면적 <span style="color: #dc2626;">*</span></label>
-                            <select id="modalSize" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif;">전용면적 (m²) <span style="color: #dc2626;">*</span></label>
+                            <input type="number" id="modalSize" required placeholder="예: 84" min="1" step="0.01" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; font-family: 'Noto Sans KR', sans-serif;">
+                            <p style="margin: 6px 0 0 0; font-size: 0.85rem; color: #6b7280; font-family: 'Noto Sans KR', sans-serif;">💡 분양 계약서에 명시된 전용면적을 입력해주세요</p>
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif;">희망 점검일 <span style="color: #dc2626;">*</span></label>
+                            <input type="date" id="modalDate" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; font-family: 'Noto Sans KR', sans-serif;">
+                        </div>
+                        <div>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif;">희망 점검 시간 <span style="color: #dc2626;">*</span></label>
+                            <select id="modalTime" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; font-family: 'Noto Sans KR', sans-serif;">
                                 <option value="">선택해주세요</option>
-                                <option value="58">58타입 이하 (~58m²)</option>
-                                <option value="74">74타입 (59~74m²)</option>
-                                <option value="84">84타입 (75~84m²)</option>
-                                <option value="104">104타입 (85~104m²)</option>
-                                <option value="over">104m² 이상</option>
+                                <option value="10:00">오전 10:00</option>
+                                <option value="10:30">오전 10:30</option>
+                                <option value="11:00">오전 11:00</option>
+                                <option value="11:30">오전 11:30</option>
+                                <option value="12:00">오후 12:00</option>
+                                <option value="12:30">오후 12:30</option>
+                                <option value="13:00">오후 13:00</option>
+                                <option value="13:30">오후 13:30</option>
+                                <option value="14:00">오후 14:00</option>
+                                <option value="14:30">오후 14:30</option>
+                                <option value="15:00">오후 15:00</option>
+                                <option value="15:30">오후 15:30</option>
+                                <option value="16:00">오후 16:00</option>
+                                <option value="16:30">오후 16:30</option>
+                                <option value="17:00">오후 17:00</option>
+                                <option value="other">기타 (문의 내용에 기재)</option>
                             </select>
+                            <p style="margin: 6px 0 0 0; font-size: 0.85rem; color: #6b7280; font-family: 'Noto Sans KR', sans-serif;">💡 점검에는 약 2시간이 소요됩니다</p>
                         </div>
                         <div>
-                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">희망 점검일 <span style="color: #dc2626;">*</span></label>
-                            <input type="date" id="modalDate" required style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;">
-                        </div>
-                        <div>
-                            <label style="display: block; margin-bottom: 10px; font-weight: 500;">추가 옵션 (선택사항)</label>
+                            <label style="display: block; margin-bottom: 10px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif;">추가 옵션 (선택사항)</label>
                             <div style="display: grid; gap: 10px;">
                                 <label style="display: flex; align-items: center; gap: 10px; padding: 12px; background: #f9fafb; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; transition: all 0.2s;">
                                     <input type="checkbox" id="modalOption1" value="하자 접수 대행" style="width: 18px; height: 18px; cursor: pointer;">
-                                    <span style="flex: 1; font-size: 0.95rem;">하자 접수 대행 (+₩50,000)</span>
+                                    <span style="flex: 1; font-size: 0.95rem; font-family: 'Noto Sans KR', sans-serif;">하자 접수 대행 (+₩50,000)</span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 10px; padding: 12px; background: #f9fafb; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; transition: all 0.2s;">
                                     <input type="checkbox" id="modalOption2" value="사후관리 재점검" style="width: 18px; height: 18px; cursor: pointer;">
-                                    <span style="flex: 1; font-size: 0.95rem;">사후관리 재점검 (+₩100,000)</span>
+                                    <span style="flex: 1; font-size: 0.95rem; font-family: 'Noto Sans KR', sans-serif;">사후관리 재점검 (+₩100,000)</span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 10px; padding: 12px; background: #f9fafb; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; transition: all 0.2s;">
                                     <input type="checkbox" id="modalOption3" value="VR 360° 촬영" style="width: 18px; height: 18px; cursor: pointer;">
-                                    <span style="flex: 1; font-size: 0.95rem;">VR 360° 촬영 (+₩50,000)</span>
+                                    <span style="flex: 1; font-size: 0.95rem; font-family: 'Noto Sans KR', sans-serif;">VR 360° 촬영 (+₩50,000)</span>
                                 </label>
                                 <label style="display: flex; align-items: center; gap: 10px; padding: 12px; background: #f9fafb; border: 1px solid #d1d5db; border-radius: 6px; cursor: pointer; transition: all 0.2s;">
                                     <input type="checkbox" id="modalOption4" value="실측 서비스" style="width: 18px; height: 18px; cursor: pointer;">
-                                    <span style="flex: 1; font-size: 0.95rem;">실측 서비스 (+₩50,000)</span>
+                                    <span style="flex: 1; font-size: 0.95rem; font-family: 'Noto Sans KR', sans-serif;">실측 서비스 (+₩50,000)</span>
                                 </label>
                             </div>
                         </div>
                         <div>
-                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">문의 내용</label>
-                            <textarea id="modalMessage" rows="4" placeholder="문의하실 내용을 입력해주세요" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; resize: vertical;"></textarea>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif;">문의 내용</label>
+                            <textarea id="modalMessage" rows="4" placeholder="문의하실 내용을 입력해주세요" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; resize: vertical; font-family: 'Noto Sans KR', sans-serif;"></textarea>
                         </div>
                         <div>
-                            <label style="display: block; margin-bottom: 6px; font-weight: 500;">비밀번호 <span style="color: #dc2626;">*</span> <span style="font-size: 0.85rem; color: #6b7280; font-weight: 400;">(문의 조회 시 필요, 숫자 4자리)</span></label>
-                            <input type="password" id="modalPassword" required placeholder="숫자 4자리 입력" maxlength="4" pattern="[0-9]{4}" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem;" inputmode="numeric">
-                            <p style="margin: 6px 0 0 0; font-size: 0.85rem; color: #6b7280;">💡 본인 문의 조회 시 사용되는 비밀번호입니다</p>
+                            <label style="display: block; margin-bottom: 6px; font-weight: 500; font-family: 'Noto Sans KR', sans-serif;">비밀번호 <span style="color: #dc2626;">*</span> <span style="font-size: 0.85rem; color: #6b7280; font-weight: 400;">(문의 조회 시 필요, 숫자 4자리)</span></label>
+                            <input type="password" id="modalPassword" required placeholder="숫자 4자리 입력" maxlength="4" pattern="[0-9]{4}" style="width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 1rem; font-family: 'Noto Sans KR', sans-serif;" inputmode="numeric">
+                            <p style="margin: 6px 0 0 0; font-size: 0.85rem; color: #6b7280; font-family: 'Noto Sans KR', sans-serif;">💡 본인 문의 조회 시 사용되는 비밀번호입니다</p>
                         </div>
 
                         <!-- 이용약관 동의 -->
