@@ -168,6 +168,11 @@ h4 { font-size: 1.25rem; }
     color: var(--text-secondary);
 }
 
+/* Hide mobile line breaks on desktop */
+.mobile-br {
+    display: none;
+}
+
 /* ===================================
    Navigation
    =================================== */
@@ -2283,6 +2288,11 @@ h4 { font-size: 1.25rem; }
         --section-padding: 50px;
     }
 
+    /* Mobile-specific line breaks */
+    .mobile-br {
+        display: inline;
+    }
+
     /* Typography Hierarchy - Enhanced Visibility */
     h1 {
         font-size: 1.85rem;
@@ -2322,6 +2332,8 @@ h4 { font-size: 1.25rem; }
         line-height: 1.6;
         color: #4b5563;
         font-weight: 500;
+        word-break: keep-all;
+        white-space: normal;
     }
 
     .section-header {
