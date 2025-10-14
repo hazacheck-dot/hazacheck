@@ -87,13 +87,29 @@ module.exports = async function handler(req, res) {
   // POST: 문의 접수
   if (req.method === 'POST') {
     try {
-      const { name, phone, email, apartment, size, moveInDate, options, message } = req.body;
+      const { name, phone, email, apartment, size, move_in_date, options, message, password, agree_privacy, agree_marketing } = req.body;
 
       // 필수 필드 검증
-      if (!name || !phone || !apartment || !size || !moveInDate) {
+      if (!name || !phone || !apartment || !size || !move_in_date) {
         return res.status(400).json({
           success: false,
           message: '필수 항목을 모두 입력해주세요.',
+        });
+      }
+
+      // 비밀번호 검증
+      if (!password || !/^\d{4}$/.test(password)) {
+        return res.status(400).json({
+          success: false,
+          message: '비밀번호는 숫자 4자리로 입력해주세요.',
+        });
+      }
+
+      // 개인정보 동의 검증
+      if (!agree_privacy) {
+        return res.status(400).json({
+          success: false,
+          message: '개인정보 수집 및 이용에 동의해주세요.',
         });
       }
 
@@ -122,8 +138,8 @@ module.exports = async function handler(req, res) {
 
       // 데이터베이스에 문의 저장
       const result = await sql`
-        INSERT INTO inquiries (name, phone, email, apartment, size, move_in_date, options, message, status, created_at)
-        VALUES (${name}, ${phone}, ${email || null}, ${apartment}, ${size}, ${moveInDate}, ${optionsJson}, ${message || ''}, 'pending', NOW())
+        INSERT INTO inquiries (name, phone, email, apartment, size, move_in_date, options, message, password, agree_privacy, agree_marketing, status, created_at)
+        VALUES (${name}, ${phone}, ${email || null}, ${apartment}, ${size}, ${move_in_date}, ${optionsJson}, ${message || ''}, ${password}, ${agree_privacy}, ${agree_marketing || false}, 'pending', NOW())
         RETURNING id, name, phone, email, apartment, size, move_in_date, options, message, created_at
       `;
 

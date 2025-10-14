@@ -680,6 +680,23 @@ if (modalForm) {
             }
         });
 
+        // 비밀번호 검증
+        const password = document.getElementById('modalPassword').value;
+        if (!/^\d{4}$/.test(password)) {
+            alert('비밀번호는 숫자 4자리로 입력해주세요.');
+            return;
+        }
+
+        // 필수 동의 확인
+        const agreePrivacy = document.getElementById('agreePrivacy').checked;
+        if (!agreePrivacy) {
+            alert('개인정보 수집 및 이용에 동의해주세요.');
+            return;
+        }
+
+        // 마케팅 동의 여부
+        const agreeMarketing = document.getElementById('agreeMarketing').checked;
+
         const formData = {
             name: document.getElementById('modalName').value,
             phone: document.getElementById('modalPhone').value,
@@ -687,6 +704,9 @@ if (modalForm) {
             size: document.getElementById('modalSize').value,
             move_in_date: document.getElementById('modalDate').value,  // API 스키마와 일치
             message: document.getElementById('modalMessage').value,
+            password: password,
+            agree_privacy: agreePrivacy,
+            agree_marketing: agreeMarketing,
             options: selectedOptions
         };
 
