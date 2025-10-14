@@ -407,9 +407,13 @@ function displayRecentInquiries(inquiries, page = 1) {
         return `${year}. ${month}. ${day}.`;
     }
 
-    const html = pageInquiries.map(inquiry => `
+    const html = pageInquiries.map((inquiry, index) => {
+        // 전체 목록에서 현재 항목의 역순 번호 계산
+        const inquiryNumber = allInquiries.length - (startIndex + index);
+
+        return `
         <tr style="border-bottom: 1px solid #e5e7eb;">
-            <td style="padding: 16px; text-align: center;">${inquiry.id}</td>
+            <td style="padding: 16px; text-align: center;">${inquiryNumber}</td>
             <td style="padding: 16px; text-align: left; font-weight: 500; max-width: 300px; word-wrap: break-word; word-break: keep-all; line-height: 1.4;">${inquiry.apartment}</td>
             <td style="padding: 16px; text-align: center;">${maskName(inquiry.name)}</td>
             <td style="padding: 16px; text-align: center; white-space: nowrap;">${formatDate(inquiry.created_at)}</td>
@@ -417,7 +421,7 @@ function displayRecentInquiries(inquiries, page = 1) {
                 <button onclick="viewInquiry(${inquiry.id})" class="btn-status" style="padding: 6px 16px; background: ${statusColor[inquiry.status] || '#2563eb'}; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 0.9rem; white-space: nowrap;">${statusText[inquiry.status] || '상담문의'}</button>
             </td>
         </tr>
-    `).join('');
+    `}).join('');
 
     inquiryTableBody.innerHTML = html;
     console.log(`문의 목록 업데이트 완료: 페이지 ${page}, ${pageInquiries.length}개 표시 (전체 ${inquiries.length}개)`);
