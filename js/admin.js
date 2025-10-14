@@ -309,7 +309,14 @@ function showInquiryModal(inquiry, isEdit = false) {
                 <h4>문의 내용</h4>
                 <div class="detail-row">
                     <div class="detail-label">추가 옵션</div>
-                    <div class="detail-value">${inquiry.options ? JSON.parse(inquiry.options).join(', ') : '-'}</div>
+                    <div class="detail-value">${inquiry.options ? (() => {
+                        try {
+                            const parsed = JSON.parse(inquiry.options);
+                            return Array.isArray(parsed) ? parsed.join(', ') : '-';
+                        } catch (e) {
+                            return inquiry.options;
+                        }
+                    })() : '-'}</div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">문의 내용</div>
