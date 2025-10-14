@@ -135,10 +135,13 @@ async function loadInquiries() {
 
         if (response.ok) {
             const data = await response.json();
-            currentInquiries = data.data;
-            updateStats(data.data);
-            renderInquiriesTable(data.data);
-            renderPagination(data.pagination);
+            const inquiries = data?.data?.inquiries || [];
+            const paginationData = data?.data?.pagination || data?.pagination || { totalPages: 1, page: 1 };
+
+            currentInquiries = inquiries;
+            updateStats(inquiries);
+            renderInquiriesTable(inquiries);
+            renderPagination(paginationData);
         } else {
             throw new Error('Failed to load inquiries');
         }
