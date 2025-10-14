@@ -211,8 +211,63 @@ module.exports = async function handler(req, res) {
           }
 
           // 전화번호로 모든 문의 조회 (비밀번호 없는 문의 + 비밀번호 일치하는 문의)
-          // 비밀번호 컬럼이 숫자형일 수 있어 빈 문자열 비교를 피합니다.
-          const result = await sql`
+          // 일부 배포 환경에서 password 컬럼이 아직 없을 수 있어 호환 처리
+          let result;
+          try {
+            result = await sql`
+              SELECT
+                id,
+                name,
+                phone,
+                email,
+                apartment,
+                size,
+                move_in_date,
+                options,
+                message,
+                status,
+                admin_response,
+                TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
+                TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
+              FROM inquiries
+              WHERE (phone = ${phone} OR phone = ${phoneDigits})
+                AND (password = ${password} OR password IS NULL)
+              ORDER BY created_at DESC
+            `;
+          } catch (e) {
+            console.warn('password 컬럼 조회 실패, 컬럼 미존재 가능. 마이그레이션 필요. Fallback 쿼리 실행.');
+            result = await sql`
+              SELECT
+                id,
+                name,
+                phone,
+                email,
+                apartment,
+                size,
+                move_in_date,
+                options,
+                message,
+                status,
+                admin_response,
+                TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
+                TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
+              FROM inquiries
+              WHERE (phone = ${phone} OR phone = ${phoneDigits})
+              ORDER BY created_at DESC
+            `;
+          }
+
+          return res.status(200).json({
+            success: true,
+            data: result.rows,
+            count: result.rows.length,
+          });
+        }
+
+        // 비밀번호 없이 전화번호만 제공된 경우 (비밀번호 없는 문의만)
+        let result;
+        try {
+          result = await sql`
             SELECT
               id,
               name,
@@ -229,38 +284,31 @@ module.exports = async function handler(req, res) {
               TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
             FROM inquiries
             WHERE (phone = ${phone} OR phone = ${phoneDigits})
-              AND (password = ${password} OR password IS NULL)
+              AND password IS NULL
             ORDER BY created_at DESC
           `;
-
-          return res.status(200).json({
-            success: true,
-            data: result.rows,
-            count: result.rows.length,
-          });
+        } catch (e) {
+          console.warn('password 컬럼 없음. 비밀번호 없이 모든 문의 조회로 대체.');
+          result = await sql`
+            SELECT
+              id,
+              name,
+              phone,
+              email,
+              apartment,
+              size,
+              move_in_date,
+              options,
+              message,
+              status,
+              admin_response,
+              TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
+              TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
+            FROM inquiries
+            WHERE (phone = ${phone} OR phone = ${phoneDigits})
+            ORDER BY created_at DESC
+          `;
         }
-
-        // 비밀번호 없이 전화번호만 제공된 경우 (비밀번호 없는 문의만)
-        const result = await sql`
-          SELECT
-            id,
-            name,
-            phone,
-            email,
-            apartment,
-            size,
-            move_in_date,
-            options,
-            message,
-            status,
-            admin_response,
-            TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
-            TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
-          FROM inquiries
-          WHERE (phone = ${phone} OR phone = ${phoneDigits})
-            AND password IS NULL
-          ORDER BY created_at DESC
-        `;
 
         return res.status(200).json({
           success: true,
