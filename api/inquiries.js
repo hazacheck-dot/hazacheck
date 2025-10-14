@@ -10,6 +10,16 @@ const corsHeaders = {
   'Access-Control-Allow-Headers': 'Content-Type',
 };
 
+// HTML escape for Telegram messages
+function escapeHtml(value = '') {
+  return String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
 // 텔레그램 알림 전송 함수
 async function sendTelegramNotification(inquiry) {
   const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -31,21 +41,30 @@ async function sendTelegramNotification(inquiry) {
     optionsText = inquiry.options || '없음';
   }
 
-  // 메시지 내용 구성
-  let messageText = `
-🔔 *새로운 문의가 접수되었습니다!*
+  // 메시지 내용 구성 (HTML 모드)
+  const name = escapeHtml(inquiry.name);
+  const phone = escapeHtml(inquiry.phone);
+  const email = inquiry.email ? escapeHtml(inquiry.email) : '';
+  const apartment = escapeHtml(inquiry.apartment);
+  const size = escapeHtml(inquiry.size);
+  const moveDate = escapeHtml(inquiry.move_in_date || '미정');
+  const messagePreview = inquiry.message ? escapeHtml(String(inquiry.message).slice(0, 300)) : '';
 
-📋 *문의 정보*
-━━━━━━━━━━━━━━━
-👤 이름: ${inquiry.name}
-📞 연락처: ${inquiry.phone}
-${inquiry.email ? `📧 이메일: ${inquiry.email}` : ''}
-🏢 아파트: ${inquiry.apartment}
-📐 평형: ${inquiry.size}타입
-📅 희망 점검일: ${inquiry.move_in_date || '미정'}
-➕ 추가옵션: ${optionsText}
-🆔 문의번호: #${inquiry.id}
-⏰ 접수시간: ${new Date(inquiry.created_at).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}
+  let messageText = `
+🚨 <b>새로운 문의가 접수되었습니다!</b>
+
+🆔 <b>문의 ID:</b> #${inquiry.id}
+👤 <b>이름:</b> ${name}
+📞 <b>연락처:</b> ${phone}
+${email ? `📧 <b>이메일:</b> ${email}\n` : ''}
+🏢 <b>아파트:</b> ${apartment}
+📐 <b>평형:</b> ${size}타입
+📅 <b>희망 점검일:</b> ${moveDate}
+➕ <b>추가옵션:</b> ${escapeHtml(optionsText)}
+⏰ <b>접수시간:</b> ${escapeHtml(new Date(inquiry.created_at).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }))}
+${messagePreview ? `\n💬 <b>문의내용:</b>\n${messagePreview}` : ''}
+
+🔗 <b>관리자 페이지:</b> https://www.hazacheck.com/admin.html?id=${inquiry.id}
   `.trim();
 
   // 문의 내용이 있으면 추가
@@ -65,7 +84,7 @@ ${inquiry.email ? `📧 이메일: ${inquiry.email}` : ''}
     body: JSON.stringify({
       chat_id: TELEGRAM_CHAT_ID,
       text: messageText,
-      parse_mode: 'Markdown',
+      parse_mode: 'HTML',
       disable_web_page_preview: true,
     }),
   });
@@ -182,7 +201,7 @@ module.exports = async function handler(req, res) {
           });
         }
 
-        // 비밀번호가 제공된 경우: 비밀번호로 인증
+        // 비밀번호가 제공된 경우: 해당 전화번호의 모든 문의 조회
         if (password) {
           if (!/^\d{4}$/.test(password)) {
             return res.status(400).json({
@@ -191,7 +210,8 @@ module.exports = async function handler(req, res) {
             });
           }
 
-          // 전화번호와 비밀번호로 본인 문의 내역 조회
+          // 전화번호로 모든 문의 조회 (비밀번호 없는 문의 + 비밀번호 일치하는 문의)
+          // 비밀번호 컬럼이 숫자형일 수 있어 빈 문자열 비교를 피합니다.
           const result = await sql`
             SELECT
               id,
@@ -209,7 +229,7 @@ module.exports = async function handler(req, res) {
               TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
             FROM inquiries
             WHERE (phone = ${phone} OR phone = ${phoneDigits})
-              AND password = ${password}
+              AND (password = ${password} OR password IS NULL)
             ORDER BY created_at DESC
           `;
 
@@ -220,7 +240,7 @@ module.exports = async function handler(req, res) {
           });
         }
 
-        // 비밀번호 없이 전화번호만 제공된 경우 (하위 호환성)
+        // 비밀번호 없이 전화번호만 제공된 경우 (비밀번호 없는 문의만)
         const result = await sql`
           SELECT
             id,

@@ -1049,6 +1049,7 @@ h4 { font-size: 1.25rem; }
     overflow: hidden;
     box-shadow: var(--shadow-md);
     transition: all var(--transition-normal);
+    position: relative;
 }
 
 .case-card:hover {
@@ -1089,12 +1090,21 @@ h4 { font-size: 1.25rem; }
 .severity-low { background: var(--severity-low); }
 
 .case-content {
-    padding: 30px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 14px 16px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.75) 100%);
 }
 
 .case-content h3 {
-    margin-bottom: 12px;
-    color: var(--text-primary);
+    margin: 0;
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 800;
+    line-height: 1.2;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
 .case-content p {
@@ -2011,20 +2021,26 @@ h4 { font-size: 1.25rem; }
 .kakao-qr {
     max-width: 300px;
     margin: 0 auto;
-    background: white;
+    background: var(--primary-color);
     padding: 30px;
     border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+    border: 2px solid var(--primary-dark);
 }
 
 .kakao-qr p {
-    color: var(--text-primary);
-    font-weight: 600;
+    color: #ffffff;
+    font-weight: 800;
     margin-bottom: 16px;
+    text-align: center;
 }
 
 .kakao-qr img {
     width: 100%;
     border-radius: 8px;
+    background: #ffffff;
+    padding: 8px;
+    border: 1px solid rgba(255,255,255,0.6);
 }
 
 /* ===================================
@@ -2678,15 +2694,17 @@ h4 { font-size: 1.25rem; }
     }
 
     .case-content {
-        padding: 20px !important;
+        padding: 10px 12px !important;
+        background: linear-gradient(180deg, rgba(0,0,0,0.0) 0%, rgba(0,0,0,0.55) 70%, rgba(0,0,0,0.8) 100%) !important;
     }
 
     .case-content h3 {
-        font-size: 0.9rem !important;
-        margin-bottom: 8px !important;
-        line-height: 1.3;
-        font-weight: 700;
-        color: var(--text-primary);
+        font-size: 0.95rem !important;
+        margin: 0 !important;
+        line-height: 1.2 !important;
+        font-weight: 800 !important;
+        color: #ffffff !important;
+        text-shadow: 0 2px 6px rgba(0,0,0,0.6) !important;
     }
 
     .case-content p {

@@ -416,6 +416,26 @@
     line-height: 1.8;
 }
 
+/* Header action buttons visibility enhancement */
+.header-actions .btn-primary {
+    filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.25));
+    font-weight: 800;
+}
+
+.header-actions .btn-secondary {
+    background: #ffffff;
+    color: var(--primary-color);
+    border: 2px solid #ffffff;
+    font-weight: 800;
+    box-shadow: 0 10px 24px rgba(255, 255, 255, 0.25), 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.header-actions .btn-secondary:hover {
+    background: #f9fafb;
+    border-color: #f9fafb;
+    transform: translateY(-2px);
+}
+
 /* Quick Contact Cards */
 .contact-quick {
     padding: 60px 0;
