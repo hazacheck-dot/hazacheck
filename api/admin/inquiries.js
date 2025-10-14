@@ -1,8 +1,38 @@
 // Vercel Serverless Function - 관리자 문의 관리 API
 // Path: /api/admin/inquiries
 
-import { sql } from '@vercel/postgres';
-import { sendStatusChangeNotification } from '../telegram-notify.js';
+const { sql } = require('@vercel/postgres');
+
+// Minimal Telegram notifier (HTML mode)
+async function sendStatusChangeNotification(inquiryId, oldStatus, newStatus, adminNote = '') {
+  try {
+    const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
+    const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
+    if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) return null;
+
+    const statusEmoji = { pending: '⏳', answered: '✅', completed: '🎉', cancelled: '❌' };
+    const statusText = { pending: '답변 대기', answered: '답변 완료', completed: '처리 완료', cancelled: '취소됨' };
+
+    const message = `
+📝 <b>문의 상태가 변경되었습니다</b>
+
+🆔 <b>문의 ID:</b> #${inquiryId}
+📊 <b>상태 변경:</b> ${statusEmoji[oldStatus] || ''} ${statusText[oldStatus] || oldStatus} → ${statusEmoji[newStatus] || ''} ${statusText[newStatus] || newStatus}
+${adminNote ? `📝 <b>관리자 메모:</b> ${adminNote}` : ''}
+⏰ <b>변경 시간:</b> ${new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' })}
+
+🔗 <b>관리자 페이지:</b> https://www.hazacheck.com/admin
+    `.trim();
+
+    await fetch(`https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ chat_id: TELEGRAM_CHAT_ID, text: message, parse_mode: 'HTML', disable_web_page_preview: true })
+    });
+  } catch (e) {
+    console.log('Telegram notify failed (continue):', e.message);
+  }
+}
 
 // CORS 헤더 설정
 const corsHeaders = {
@@ -22,7 +52,7 @@ function authenticateAdmin(req) {
   return true;
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // CORS preflight 요청 처리
   if (req.method === 'OPTIONS') {
     return res.status(200).json({});
