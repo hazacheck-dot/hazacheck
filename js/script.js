@@ -692,6 +692,7 @@ if (modalForm) {
             phone: document.getElementById('modalPhone').value,
             apartment: document.getElementById('modalApartment').value,
             size: document.getElementById('modalSize').value,
+            apartment_type: document.getElementById('modalApartmentType').value,
             move_in_date: document.getElementById('modalDate').value,  // API 스키마와 일치
             preferred_time: document.getElementById('modalTime').value,
             message: document.getElementById('modalMessage').value,

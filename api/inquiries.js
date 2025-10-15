@@ -2,6 +2,7 @@
 // Path: /api/inquiries
 
 const { sql } = require('@vercel/postgres');
+const { sendTelegramNotification } = require('./telegram-notify.js');
 
 // CORS 헤더 설정
 const corsHeaders = {
@@ -20,82 +21,7 @@ function escapeHtml(value = '') {
     .replace(/'/g, '&#39;');
 }
 
-// 텔레그램 알림 전송 함수
-async function sendTelegramNotification(inquiry) {
-  const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-  const TELEGRAM_CHAT_ID = process.env.TELEGRAM_CHAT_ID;
-
-  if (!TELEGRAM_BOT_TOKEN || !TELEGRAM_CHAT_ID) {
-    console.log('텔레그램 환경변수가 설정되지 않았습니다.');
-    return;
-  }
-
-  // 옵션 파싱
-  let optionsText = '없음';
-  try {
-    const options = typeof inquiry.options === 'string' ? JSON.parse(inquiry.options) : inquiry.options;
-    if (options && options.length > 0) {
-      optionsText = options.join(', ');
-    }
-  } catch (e) {
-    optionsText = inquiry.options || '없음';
-  }
-
-  // 메시지 내용 구성 (HTML 모드)
-  const name = escapeHtml(inquiry.name);
-  const phone = escapeHtml(inquiry.phone);
-  const email = inquiry.email ? escapeHtml(inquiry.email) : '';
-  const apartment = escapeHtml(inquiry.apartment);
-  const size = escapeHtml(inquiry.size);
-  const moveDate = escapeHtml(inquiry.move_in_date || '미정');
-  const messagePreview = inquiry.message ? escapeHtml(String(inquiry.message).slice(0, 300)) : '';
-
-  let messageText = `
-🚨 <b>새로운 문의가 접수되었습니다!</b>
-
-🆔 <b>문의 ID:</b> #${inquiry.id}
-👤 <b>이름:</b> ${name}
-📞 <b>연락처:</b> ${phone}
-${email ? `📧 <b>이메일:</b> ${email}\n` : ''}
-🏢 <b>아파트:</b> ${apartment}
-📐 <b>평형:</b> ${size}타입
-📅 <b>희망 점검일:</b> ${moveDate}
-➕ <b>추가옵션:</b> ${escapeHtml(optionsText)}
-⏰ <b>접수시간:</b> ${escapeHtml(new Date(inquiry.created_at).toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }))}
-${messagePreview ? `\n💬 <b>문의내용:</b>\n${messagePreview}` : ''}
-
-🔗 <b>관리자 페이지:</b> https://www.hazacheck.com/admin.html?id=${inquiry.id}
-  `.trim();
-
-  // 문의 내용이 있으면 추가
-  if (inquiry.message && inquiry.message.trim()) {
-    messageText += `\n\n💬 *문의내용:*\n${inquiry.message.substring(0, 200)}${inquiry.message.length > 200 ? '...' : ''}`;
-  }
-
-  messageText += `\n\n[📱 관리자 페이지에서 상세보기](https://www.hazacheck.com/admin.html?id=${inquiry.id})`;
-
-  const telegramUrl = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
-
-  const response = await fetch(telegramUrl, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      chat_id: TELEGRAM_CHAT_ID,
-      text: messageText,
-      parse_mode: 'HTML',
-      disable_web_page_preview: true,
-    }),
-  });
-
-  if (!response.ok) {
-    const error = await response.text();
-    throw new Error(`텔레그램 API 오류: ${error}`);
-  }
-
-  return response.json();
-}
+// 텔레그램 알림은 별도 모듈 사용
 
 module.exports = async function handler(req, res) {
   // CORS preflight 요청 처리
