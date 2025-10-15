@@ -29,6 +29,7 @@ const loadingOverlay = document.getElementById('loadingOverlay');
 const totalInquiriesEl = document.getElementById('totalInquiries');
 const pendingInquiriesEl = document.getElementById('pendingInquiries');
 const answeredInquiriesEl = document.getElementById('answeredInquiries');
+const completedInquiriesEl = document.getElementById('completedInquiries');
 const completionRateEl = document.getElementById('completionRate');
 
 // ===================================
@@ -162,7 +163,8 @@ function updateStats(inquiries) {
 
     totalInquiriesEl.textContent = total;
     pendingInquiriesEl.textContent = pending;
-    answeredInquiriesEl.textContent = answered + completed;
+    answeredInquiriesEl.textContent = answered;
+    completedInquiriesEl.textContent = completed;
     completionRateEl.textContent = `${completionRate}%`;
 }
 
@@ -196,7 +198,7 @@ function renderInquiriesTable(inquiries) {
             <td>
                 <div class="action-buttons">
                     <button class="btn btn-sm btn-view" onclick="viewInquiry(${inquiry.id})">보기</button>
-                    <button class="btn btn-sm btn-edit" onclick="editInquiry(${inquiry.id})">수정</button>
+                    <button class="btn btn-sm btn-edit" onclick="editInquiry(${inquiry.id})">답변</button>
                     <button class="btn btn-sm btn-delete" onclick="deleteInquiry(${inquiry.id})">삭제</button>
                 </div>
             </td>

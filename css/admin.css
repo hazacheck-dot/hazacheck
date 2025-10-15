@@ -2,6 +2,15 @@
    Admin Page Styles
    =================================== */
 
+/* Global Admin Styles */
+.admin-dashboard,
+.admin-panel,
+.inquiries-table,
+.login-card,
+.modal-content {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
 /* Admin Header */
 .admin-header {
     background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
