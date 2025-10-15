@@ -329,7 +329,7 @@ function showInquiryModal(inquiry, isEdit = false) {
                 <h4>관리 정보</h4>
                 <div class="detail-row">
                     <div class="detail-label">상태</div>
-                    <div class="detail-value">${isEdit ? `<select id="editStatus"><option value="pending" ${inquiry.status === 'pending' ? 'selected' : ''}>답변 대기</option><option value="answered" ${inquiry.status === 'answered' ? 'selected' : ''}>답변 완료</option><option value="completed" ${inquiry.status === 'completed' ? 'selected' : ''}>처리 완료</option><option value="cancelled" ${inquiry.status === 'cancelled' ? 'selected' : ''}>취소됨</option></select>` : getStatusText(inquiry.status)}</div>
+                    <div class="detail-value">${isEdit ? `<select id="editStatus"><option value="pending" ${inquiry.status === 'pending' ? 'selected' : ''}>답변 대기</option><option value="answered" ${inquiry.status === 'answered' ? 'selected' : ''}>답변 완료</option><option value="completed" ${inquiry.status === 'completed' ? 'selected' : ''}>예약 완료</option><option value="cancelled" ${inquiry.status === 'cancelled' ? 'selected' : ''}>취소됨</option></select>` : getStatusText(inquiry.status)}</div>
                 </div>
                 <div class="detail-row">
                     <div class="detail-label">관리자 메모</div>
@@ -447,7 +447,7 @@ function getStatusText(status) {
     const statusMap = {
         'pending': '답변 대기',
         'answered': '답변 완료',
-        'completed': '처리 완료',
+        'completed': '예약 완료',
         'cancelled': '취소됨'
     };
     return statusMap[status] || status;

@@ -1,7 +1,7 @@
 // 텔레그램 알림 유틸리티 함수
 // Path: /api/telegram-notify.js
 
-export async function sendTelegramNotification(inquiryData) {
+async function sendTelegramNotification(inquiryData) {
   try {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -98,7 +98,7 @@ ${messagePreview}
 }
 
 // 상태 변경 알림
-export async function sendStatusChangeNotification(inquiryId, oldStatus, newStatus, adminNote = '') {
+async function sendStatusChangeNotification(inquiryId, oldStatus, newStatus, adminNote = '') {
   try {
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const chatId = process.env.TELEGRAM_CHAT_ID;
@@ -117,7 +117,7 @@ export async function sendStatusChangeNotification(inquiryId, oldStatus, newStat
     const statusText = {
       'pending': '답변 대기',
       'answered': '답변 완료',
-      'completed': '처리 완료',
+      'completed': '예약 완료',
       'cancelled': '취소됨'
     };
 
@@ -155,3 +155,8 @@ ${adminNote ? `📝 <b>관리자 메모:</b> ${adminNote}` : ''}
     return null;
   }
 }
+
+module.exports = {
+  sendTelegramNotification,
+  sendStatusChangeNotification
+};
