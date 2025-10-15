@@ -255,10 +255,7 @@ module.exports = async function handler(req, res) {
         SELECT
           id,
           CONCAT(SUBSTRING(name, 1, 1), '**') as name,
-          CONCAT(
-            SUBSTRING(apartment, 1, LEAST(LENGTH(apartment), 4)),
-            CASE WHEN LENGTH(apartment) > 4 THEN '...' ELSE '' END
-          ) as apartment,
+          apartment,
           size,
           status,
           TO_CHAR(created_at, 'YYYY-MM-DD') as created_at
