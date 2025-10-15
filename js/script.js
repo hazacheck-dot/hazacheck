@@ -514,9 +514,26 @@ function displayModalPriceInfo(data) {
         return;
     }
 
+    // 세대 크기를 m² 형식으로 변환
+    let sizeDisplay = data.size;
+    const sizeValue = data.sizeValue || data.size.replace(/[^0-9]/g, '');
+
+    // 타입 표기를 m² 표기로 변환
+    const sizeMap = {
+        '58': '~58m²',
+        '74': '59~74m²',
+        '84': '75~84m²',
+        '104': '85~104m²',
+        'over': '104m² 이상'
+    };
+
+    if (sizeMap[sizeValue]) {
+        sizeDisplay = sizeMap[sizeValue];
+    }
+
     // 가격 정보 표시
     let html = '<div style="line-height: 1.8;">';
-    html += '<p style="margin: 8px 0;"><strong>📏 세대 크기:</strong> ' + data.size + '</p>';
+    html += '<p style="margin: 8px 0;"><strong>📏 세대 크기:</strong> ' + sizeDisplay + '</p>';
     html += '<p style="margin: 8px 0;"><strong>💵 기본 비용:</strong> ' + data.basePriceFormatted + '</p>';
 
     if (data.options && data.options.length > 0) {
