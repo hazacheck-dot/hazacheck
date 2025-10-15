@@ -106,7 +106,7 @@ module.exports = async function handler(req, res) {
   // POST: 문의 접수
   if (req.method === 'POST') {
     try {
-      const { name, phone, email, apartment, size, move_in_date, options, message, password, agree_privacy, agree_marketing } = req.body;
+      const { name, phone, email, apartment, size, move_in_date, preferred_time, options, message, password, agree_privacy, agree_marketing } = req.body;
 
       // 필수 필드 검증
       if (!name || !phone || !apartment || !size || !move_in_date) {
@@ -157,9 +157,9 @@ module.exports = async function handler(req, res) {
 
       // 데이터베이스에 문의 저장
       const result = await sql`
-        INSERT INTO inquiries (name, phone, email, apartment, size, move_in_date, options, message, password, agree_privacy, agree_marketing, status, created_at)
-        VALUES (${name}, ${phone}, ${email || null}, ${apartment}, ${size}, ${move_in_date}, ${optionsJson}, ${message || ''}, ${password}, ${agree_privacy}, ${agree_marketing || false}, 'pending', NOW())
-        RETURNING id, name, phone, email, apartment, size, move_in_date, options, message, created_at
+        INSERT INTO inquiries (name, phone, email, apartment, size, move_in_date, preferred_time, options, message, password, agree_privacy, agree_marketing, status, created_at)
+        VALUES (${name}, ${phone}, ${email || null}, ${apartment}, ${size}, ${move_in_date}, ${preferred_time || null}, ${optionsJson}, ${message || ''}, ${password}, ${agree_privacy}, ${agree_marketing || false}, 'pending', NOW())
+        RETURNING id, name, phone, email, apartment, size, move_in_date, preferred_time, options, message, created_at
       `;
 
       // 텔레그램 알림 발송 (선택사항)
