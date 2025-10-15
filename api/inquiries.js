@@ -145,14 +145,13 @@ module.exports = async function handler(req, res) {
                 id,
                 name,
                 phone,
-                email,
                 apartment,
                 size,
                 move_in_date,
                 options,
                 message,
                 status,
-                admin_note,
+                admin_response,
                 TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
                 TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
               FROM inquiries
@@ -167,14 +166,13 @@ module.exports = async function handler(req, res) {
                 id,
                 name,
                 phone,
-                email,
                 apartment,
                 size,
                 move_in_date,
                 options,
                 message,
                 status,
-                admin_note,
+                admin_response,
                 TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
                 TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
               FROM inquiries
