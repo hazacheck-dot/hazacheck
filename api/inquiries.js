@@ -136,8 +136,30 @@ module.exports = async function handler(req, res) {
             });
           }
 
-          // 전화번호로 모든 문의 조회 (비밀번호 없는 문의 + 비밀번호 일치하는 문의)
-          // 일부 배포 환경에서 password 컬럼이 아직 없을 수 있어 호환 처리
+          // 먼저 비밀번호가 일치하는 문의가 있는지 확인
+          let passwordCheck;
+          try {
+            passwordCheck = await sql`
+              SELECT COUNT(*) as count
+              FROM inquiries
+              WHERE (phone = ${phone} OR phone = ${phoneDigits})
+                AND password = ${password}
+            `;
+          } catch (e) {
+            // password 컬럼이 없는 경우 모든 문의 조회
+            console.warn('password 컬럼 미존재. 전화번호로만 조회.');
+            passwordCheck = { rows: [{ count: 1 }] };
+          }
+
+          // 비밀번호가 일치하는 문의가 없으면 에러
+          if (passwordCheck.rows[0].count === 0) {
+            return res.status(401).json({
+              success: false,
+              message: '전화번호 또는 비밀번호가 일치하지 않습니다.',
+            });
+          }
+
+          // 비밀번호가 일치하면 해당 전화번호의 모든 문의 조회
           let result;
           try {
             result = await sql`
@@ -156,29 +178,14 @@ module.exports = async function handler(req, res) {
                 TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
               FROM inquiries
               WHERE (phone = ${phone} OR phone = ${phoneDigits})
-                AND (password = ${password} OR password IS NULL OR password = '')
               ORDER BY created_at DESC
             `;
           } catch (e) {
-            console.warn('password 컬럼 조회 실패, 컬럼 미존재 가능. 마이그레이션 필요. Fallback 쿼리 실행.');
-            result = await sql`
-              SELECT
-                id,
-                name,
-                phone,
-                apartment,
-                size,
-                move_in_date,
-                options,
-                message,
-                status,
-                admin_response,
-                TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI') as created_at,
-                TO_CHAR(updated_at, 'YYYY-MM-DD HH24:MI') as updated_at
-              FROM inquiries
-              WHERE (phone = ${phone} OR phone = ${phoneDigits})
-              ORDER BY created_at DESC
-            `;
+            console.error('문의 조회 실패:', e);
+            return res.status(500).json({
+              success: false,
+              message: '문의 조회 중 오류가 발생했습니다.',
+            });
           }
 
           return res.status(200).json({
