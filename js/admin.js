@@ -189,7 +189,6 @@ function renderInquiriesTable(inquiries) {
             <td>${inquiry.id}</td>
             <td>${inquiry.name}</td>
             <td>${inquiry.phone}</td>
-            <td>${inquiry.email || '-'}</td>
             <td>${inquiry.apartment}</td>
             <td>${inquiry.size}타입</td>
             <td>${inquiry.move_in_date}</td>

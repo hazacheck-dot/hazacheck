@@ -236,19 +236,20 @@
 }
 
 .inquiries-table th {
-    background: var(--bg-gray);
-    padding: 16px 12px;
+    background: linear-gradient(180deg, #f3f4f6 0%, #eef2ff 100%);
+    padding: 18px 14px;
     text-align: left;
     font-weight: 600;
-    color: var(--text-primary);
+    color: #111827;
     border-bottom: 2px solid var(--border-color);
     white-space: nowrap;
 }
 
 .inquiries-table td {
-    padding: 16px 12px;
+    padding: 18px 14px;
     border-bottom: 1px solid var(--border-color);
-    color: var(--text-primary);
+    color: #111827;
+    font-weight: 600;
     vertical-align: middle;
 }
 
@@ -281,8 +282,8 @@
 }
 
 .status-completed {
-    background: var(--primary-light);
-    color: var(--primary-dark);
+    background: #e0f2fe;
+    color: #0369a1;
 }
 
 .status-cancelled {
