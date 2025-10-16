@@ -512,6 +512,25 @@ style.textContent = `
 document.head.appendChild(style);
 
 // ===================================
+// Option Card Checkbox Styling
+// ===================================
+
+document.addEventListener('change', function(e) {
+    if (e.target.classList.contains('option-checkbox')) {
+        const card = e.target.closest('.option-card');
+        if (e.target.checked) {
+            card.style.borderColor = '#2563eb';
+            card.style.background = '#eff6ff';
+            card.style.boxShadow = '0 4px 12px rgba(37, 99, 235, 0.15)';
+        } else {
+            card.style.borderColor = '#e5e7eb';
+            card.style.background = 'white';
+            card.style.boxShadow = 'none';
+        }
+    }
+});
+
+// ===================================
 // Initialize
 // ===================================
 
