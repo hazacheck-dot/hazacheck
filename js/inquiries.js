@@ -163,7 +163,7 @@ if (inquiryForm) {
             apartment_unit: document.getElementById('apartment_unit').value.trim(),
             move_in_date: document.getElementById('move_in_date').value,
             preferred_time: document.getElementById('preferred_time').value,
-            options: selectedOptions.join(', '), // 옵션들을 쉼표로 구분된 문자열로
+            options: selectedOptions, // 배열로 전송
             message: document.getElementById('message').value.trim(),
             password: document.getElementById('password').value.trim(),
             agree_privacy: document.getElementById('agree_privacy').checked,
