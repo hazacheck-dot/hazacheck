@@ -32,6 +32,20 @@ function loadPriceSimulationData() {
                 }
             }
 
+            // 옵션 자동 체크
+            if (data.options && data.options.length > 0) {
+                const optionCheckboxes = document.querySelectorAll('input[name="options"]');
+                data.options.forEach(option => {
+                    const optionName = option.name || option;
+                    optionCheckboxes.forEach(checkbox => {
+                        // 옵션 이름이 포함되어 있으면 체크
+                        if (checkbox.value.includes(optionName) || optionName.includes(checkbox.value.split('(')[0].trim())) {
+                            checkbox.checked = true;
+                        }
+                    });
+                });
+            }
+
             // 가격 시뮬레이션 카드 표시
             displayPriceSimulationCard(data);
 
@@ -134,6 +148,12 @@ if (inquiryForm) {
     inquiryForm.addEventListener('submit', async function(e) {
         e.preventDefault();
 
+        // 선택된 옵션 수집
+        const selectedOptions = [];
+        document.querySelectorAll('input[name="options"]:checked').forEach(checkbox => {
+            selectedOptions.push(checkbox.value);
+        });
+
         const formData = {
             name: document.getElementById('name').value.trim(),
             phone: document.getElementById('phone').value.trim(),
@@ -142,6 +162,7 @@ if (inquiryForm) {
             apartment_unit: document.getElementById('apartment_unit').value.trim(),
             move_in_date: document.getElementById('move_in_date').value,
             preferred_time: document.getElementById('preferred_time').value,
+            options: selectedOptions.join(', '), // 옵션들을 쉼표로 구분된 문자열로
             message: document.getElementById('message').value.trim(),
             password: document.getElementById('password').value.trim(),
             agree_privacy: document.getElementById('agree_privacy').checked,
