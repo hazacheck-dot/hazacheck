@@ -482,16 +482,16 @@ function displayLookupResult(inquiries) {
 // Input Focus Effects
 // ===================================
 
-document.querySelectorAll('input, select, textarea').forEach(input => {
+document.querySelectorAll('input:not([type="checkbox"]), select, textarea').forEach(input => {
     input.addEventListener('focus', function() {
-        if (this.style.borderColor !== '#dc2626') {
+        if (this.style.borderColor !== '#ef4444') {
             this.style.borderColor = '#2563eb';
-            this.style.boxShadow = '0 0 0 3px rgba(37, 99, 235, 0.1)';
+            this.style.boxShadow = '0 0 0 4px rgba(37, 99, 235, 0.1)';
         }
     });
 
     input.addEventListener('blur', function() {
-        if (this.style.borderColor !== '#dc2626') {
+        if (this.style.borderColor !== '#ef4444') {
             this.style.borderColor = '#e5e7eb';
             this.style.boxShadow = 'none';
         }

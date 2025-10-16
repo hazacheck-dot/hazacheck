@@ -880,13 +880,49 @@
     }
 
     .inquiry-hero h1 {
-        font-size: 1.8rem !important;
+        font-size: 1.75rem !important;
         line-height: 1.3 !important;
-        margin-bottom: 12px !important;
+        margin-bottom: 16px !important;
     }
 
     .inquiry-hero p {
         font-size: 1rem !important;
+    }
+
+    /* 히어로 전화번호 버튼 모바일 */
+    .inquiry-hero a[href^="tel"] {
+        font-size: 1rem !important;
+        padding: 10px 20px !important;
+    }
+
+    /* 폼 헤더 모바일 */
+    div[style*="상담 신청서"] h2 {
+        font-size: 1.5rem !important;
+    }
+
+    div[style*="상담 신청서"] p {
+        font-size: 0.95rem !important;
+    }
+
+    /* 폼 컨테이너 모바일 */
+    div[style*="background: white"][style*="border-radius: 20px"][style*="padding: 48px"] {
+        padding: 28px !important;
+        border-radius: 16px !important;
+    }
+
+    /* 가격 시뮬레이션 카드 모바일 */
+    div[id="priceSimulationCard"] {
+        padding: 24px !important;
+        margin-bottom: 20px !important;
+    }
+
+    /* 실시간 현황 모바일 */
+    div[style*="실시간 상담 현황"] {
+        padding: 24px !important;
+    }
+
+    div[style*="실시간 상담 현황"] h3 {
+        font-size: 1.2rem !important;
     }
 
     /* 2단 레이아웃을 1단으로 */
