@@ -147,6 +147,25 @@
 
                 <!-- RIGHT: Real-time Inquiry Status -->
                 <div>
+                    <!-- 가격 시뮬레이션 정보 카드 -->
+                    <div id="priceSimulationCard" style="display: none; background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%); border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3); color: white;">
+                        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+                            <h3 style="font-size: 1.2rem; font-weight: 700; margin: 0; display: flex; align-items: center; gap: 8px;">
+                                ⭐ 추가 옵션 (선택사항)
+                            </h3>
+                        </div>
+
+                        <div id="priceSimulationDetails" style="background: rgba(255,255,255,0.15); border-radius: 12px; padding: 16px; margin-bottom: 12px;">
+                            <!-- JavaScript로 동적 생성 -->
+                        </div>
+
+                        <div id="priceSimulationTotal" style="display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 2px solid rgba(255,255,255,0.3);">
+                            <!-- JavaScript로 동적 생성 -->
+                        </div>
+
+                        <p style="font-size: 0.85rem; opacity: 0.9; margin: 12px 0 0 0; text-align: center; font-style: italic;">대부분의 고객이 선택하는 옵션</p>
+                    </div>
+
                     <!-- 조회하기 버튼 -->
                     <button onclick="openLookupModal()" style="width: 100%; padding: 16px; background: white; border: 2px solid #2563eb; border-radius: 12px; margin-bottom: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.1rem; font-weight: 600; color: #2563eb; transition: all 0.3s; box-shadow: 0 2px 8px rgba(37, 99, 235, 0.15);">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -169,7 +188,7 @@
                         <p style="font-size: 0.9rem; color: #6b7280; margin-bottom: 20px;">최신 상담 문의 내역을 확인하세요</p>
 
                         <!-- 문의 목록 -->
-                        <div id="liveInquiryList" style="display: flex; flex-direction: column; gap: 12px; max-height: 600px; overflow-y: auto;">
+                        <div id="liveInquiryList" style="display: flex; flex-direction: column; gap: 12px; max-height: 600px; overflow-y: hidden; overflow-x: hidden; position: relative;">
                             <!-- JavaScript로 동적 생성 -->
                         </div>
                     </div>

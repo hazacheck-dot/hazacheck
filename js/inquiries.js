@@ -32,16 +32,64 @@ function loadPriceSimulationData() {
                 }
             }
 
-            // 옵션 자동 체크는 제거 (옵션 필드가 없으므로)
+            // 가격 시뮬레이션 카드 표시
+            displayPriceSimulationCard(data);
 
-            // localStorage 데이터 삭제
-            localStorage.removeItem('hazacheck_calculation');
+            // localStorage 데이터는 유지 (사용자가 다시 올 수 있으므로)
+            // localStorage.removeItem('hazacheck_calculation');
 
             console.log('가격 시뮬레이션 데이터 자동 입력 완료:', data);
         } catch (error) {
             console.error('가격 시뮬레이션 데이터 파싱 오류:', error);
         }
     }
+}
+
+function displayPriceSimulationCard(data) {
+    const card = document.getElementById('priceSimulationCard');
+    const detailsDiv = document.getElementById('priceSimulationDetails');
+    const totalDiv = document.getElementById('priceSimulationTotal');
+
+    if (!card || !detailsDiv || !totalDiv) return;
+
+    // 옵션 정보 생성
+    const optionsHTML = data.options && data.options.length > 0 ? `
+        ${data.options.map(option => {
+            const optionName = option.name || option;
+            const optionPrice = option.price || extractPrice(optionName);
+            return `
+                <div style="display: flex; justify-content: space-between; align-items: center; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 1.2rem;">🔥</span>
+                        <span style="font-size: 0.95rem; font-weight: 500;">${optionName}</span>
+                    </div>
+                    <span style="font-size: 0.95rem; font-weight: 700;">+₩${optionPrice.toLocaleString()}</span>
+                </div>
+            `;
+        }).join('')}
+    ` : '<p style="text-align: center; opacity: 0.8; margin: 0;">선택된 추가 옵션이 없습니다</p>';
+
+    detailsDiv.innerHTML = optionsHTML;
+
+    // 총액 정보
+    totalDiv.innerHTML = `
+        <div>
+            <div style="font-size: 0.9rem; opacity: 0.9; margin-bottom: 4px;">사후관리 재점검</div>
+            <div style="font-size: 1.8rem; font-weight: 900;">+₩${(data.totalPrice || 0).toLocaleString()}</div>
+        </div>
+    `;
+
+    // 카드 표시
+    card.style.display = 'block';
+}
+
+// 옵션 이름에서 가격 추출 (예: "하자 접수 대행 (+5만원)" -> 50000)
+function extractPrice(optionName) {
+    const match = optionName.match(/(\d+)만원/);
+    if (match) {
+        return parseInt(match[1]) * 10000;
+    }
+    return 0;
 }
 
 // Phone number formatting
@@ -198,53 +246,62 @@ function displayLiveInquiries(inquiries) {
 }
 
 // ===================================
-// Auto Scroll for Live Inquiry List
+// Auto Scroll for Live Inquiry List (연속 스크롤)
 // ===================================
 
-let scrollInterval;
+let scrollAnimationId;
 let isPaused = false;
+let scrollSpeed = 0.5; // 픽셀/프레임 (느리게 연속적으로)
 
 function startAutoScroll() {
     const container = document.getElementById('liveInquiryList');
     if (!container) return;
 
-    // 기존 interval 정리
-    if (scrollInterval) {
-        clearInterval(scrollInterval);
+    // 기존 애니메이션 정리
+    if (scrollAnimationId) {
+        cancelAnimationFrame(scrollAnimationId);
     }
 
     // 마우스 오버 시 일시정지
     container.addEventListener('mouseenter', () => {
         isPaused = true;
-    });
+    }, { once: false });
 
     container.addEventListener('mouseleave', () => {
         isPaused = false;
-    });
+    }, { once: false });
 
-    // 자동 스크롤 시작 (3초마다 아래로 이동)
-    scrollInterval = setInterval(() => {
-        if (isPaused) return;
+    // 연속 스크롤 애니메이션
+    function animate() {
+        if (!isPaused) {
+            // 현재 스크롤 위치
+            const currentScroll = container.scrollTop;
+            const maxScroll = container.scrollHeight - container.clientHeight;
 
-        const items = container.querySelectorAll('.inquiry-live-item');
-        if (items.length === 0) return;
-
-        // 부드러운 스크롤
-        container.scrollBy({
-            top: items[0].offsetHeight + 12, // 아이템 높이 + gap
-            behavior: 'smooth'
-        });
-
-        // 끝에 도달하면 처음으로
-        if (container.scrollTop + container.clientHeight >= container.scrollHeight - 10) {
-            setTimeout(() => {
-                container.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }, 2000); // 2초 대기 후 처음으로
+            // 스크롤 이동
+            if (currentScroll >= maxScroll) {
+                // 끝에 도달하면 처음으로 (즉시)
+                container.scrollTop = 0;
+            } else {
+                // 연속적으로 부드럽게 아래로
+                container.scrollTop += scrollSpeed;
+            }
         }
-    }, 3000); // 3초마다
+
+        // 다음 프레임 요청
+        scrollAnimationId = requestAnimationFrame(animate);
+    }
+
+    // 애니메이션 시작
+    animate();
+}
+
+// 정리 함수
+function stopAutoScroll() {
+    if (scrollAnimationId) {
+        cancelAnimationFrame(scrollAnimationId);
+        scrollAnimationId = null;
+    }
 }
 
 // ===================================

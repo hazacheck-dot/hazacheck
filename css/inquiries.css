@@ -833,6 +833,19 @@
 }
 
 /* ===================================
+   Live Inquiry List Scrollbar Hidden
+   =================================== */
+
+#liveInquiryList {
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+#liveInquiryList::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+/* ===================================
    Responsive Design - Inquiry Page
    =================================== */
 
