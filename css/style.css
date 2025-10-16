@@ -9,10 +9,10 @@
 
 :root {
     /* Professional Color Palette - 전문적이고 신뢰감 있는 컬러 */
-    --primary-color: #1e3a8a;        /* Deep Navy - 깊이 있는 네이비 */
+    --primary-color: #1e3a8a;        /* Deep Navy - 깊이 있는 네이비 (로고 색상) */
     --primary-dark: #1e293b;         /* Darker Navy - 더 어두운 네이비 */
     --primary-light: #3b5998;        /* Lighter Navy - 밝은 네이비 */
-    --secondary-color: #0d9488;      /* Professional Teal - 전문적인 청록색 */
+    --secondary-color: #10b981;      /* Professional Green - 전문적인 초록색 */
     --accent-color: #f59e0b;         /* Warm Amber - 따뜻한 호박색 */
     --accent-gold: #eab308;          /* Gold - 골드 (신뢰감) */
 
@@ -29,11 +29,11 @@
 
     --severity-high: #dc2626;        /* Red - 빨강 */
     --severity-medium: #f59e0b;      /* Amber - 호박색 */
-    --severity-low: #0d9488;         /* Teal - 청록색 */
+    --severity-low: #10b981;         /* Green - 초록색 */
 
     /* Gradient Colors */
     --gradient-primary: linear-gradient(135deg, #1e3a8a 0%, #3b5998 100%);
-    --gradient-secondary: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+    --gradient-secondary: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);
     --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
 
     /* Spacing */
@@ -41,8 +41,8 @@
     --container-padding: 20px;
 
     /* Typography */
-    --font-primary: 'Noto Sans KR', sans-serif;
-    --font-secondary: 'Poppins', sans-serif;
+    --font-primary: 'Source Han Sans KR', sans-serif;
+    --font-secondary: 'Source Han Sans KR', sans-serif;
 
     /* Transitions */
     --transition-fast: 0.2s ease;

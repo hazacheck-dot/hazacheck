@@ -10,10 +10,8 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/logo/logo_non_text.png">
 
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/adobe-fonts/source-han-sans@release/SubsetOTF/SourceHanSansKR/SourceHanSansKR.css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css">
@@ -25,7 +23,7 @@
             <div class="nav-wrapper">
                 <a href="#home" class="logo" style="display: flex; align-items: center; gap: 12px; text-decoration: none;">
                     <img src="images/logo/logo_non_text.png" alt="하자체크 로고" class="logo-img">
-                    <span class="brand-text" style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color); font-family: 'Poppins', sans-serif;">Hazacheck</span>
+                    <span class="brand-text" style="font-size: 1.5rem; font-weight: 700; color: var(--primary-color); font-family: 'Source Han Sans KR', sans-serif;">Hazacheck</span>
                 </a>
 
                 <button class="menu-toggle" id="menuToggle" aria-label="메뉴 열기">
@@ -440,10 +438,9 @@
                                 <label class="option-item option-recommended">
                                     <input type="checkbox" class="option-checkbox" data-price="50000" data-name="하자 접수 대행">
                                     <div class="option-content">
-                                        <div class="option-badge">👍 인기</div>
                                         <div class="option-name">하자 접수 대행</div>
                                         <div class="option-price">+₩50,000</div>
-                                        <div class="option-desc">대부분의 고객이 선택하는 옵션</div>
+                                        <div class="option-desc">다른 고객님들이 많이 선택한 옵션이에요</div>
                                     </div>
                                 </label>
                                 <label class="option-item">
@@ -589,116 +586,6 @@
         </div>
     </section>
 
-    <!-- Why Choose Us Section -->
-    <section class="testimonials-section" id="testimonials" style="background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);">
-        <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">하자체크만의 차별점</h2>
-                <p class="section-subtitle">신생 업체지만, 1군 건설사 출신 대표의 6,000세대 경험이 있습니다</p>
-            </div>
-
-            <div class="testimonials-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px; margin-top: 50px;">
-                <!-- 1. 1군 건설사 출신의 전문성 -->
-                <div class="testimonial-card" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b5998 100%); color: white; border: none;">
-                    <div class="testimonial-header">
-                        <div class="testimonial-rating" style="font-size: 2.5rem;">
-                            🏗️
-                        </div>
-                        <div class="testimonial-type" style="background: rgba(255,255,255,0.2); color: white;">1군 건설사 출신</div>
-                    </div>
-                    <blockquote class="testimonial-quote" style="color: white; font-size: 1.05rem; line-height: 1.7;">
-                        <strong style="display: block; font-size: 1.3rem; margin-bottom: 12px;">6,000세대 경험의 진짜 전문가</strong>
-                        대형 건설현장에서 쌓은 실전 경험으로 어디에서 하자가 자주 발생하는지, 어떤 업무 프로세스로 처리되는지 정확히 알고 있습니다. 일반 점검업체와는 차원이 다릅니다.
-                    </blockquote>
-                    <div class="testimonial-footer" style="border-top: 1px solid rgba(255,255,255,0.3); padding-top: 16px; margin-top: 16px;">
-                        <span class="testimonial-author" style="color: rgba(255,255,255,0.9);">✓ 6,000세대 이상 시공 경험</span>
-                        <span class="testimonial-date" style="color: rgba(255,255,255,0.7);">검증된 전문성</span>
-                    </div>
-                </div>
-
-                <!-- 2. 자체 앱 개발 시스템 -->
-                <div class="testimonial-card" style="background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%); color: white; border: none;">
-                    <div class="testimonial-header">
-                        <div class="testimonial-rating" style="font-size: 2.5rem;">
-                            📱
-                        </div>
-                        <div class="testimonial-type" style="background: rgba(255,255,255,0.2); color: white;">자체 앱 개발</div>
-                    </div>
-                    <blockquote class="testimonial-quote" style="color: white; font-size: 1.05rem; line-height: 1.7;">
-                        <strong style="display: block; font-size: 1.3rem; margin-bottom: 12px;">사진 한 장도 빠뜨리지 않는 시스템</strong>
-                        점검 시 앱에 사진을 기록하면 위치, 증상이 자동으로 입력되어 자동 보고서가 생성됩니다. 보통 업체들처럼 사진을 한두 장씩 빼먹는 일이 절대 없습니다.
-                    </blockquote>
-                    <div class="testimonial-footer" style="border-top: 1px solid rgba(255,255,255,0.3); padding-top: 16px; margin-top: 16px;">
-                        <span class="testimonial-author" style="color: rgba(255,255,255,0.9);">✓ 위치/증상 자동 기록</span>
-                        <span class="testimonial-date" style="color: rgba(255,255,255,0.7);">완벽한 증빙</span>
-                    </div>
-                </div>
-
-                <!-- 3. 체계적인 보고서 -->
-                <div class="testimonial-card" style="background: linear-gradient(135deg, #059669 0%, #10b981 100%); color: white; border: none;">
-                    <div class="testimonial-header">
-                        <div class="testimonial-rating" style="font-size: 2.5rem;">
-                            📋
-                        </div>
-                        <div class="testimonial-type" style="background: rgba(255,255,255,0.2); color: white;">명확한 보고서</div>
-                    </div>
-                    <blockquote class="testimonial-quote" style="color: white; font-size: 1.05rem; line-height: 1.7;">
-                        <strong style="display: block; font-size: 1.3rem; margin-bottom: 12px;">작업자가 이해할 수 있는 보고서</strong>
-                        평균 80건의 하자를 위치와 증상을 명확하게 기재하고 엑셀로 정리합니다. 작업자들이 정확히 확인할 수 있도록 사진도 명확하게 표시합니다. 엉터리 보고서와는 차원이 다릅니다.
-                    </blockquote>
-                    <div class="testimonial-footer" style="border-top: 1px solid rgba(255,255,255,0.3); padding-top: 16px; margin-top: 16px;">
-                        <span class="testimonial-author" style="color: rgba(255,255,255,0.9);">✓ 위치 명확 표기</span>
-                        <span class="testimonial-date" style="color: rgba(255,255,255,0.7);">엑셀 정리</span>
-                    </div>
-                </div>
-
-                <!-- 4. 하자 발생 예측 능력 -->
-                <div class="testimonial-card" style="background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); color: white; border: none;">
-                    <div class="testimonial-header">
-                        <div class="testimonial-rating" style="font-size: 2.5rem;">
-                            🎯
-                        </div>
-                        <div class="testimonial-type" style="background: rgba(255,255,255,0.2); color: white;">하자 예측</div>
-                    </div>
-                    <blockquote class="testimonial-quote" style="color: white; font-size: 1.05rem; line-height: 1.7;">
-                        <strong style="display: block; font-size: 1.3rem; margin-bottom: 12px;">어디서 하자가 나올지 이미 압니다</strong>
-                        6,000세대 경험과 건설사 DB로 아파트마다 어디에서 주로 하자가 발생하는지 정확히 알고 있습니다. 최소 4건에서 최대 140건까지, 놓치지 않고 찾아냅니다.
-                    </blockquote>
-                    <div class="testimonial-footer" style="border-top: 1px solid rgba(255,255,255,0.3); padding-top: 16px; margin-top: 16px;">
-                        <span class="testimonial-author" style="color: rgba(255,255,255,0.9);">✓ 건설사 DB 보유</span>
-                        <span class="testimonial-date" style="color: rgba(255,255,255,0.7);">평균 80건 발견</span>
-                    </div>
-                </div>
-
-                <!-- 5. 신뢰할 수 있는 신생 업체 -->
-                <div class="testimonial-card" style="background: linear-gradient(135deg, #ea580c 0%, #f97316 100%); color: white; border: none;">
-                    <div class="testimonial-header">
-                        <div class="testimonial-rating" style="font-size: 2.5rem;">
-                            💪
-                        </div>
-                        <div class="testimonial-type" style="background: rgba(255,255,255,0.2); color: white;">신생 업체의 진실</div>
-                    </div>
-                    <blockquote class="testimonial-quote" style="color: white; font-size: 1.05rem; line-height: 1.7;">
-                        <strong style="display: block; font-size: 1.3rem; margin-bottom: 12px;">솔직하게 말씀드립니다</strong>
-                        저희는 신생 업체입니다. 장비도 이제 구매 예정이고, 고객 후기도 아직 없습니다. 하지만 1군 건설사 출신 대표의 6,000세대 경험과 자체 개발 시스템으로 기존 업체보다 더 나은 서비스를 약속드립니다.
-                    </blockquote>
-                    <div class="testimonial-footer" style="border-top: 1px solid rgba(255,255,255,0.3); padding-top: 16px; margin-top: 16px;">
-                        <span class="testimonial-author" style="color: rgba(255,255,255,0.9);">✓ 정직한 서비스</span>
-                        <span class="testimonial-date" style="color: rgba(255,255,255,0.7);">신뢰 우선</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="testimonials-cta" style="margin-top: 60px; text-align: center;">
-                <div style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); padding: 40px; border-radius: 20px; box-shadow: 0 10px 40px rgba(251, 191, 36, 0.3);">
-                    <p class="cta-text" style="font-size: 1.8rem; font-weight: 800; color: #1e293b; margin-bottom: 16px;">지금은 신생이지만, 경험만큼은 최고입니다</p>
-                    <p style="font-size: 1.1rem; color: #374151; margin-bottom: 30px;">1군 건설사 경력과 자체 시스템으로 더 나은 점검 서비스를 제공합니다</p>
-                    <a href="inquiries.html" class="btn btn-primary btn-lg" style="padding: 18px 40px; font-size: 1.2rem;">첫 고객이 되어주세요 →</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- FAQ Section -->
     <section class="faq-section" id="faq">
         <div class="container">
@@ -710,65 +597,11 @@
             <div class="faq-container">
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>사전점검 진행 시 꼭 동행해야 하나요?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p><strong>■ 사전점검 행사 시</strong><br>
-                        아파트 출입을 위해 계약자 확인 절차가 필요하므로, 촬영 팀과 아파트 외부에서 만나 함께 입장해 주셔야 합니다.<br>
-                        부득이하게 동행이 어려우신 경우, 위임장을 미리 전달해주시면 촬영팀 단독 방문이 가능합니다.<br>
-                        (위임서류는 해당 시공사에 문의하시면 발급 받으실 수 있습니다.)</p>
-                        <p><strong>■ 준공 이후</strong><br>
-                        잔금이 완납된 세대는 비밀번호 공유 또는 대리인 참석을 통해 촬영 진행이 가능합니다.<br>
-                        임시 출입키로 세대 출입이 가능한 경우, 위임장을 사전 전달해 주시면 촬영 팀이 단독으로 방문할 수 있습니다.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>사전점검 때 준비해야 할 사항이 있나요?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>사전점검과 관련해 필요한 준비물은 하자체크가 모두 준비해 갑니다.<br>
-                        입주민 여러분께서는 입주에 필요한 사항만 준비해 주시면 됩니다.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>결제는 선불로 진행되나요?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>하자체크는 예약금 10만 원을 요청드리고 있고, 사전점검 후 잔금을 요청드리는 방식으로 진행됩니다.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
-                        <span>모바일 하자 접수는 무엇인가요?</span>
-                        <span class="faq-icon">+</span>
-                    </button>
-                    <div class="faq-answer">
-                        <p>하자보수를 건설사에 요청하는 방법은 2가지가 있습니다.</p>
-                        <p><strong>■ 하자점검 체크리스트</strong><br>
-                        서면으로 하자 접수를 받는 아파트의 경우, 제공되는 체크리스트에 하자의 위치와 하자 내용을 기입해 제출해야 합니다. 제출된 내용을 바탕으로 하자 접수는 이뤄지기에 상세히 기록해야 합니다.<br>
-                        또한, 기록만으로 하자의 위치를 확인하기 어렵기에 제공된 스티커를 부착해 하자 위치를 확인할 수 있도록 해야 합니다.</p>
-                        <p><strong>■ 모바일 하자 접수</strong><br>
-                        건설사 하자 접수 어플을 통해 하자를 접수하는 방식으로 어플에 하자사진 2장(원거리, 근거리 각 1장)을 등록하고, 하자의 위치와 하자의 종류에 해당하는 카테고리를 선택, 하자의 내용을 입력해야 한 건의 하자 접수를 등록할 수 있습니다.<br>
-                        어플을 통해서 향후 하자 보수 상태를 확인할 수 있어, 최근 많은 건설사에서 선호하고 있는 방식입니다.</p>
-                        <p><strong>*어떤 방식이든 하자체크에서 모두 진행해 드리니 걱정하지 마세요</strong></p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <button class="faq-question">
                         <span>정말 대표님이 직접 오시나요?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>네, 100% 대표가 직접 현장에 방문하여 점검합니다. 이것이 저희의 가장 큰 차별점입니다. 하루 2세대만 점검하는 이유도 대표가 직접 꼼꼼하게 점검하기 위함입니다. 중간 관리자나 직원이 가는 것이 아니라, 6,000세대 경험을 가진 대표가 직접 갑니다.</p>
+                        <p>네. 100% 대표가 직접 방문합니다. 하루 2세대만 진행하는 이유도 한 세대에 충분한 시간을 들여 꼼꼼히 점검하기 위함입니다. 중간 관리자나 파견 인력이 아닌, 1군 건설사 출신·6,000세대 경력의 대표가 처음부터 끝까지 책임 점검합니다.</p>
                     </div>
                 </div>
 
@@ -778,7 +611,12 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>카카오톡(@hazacheck), 전화(010-2900-5200), 또는 홈페이지 문의 게시판을 통해 예약하실 수 있습니다. 하루 2세대 한정이므로 입주 날짜가 정해지시면 최대한 빨리 예약하시는 것을 권장드립니다.</p>
+                        <p style="margin-bottom: 16px;">아래 채널 중 편한 방법으로 예약해 주세요. 입주 날짜가 정해지면 빠르게 예약하시는 걸 권장드립니다(하루 2세대 제한).</p>
+                        <ul style="margin: 0; padding-left: 0; line-height: 2; list-style: none;">
+                            <li style="margin-bottom: 8px; padding: 10px 14px; background: #f8fafc; border-radius: 6px;"><strong style="color: var(--primary-color);">카카오톡</strong>: @hazacheck (오픈채팅 가능)</li>
+                            <li style="margin-bottom: 8px; padding: 10px 14px; background: #f8fafc; border-radius: 6px;"><strong style="color: var(--primary-color);">전화</strong>: 010-2900-5200</li>
+                            <li style="margin-bottom: 8px; padding: 10px 14px; background: #f8fafc; border-radius: 6px;"><strong style="color: var(--primary-color);">홈페이지</strong>: <a href="inquiries.html" style="color: var(--primary-color); text-decoration: underline;">온라인 문의</a></li>
+                        </ul>
                     </div>
                 </div>
 
@@ -788,17 +626,224 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>가능하시면 함께 계시는 것을 추천드립니다. 현장에서 하자를 직접 확인하시고 궁금한 점을 바로 질문하실 수 있습니다. 다만 불가피하게 참석이 어려우시면 점검 후 상세한 보고서와 사진/영상으로 설명해드립니다.</p>
+                        <p>동행하시면 현장에서 하자를 직접 확인하고 바로 질의응답이 가능해 가장 좋습니다. 일정상 어렵다면 대리 진행도 가능합니다. 단지 규정에 따라 위임장/신분증 사본(중요정보 가림)이 필요할 수 있으며, 점검 후에는 사진·영상 포함 상세 보고서로 결과를 설명드립니다.</p>
                     </div>
                 </div>
 
                 <div class="faq-item">
                     <button class="faq-question">
-                        <span>104㎡ 이상은 비용이 어떻게 되나요?</span>
+                        <span>아파트 계약자가 현장 방문이 어려울 때는 어떻게 하나요?</span>
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p>104㎡ 이상의 대형 평형은 점검 범위와 시간이 늘어나므로 별도 견적을 안내드립니다. 카카오톡이나 전화로 평형을 말씀해주시면 정확한 견적을 즉시 안내해드립니다.</p>
+                        <p style="margin-bottom: 16px;">사전점검 행사일에는 계약자 본인 확인이 일반적입니다. 미동행 시 단지/시공사 지침에 따라 다음 서류가 필요할 수 있습니다:</p>
+                        <div style="background: #f8fafc; padding: 16px; border-radius: 8px; margin-bottom: 12px; border-left: 3px solid var(--primary-color);">
+                            <ul style="margin: 0; padding-left: 0; line-height: 1.8; list-style: none;">
+                                <li style="margin-bottom: 6px;">• <strong style="color: var(--primary-color);">위임장 + 신분증 사본</strong> (중요정보 가림)</li>
+                                <li style="margin-bottom: 6px;">• <strong style="color: var(--primary-color);">공급계약서</strong> (중요정보 가림)</li>
+                            </ul>
+                        </div>
+                        <p style="font-size: 0.95rem; color: #64748b; line-height: 1.6;">필요 서류는 단지에 먼저 확인해 주세요. 접수된 서류는 점검 완료 후 즉시 폐기합니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>모든 하자를 다 찾아주나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="margin-bottom: 16px;">사람의 눈으로 진행되는 인력 서비스이므로 <span style="background: #fef3c7; padding: 2px 6px; border-radius: 4px; color: #92400e;">미세 오염·미관상 흠집</span> 등 경미한 항목은 누락될 수 있습니다.</p>
+                        <p style="margin-bottom: 12px;">다만 구조·설비·방수 등 <strong style="color: var(--primary-color); background: #eff6ff; padding: 2px 6px; border-radius: 4px;">중요 하자</strong>는 장비와 절차로 최대한 놓치지 않도록 점검합니다.</p>
+                        <p style="font-size: 0.95rem; color: #64748b; line-height: 1.6;">누락 의심 시 사후 문의를 주시면 재확인 방법을 안내드립니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>점검 시간은 얼마나 걸리나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="margin-bottom: 16px;">평형과 단지 규정에 따라 다르지만 보통 <strong style="color: var(--primary-color); font-size: 1.1rem;">약 2시간 내외</strong>입니다.</p>
+                        <div style="background: #f8fafc; padding: 16px; border-radius: 8px; border-left: 3px solid var(--secondary-color);">
+                            <p style="margin: 0; color: #475569; line-height: 1.8;">
+                                준비 15분 / 외부·구조 25분 / 내부 마감 30~40분 / 설비 30분 / 정리·브리핑 10분
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>몇 명이 방문하나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p>기본은 1인(대표) 점검입니다. 평형·동선·일정에 따라 보조 인력이 동행할 수 있습니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>104㎡ 이상(대형 평형) 비용은 어떻게 되나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="margin-bottom: 12px;">104㎡ 초과는 공간 규모와 점검 범위가 커져 <strong style="color: var(--primary-color); background: #eff6ff; padding: 2px 8px; border-radius: 4px;">별도 견적</strong>으로 안내드립니다.</p>
+                        <p style="font-size: 0.95rem; color: #64748b; line-height: 1.6;">평형/동·호수(또는 유사 규모)만 알려주시면 즉시 안내드립니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>모바일 앱(건설사 어플) 하자 접수도 해주시나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="margin-bottom: 12px;">네. <strong style="color: var(--accent-color);">옵션(유료)</strong>으로 대행 가능합니다.</p>
+                        <p style="margin-bottom: 12px;">건설사 앱은 <span style="background: #eff6ff; padding: 2px 6px; border-radius: 4px; color: var(--primary-color);">원거리·근거리 각 1장</span> 등 규정이 있어, 항목별 사진·카테고리·설명 입력까지 맞춰 드립니다.</p>
+                        <p style="font-size: 0.95rem; color: #64748b;">서면 체크리스트 방식도 지원합니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>시공사 예약 시간과 점검 예약 시간이 다르면 어떻게 하나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="margin-bottom: 12px;">사전점검 당일 변동이 잦아 <strong style="background: #eff6ff; padding: 2px 8px; border-radius: 4px; color: var(--primary-color);">입장 시간 유연 운영</strong>인 단지가 많습니다.</p>
+                        <p style="margin-bottom: 12px;">다만 단지별 상이하므로 <strong style="color: var(--primary-color);">관리사무소/시공사 지침</strong>을 사전 확인해 주세요.</p>
+                        <p style="font-size: 0.95rem; color: #64748b;">필요 시 저희가 일정 조정을 도와드립니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>취소·환불 규정은 어떻게 되나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="margin-bottom: 16px;">인력 배정·이동/숙박 등 고정비가 발생해 지역별로 차등 운영합니다.</p>
+                        <div style="margin-bottom: 12px; padding: 12px; background: #f8fafc; border-left: 3px solid var(--primary-color); border-radius: 4px;">
+                            <strong style="color: var(--primary-color); font-size: 1.05rem;">수도권</strong><br>
+                            <span style="display: inline-block; margin-top: 6px;">3일 전 100% / 2일 전 80% / 1일 전·당일 환불 불가</span>
+                        </div>
+                        <div style="margin-bottom: 12px; padding: 12px; background: #f8fafc; border-left: 3px solid var(--primary-color); border-radius: 4px;">
+                            <strong style="color: var(--primary-color); font-size: 1.05rem;">지방(강원·충청·전라·경상 등)</strong><br>
+                            <span style="display: inline-block; margin-top: 6px;">7일 전 100% / 6일 전 80% / 5일 전~당일 환불 불가</span>
+                        </div>
+                        <p style="margin-top: 16px; padding: 12px; background: #fef3c7; border-radius: 8px; font-size: 0.95rem; color: #92400e; line-height: 1.6;">※ 기상 악화·단지 사정 변경 등 불가항력은 가능한 범위에서 일정 변경을 우선 지원합니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>결제는 어떻게 하나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div style="background: #f8fafc; padding: 16px; border-radius: 8px; margin-bottom: 12px; border-left: 3px solid var(--secondary-color);">
+                            <p style="margin: 0; line-height: 1.8;">
+                                예약 확정 시 <strong style="color: var(--primary-color);">예약금(예: 10만원)</strong>, 점검 후 <strong style="color: var(--primary-color);">잔금 결제</strong>를 기본으로 합니다.
+                            </p>
+                        </div>
+                        <p style="font-size: 0.95rem; color: #64748b;">(카드/계좌이체 가능) 대행 옵션 선택 시 추가 비용은 사전 고지합니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>당일 산출물은 무엇을 받나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div style="background: #f8fafc; padding: 16px; border-radius: 8px; border-left: 3px solid var(--secondary-color);">
+                            <div style="margin-bottom: 10px;">✓ <strong style="color: var(--primary-color);">당일 요약 리포트</strong>와 핵심 사진 묶음</div>
+                            <div style="margin-bottom: 10px;">✓ <strong style="color: var(--primary-color);">세부 보고서</strong> (사진/영상·위치·설명·우선순위)</div>
+                            <div>✓ 건설사 접수용 문구 예시</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>하자보수가 제대로 되었는지 확인(재점검)도 가능한가요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="margin-bottom: 12px;">네. <strong style="color: var(--accent-color);">사후 재점검(옵션)</strong>을 제공하며, 보수 완료 내역 확인과 추가 발견 하자 체크를 진행합니다.</p>
+                        <p style="background: #fef3c7; padding: 12px; border-radius: 8px; color: #92400e; line-height: 1.6; font-size: 0.95rem; margin: 0;">
+                            💡 일정은 <strong>입주지정기간 내 가능한 가장 빠른 날짜</strong>로 권장드립니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>점검 중 물 사용이나 장비 사용 제한이 있으면 어떻게 하나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="margin-bottom: 12px;">단지 규정에 따라 물컵 테스트/전기 테스터 등 <span style="background: #fef3c7; padding: 2px 6px; border-radius: 4px; color: #92400e;">간이 확인만 허용</span>될 수 있습니다.</p>
+                        <p style="margin-bottom: 12px;">이 경우 안전·규정 범위 내에서 <strong style="color: var(--primary-color);">대체 절차</strong>(시각·청각·계측을 활용한 간접 확인)로 진행하고 보고서에 근거와 한계를 명시합니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>개인정보와 문서 관리는 어떻게 하나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div style="background: #f8fafc; padding: 16px; border-radius: 8px; margin-bottom: 12px; border-left: 3px solid var(--secondary-color);">
+                            <p style="margin: 0 0 12px 0; line-height: 1.8;">
+                                위임/출입을 위해 수집되는 문서는 <strong style="color: var(--primary-color);">중요 정보 마스킹</strong>을 전제로 사용하며, <strong style="color: var(--primary-color);">점검 종료 후 즉시 폐기</strong>합니다.
+                            </p>
+                            <p style="margin: 0; line-height: 1.8; color: #64748b;">
+                                촬영·기록 데이터는 보고서 제공과 사후 응대 목적 외에 사용하지 않습니다.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>법적 증거로 쓸 수 있나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="margin-bottom: 12px;">하자 유형에 따라 <strong style="color: var(--primary-color);">위치·사진·설명·측정값(가능 시)</strong>을 남겨 제출 근거로 사용하실 수 있습니다.</p>
+                        <p style="margin-bottom: 12px;">필요 시 분쟁 대응의 <strong style="background: #eff6ff; padding: 2px 8px; border-radius: 4px; color: var(--primary-color);">기본 자료</strong>로 활용 가능합니다.</p>
+                        <p style="background: #fef3c7; padding: 12px; border-radius: 8px; color: #92400e; line-height: 1.6; font-size: 0.95rem; margin: 0;">
+                            ※ 법률 자문·분쟁 대리 자체는 제공하지 않습니다.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>당일 일정이 촉박합니다. 핵심만 빠르게 볼 수 있나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <p style="margin-bottom: 12px;">가능합니다. <strong style="background: #eff6ff; padding: 2px 8px; border-radius: 4px; color: var(--primary-color);">핵심 우선순위 코스(30~60분)</strong>로 축약해 먼저 확인하고, 이후 상세 항목은 별도 시간에 재점검(또는 리포트 보완)하는 방식으로 조정해 드립니다.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button class="faq-question">
+                        <span>문의 채널은 무엇이 있나요?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer">
+                        <div style="margin-bottom: 12px;">
+                            <div style="margin-bottom: 8px; padding: 10px 14px; background: #f8fafc; border-radius: 6px;"><strong style="color: var(--primary-color);">카카오톡</strong>: @hazacheck</div>
+                            <div style="margin-bottom: 8px; padding: 10px 14px; background: #f8fafc; border-radius: 6px;"><strong style="color: var(--primary-color);">전화</strong>: 010-2900-5200</div>
+                            <div style="margin-bottom: 8px; padding: 10px 14px; background: #f8fafc; border-radius: 6px;"><strong style="color: var(--primary-color);">홈페이지</strong>: <a href="inquiries.html" style="color: var(--primary-color); text-decoration: underline;">온라인 문의</a></div>
+                        </div>
+                        <p style="font-size: 0.95rem; color: #64748b; line-height: 1.6;">운영 시간 외 문의는 <strong>다음 영업일</strong>에 순차 회신드립니다.</p>
                     </div>
                 </div>
             </div>
