@@ -5,6 +5,45 @@
 const inquiryForm = document.getElementById('inquiryForm');
 const phoneInput = document.getElementById('phone');
 
+// ===================================
+// Load Price Simulation Data from localStorage
+// ===================================
+
+function loadPriceSimulationData() {
+    const priceData = localStorage.getItem('hazacheck_calculation');
+
+    if (priceData) {
+        try {
+            const data = JSON.parse(priceData);
+
+            // 평형/타입 자동 입력
+            if (data.size) {
+                const sizeInput = document.getElementById('size');
+                if (sizeInput) {
+                    // size 값을 m² 형식으로 변환
+                    const sizeMap = {
+                        '58': '~58m²',
+                        '74': '59~74m²',
+                        '84': '75~84m²',
+                        '104': '85~104m²',
+                        'over': '104m² 이상'
+                    };
+                    sizeInput.value = sizeMap[data.size] || data.size;
+                }
+            }
+
+            // 옵션 자동 체크는 제거 (옵션 필드가 없으므로)
+
+            // localStorage 데이터 삭제
+            localStorage.removeItem('hazacheck_calculation');
+
+            console.log('가격 시뮬레이션 데이터 자동 입력 완료:', data);
+        } catch (error) {
+            console.error('가격 시뮬레이션 데이터 파싱 오류:', error);
+        }
+    }
+}
+
 // Phone number formatting
 if (phoneInput) {
     phoneInput.addEventListener('input', function(e) {
@@ -138,30 +177,74 @@ function displayLiveInquiries(inquiries) {
         'cancelled': '#6b7280'
     };
 
-    function formatDate(dateStr) {
-        if (!dateStr) return '';
-        const date = new Date(dateStr);
-        const month = date.getMonth() + 1;
-        const day = date.getDate();
-        return `${month}월 ${day}일`;
-    }
-
     const html = inquiries.map(inquiry => `
-        <div style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px; transition: all 0.2s; cursor: pointer;" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#d1d5db';" onmouseout="this.style.background='#f9fafb'; this.style.borderColor='#e5e7eb';">
-            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+        <div class="inquiry-live-item" style="background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 10px; padding: 14px; transition: all 0.2s; cursor: pointer;" onmouseover="this.style.background='#f3f4f6'; this.style.borderColor='#d1d5db';" onmouseout="this.style.background='#f9fafb'; this.style.borderColor='#e5e7eb';">
+            <div style="display: flex; justify-content: space-between; align-items: start; gap: 12px;">
                 <div style="flex: 1; min-width: 0;">
-                    <div style="font-size: 0.95rem; font-weight: 600; color: #111827; margin-bottom: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${inquiry.apartment}</div>
+                    <div style="font-size: 0.95rem; font-weight: 600; color: #111827; margin-bottom: 6px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${inquiry.apartment}</div>
                     <div style="font-size: 0.85rem; color: #6b7280;">${inquiry.name} · ${inquiry.size}</div>
                 </div>
-                <div style="display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; background: ${statusColors[inquiry.status]}15; border-radius: 12px; font-size: 0.8rem; font-weight: 600; color: ${statusColors[inquiry.status]}; white-space: nowrap;">
+                <div style="display: inline-flex; align-items: center; gap: 4px; padding: 6px 12px; background: ${statusColors[inquiry.status]}15; border-radius: 12px; font-size: 0.8rem; font-weight: 600; color: ${statusColors[inquiry.status]}; white-space: nowrap;">
                     ${statusIcons[inquiry.status]} ${statusText[inquiry.status]}
                 </div>
             </div>
-            <div style="font-size: 0.8rem; color: #9ca3af;">${formatDate(inquiry.created_at)}</div>
         </div>
     `).join('');
 
     container.innerHTML = html;
+
+    // 자동 스크롤 시작
+    startAutoScroll();
+}
+
+// ===================================
+// Auto Scroll for Live Inquiry List
+// ===================================
+
+let scrollInterval;
+let isPaused = false;
+
+function startAutoScroll() {
+    const container = document.getElementById('liveInquiryList');
+    if (!container) return;
+
+    // 기존 interval 정리
+    if (scrollInterval) {
+        clearInterval(scrollInterval);
+    }
+
+    // 마우스 오버 시 일시정지
+    container.addEventListener('mouseenter', () => {
+        isPaused = true;
+    });
+
+    container.addEventListener('mouseleave', () => {
+        isPaused = false;
+    });
+
+    // 자동 스크롤 시작 (3초마다 아래로 이동)
+    scrollInterval = setInterval(() => {
+        if (isPaused) return;
+
+        const items = container.querySelectorAll('.inquiry-live-item');
+        if (items.length === 0) return;
+
+        // 부드러운 스크롤
+        container.scrollBy({
+            top: items[0].offsetHeight + 12, // 아이템 높이 + gap
+            behavior: 'smooth'
+        });
+
+        // 끝에 도달하면 처음으로
+        if (container.scrollTop + container.clientHeight >= container.scrollHeight - 10) {
+            setTimeout(() => {
+                container.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }, 2000); // 2초 대기 후 처음으로
+        }
+    }, 3000); // 3초마다
 }
 
 // ===================================
@@ -355,6 +438,11 @@ document.head.appendChild(style);
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Inquiries page loaded!');
+
+    // 가격 시뮬레이션 데이터 자동 입력
+    loadPriceSimulationData();
+
+    // 실시간 목록 로드
     loadLiveInquiries();
 
     // Auto refresh every 30 seconds
