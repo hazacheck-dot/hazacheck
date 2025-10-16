@@ -36,10 +36,11 @@ function loadPriceSimulationData() {
             if (data.options && data.options.length > 0) {
                 const optionCheckboxes = document.querySelectorAll('input[name="options"]');
                 data.options.forEach(option => {
-                    const optionName = option.name || option;
+                    const optionName = (option.name || option).trim();
                     optionCheckboxes.forEach(checkbox => {
-                        // 옵션 이름이 포함되어 있으면 체크
-                        if (checkbox.value.includes(optionName) || optionName.includes(checkbox.value.split('(')[0].trim())) {
+                        const checkboxOptionName = checkbox.value.split('(')[0].trim();
+                        // 옵션 이름이 일치하면 체크
+                        if (checkboxOptionName === optionName || optionName.includes(checkboxOptionName)) {
                             checkbox.checked = true;
                         }
                     });
