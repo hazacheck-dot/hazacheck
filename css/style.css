@@ -8,26 +8,33 @@
 }
 
 :root {
-    /* Colors */
-    --primary-color: #2563eb;
-    --primary-dark: #1e40af;
-    --primary-light: #3b82f6;
-    --secondary-color: #10b981;
-    --accent-color: #f59e0b;
+    /* Professional Color Palette - 전문적이고 신뢰감 있는 컬러 */
+    --primary-color: #1e3a8a;        /* Deep Navy - 깊이 있는 네이비 */
+    --primary-dark: #1e293b;         /* Darker Navy - 더 어두운 네이비 */
+    --primary-light: #3b5998;        /* Lighter Navy - 밝은 네이비 */
+    --secondary-color: #0d9488;      /* Professional Teal - 전문적인 청록색 */
+    --accent-color: #f59e0b;         /* Warm Amber - 따뜻한 호박색 */
+    --accent-gold: #eab308;          /* Gold - 골드 (신뢰감) */
 
-    --text-primary: #1f2937;
-    --text-secondary: #6b7280;
-    --text-light: #9ca3af;
+    --text-primary: #0f172a;         /* Almost Black - 거의 검정 */
+    --text-secondary: #475569;       /* Slate Gray - 슬레이트 회색 */
+    --text-light: #64748b;           /* Light Slate - 밝은 슬레이트 */
 
     --bg-white: #ffffff;
-    --bg-gray: #f9fafb;
-    --bg-dark: #111827;
+    --bg-gray-light: #f8fafc;        /* Very Light Gray - 아주 밝은 회색 */
+    --bg-gray: #f1f5f9;              /* Light Gray - 밝은 회색 */
+    --bg-dark: #0f172a;              /* Deep Dark - 깊은 어두움 */
 
-    --border-color: #e5e7eb;
+    --border-color: #e2e8f0;         /* Softer Border - 부드러운 테두리 */
 
-    --severity-high: #ef4444;
-    --severity-medium: #f59e0b;
-    --severity-low: #3b82f6;
+    --severity-high: #dc2626;        /* Red - 빨강 */
+    --severity-medium: #f59e0b;      /* Amber - 호박색 */
+    --severity-low: #0d9488;         /* Teal - 청록색 */
+
+    /* Gradient Colors */
+    --gradient-primary: linear-gradient(135deg, #1e3a8a 0%, #3b5998 100%);
+    --gradient-secondary: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%);
+    --gradient-accent: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
 
     /* Spacing */
     --section-padding: 100px;
@@ -1537,7 +1544,7 @@ h4 { font-size: 1.25rem; }
    =================================== */
 .equipment-section {
     padding: var(--section-padding) 0;
-    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 50%, #2563eb 100%);
+    background: linear-gradient(135deg, #1e3a8a 0%, #2c5282 50%, #3b5998 100%);
     color: white;
     position: relative;
     overflow: hidden;
@@ -1656,7 +1663,7 @@ h4 { font-size: 1.25rem; }
 
 /* Company Description Box */
 .company-description-box {
-    background: linear-gradient(135deg, var(--primary-color), #1e40af);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
     padding: 50px;
     border-radius: 20px;
     margin-bottom: 40px;
@@ -1865,7 +1872,7 @@ h4 { font-size: 1.25rem; }
 }
 
 .testimonial-type {
-    background: linear-gradient(135deg, var(--primary-color), #1e40af);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
     color: white;
     padding: 4px 12px;
     border-radius: 12px;
@@ -2834,7 +2841,7 @@ h4 { font-size: 1.25rem; }
     .calculator-header {
         margin-bottom: 24px !important;
         text-align: center;
-        background: linear-gradient(135deg, #2563eb, #1d4ed8);
+        background: linear-gradient(135deg, #1e3a8a, #3b5998);
         padding: 24px 20px;
         border-radius: 16px;
         color: white;
@@ -3293,7 +3300,7 @@ h4 { font-size: 1.25rem; }
 
     .option-recommended {
         background: linear-gradient(135deg, #eff6ff, #dbeafe) !important;
-        border: 2px solid #2563eb !important;
+        border: 2px solid #1e3a8a !important;
         box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2) !important;
     }
 
@@ -3314,8 +3321,8 @@ h4 { font-size: 1.25rem; }
     }
 
     .option-item:has(.option-checkbox:checked) {
-        background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
-        border-color: #2563eb !important;
+        background: linear-gradient(135deg, #1e3a8a, #3b5998) !important;
+        border-color: #1e3a8a !important;
         box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4) !important;
     }
 
@@ -3343,7 +3350,7 @@ h4 { font-size: 1.25rem; }
     .option-price {
         font-size: 1.05rem !important;
         font-weight: 800 !important;
-        color: #2563eb !important;
+        color: #1e3a8a !important;
         white-space: nowrap;
         align-self: flex-end;
     }
@@ -3417,8 +3424,8 @@ h4 { font-size: 1.25rem; }
     }
 
     .size-option.active {
-        background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
-        border-color: #2563eb !important;
+        background: linear-gradient(135deg, #1e3a8a, #3b5998) !important;
+        border-color: #1e3a8a !important;
         box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4) !important;
     }
 
