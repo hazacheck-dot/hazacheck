@@ -122,12 +122,27 @@
                                 <label style="display: block; margin-bottom: 10px; font-weight: 700; color: #111827; font-size: 1rem;">희망 점검일 <span style="color: #ef4444;">*</span></label>
                                 <div style="display: grid; grid-template-columns: 1fr auto; gap: 12px;">
                                     <input type="date" id="move_in_date" name="move_in_date" required style="width: 100%; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.2s; font-family: 'Source Han Sans KR', sans-serif;">
-                                    <select id="preferred_time" name="preferred_time" required style="padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; background: white; cursor: pointer; font-family: 'Source Han Sans KR', sans-serif; font-weight: 500;">
+                                    <select id="preferred_time" name="preferred_time" required style="padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; background: white; cursor: pointer; font-family: 'Source Han Sans KR', sans-serif; font-weight: 500; min-width: 120px;">
                                         <option value="">시간 선택</option>
-                                        <option value="오전">오전</option>
-                                        <option value="오후">오후</option>
+                                        <option value="09:00">09:00</option>
+                                        <option value="09:30">09:30</option>
+                                        <option value="10:00">10:00</option>
+                                        <option value="10:30">10:30</option>
+                                        <option value="11:00">11:00</option>
+                                        <option value="11:30">11:30</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="13:30">13:30</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="14:30">14:30</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="15:30">15:30</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="16:30">16:30</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="17:30">17:30</option>
                                     </select>
                                 </div>
+                                <p style="margin: 8px 0 0 0; font-size: 0.85rem; color: #6b7280;">💡 점검은 평균 2시간 소요됩니다. (점심시간: 12:00~13:00)</p>
                             </div>
 
                             <!-- 추가 옵션 (선택사항) -->
