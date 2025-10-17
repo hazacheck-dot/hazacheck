@@ -340,11 +340,20 @@ function openLookupModal() {
 function closeLookupModal() {
     document.getElementById('lookupModal').style.display = 'none';
     document.getElementById('lookupForm').reset();
-    document.getElementById('lookupResult').style.display = 'none';
+}
+
+function openResultModal() {
+    document.getElementById('resultModal').style.display = 'flex';
+}
+
+function closeResultModal() {
+    document.getElementById('resultModal').style.display = 'none';
 }
 
 window.openLookupModal = openLookupModal;
 window.closeLookupModal = closeLookupModal;
+window.openResultModal = openResultModal;
+window.closeResultModal = closeResultModal;
 
 // Lookup phone formatting
 const lookupPhone = document.getElementById('lookupPhone');
@@ -396,7 +405,12 @@ async function handleLookup(e) {
         const result = await response.json();
 
         if (response.ok && result.success) {
+            // 조회 모달 닫기
+            closeLookupModal();
+            
+            // 결과 모달 열고 데이터 표시
             displayLookupResult(result.data);
+            openResultModal();
         } else {
             alert(result.message || '전화번호 또는 비밀번호가 일치하지 않습니다.');
         }
@@ -409,15 +423,15 @@ async function handleLookup(e) {
 window.handleLookup = handleLookup;
 
 function displayLookupResult(inquiries) {
-    const resultDiv = document.getElementById('lookupResult');
-    resultDiv.style.display = 'block';
+    const resultContent = document.getElementById('resultContent');
+    const resultModalTitle = document.getElementById('resultModalTitle');
 
     if (inquiries.length === 0) {
-        resultDiv.innerHTML = `
-            <div style="text-align: center; padding: 30px;">
-                <div style="font-size: 3rem; margin-bottom: 12px;">📭</div>
-                <h4 style="margin: 0 0 8px 0; color: #374151;">문의 내역이 없습니다</h4>
-                <p style="margin: 0; color: #6b7280; font-size: 0.95rem;">입력하신 정보로 등록된 문의가 없습니다.</p>
+        resultContent.innerHTML = `
+            <div style="text-align: center; padding: 60px 30px;">
+                <div style="font-size: 4rem; margin-bottom: 20px; opacity: 0.5;">📭</div>
+                <h3 style="margin: 0 0 12px 0; color: #374151; font-size: 1.3rem;">문의 내역이 없습니다</h3>
+                <p style="margin: 0; color: #6b7280; font-size: 1rem;">입력하신 정보로 등록된 문의가 없습니다.</p>
             </div>
         `;
         return;
@@ -426,7 +440,7 @@ function displayLookupResult(inquiries) {
     const statusIcons = {
         'pending': '🔵',
         'answered': '✅',
-        'completed': '✅',
+        'completed': '🎉',
         'cancelled': '❌'
     };
 
@@ -444,38 +458,136 @@ function displayLookupResult(inquiries) {
         'cancelled': '#6b7280'
     };
 
-    const html = `
-        <div style="margin-bottom: 16px; padding-bottom: 16px; border-bottom: 2px solid #e5e7eb;">
-            <h4 style="margin: 0; color: #111827; font-size: 1.1rem;">📋 내 문의 내역 (${inquiries.length}건)</h4>
-        </div>
-        ${inquiries.map(inquiry => `
-            <div style="background: white; border: 2px solid #e5e7eb; border-radius: 10px; padding: 16px; margin-bottom: 12px;">
-                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
-                    <div>
-                        <div style="display: inline-block; background: ${statusColors[inquiry.status]}; color: white; padding: 5px 12px; border-radius: 16px; font-size: 0.8rem; font-weight: 600; margin-bottom: 8px;">
-                            ${statusIcons[inquiry.status]} ${statusText[inquiry.status]}
+    const statusBgColors = {
+        'pending': '#eff6ff',
+        'answered': '#ecfdf5',
+        'completed': '#ecfdf5',
+        'cancelled': '#f3f4f6'
+    };
+
+    // 타이틀 업데이트
+    resultModalTitle.innerHTML = `📋 <span>내 문의 내역 <span style="font-size: 1.3rem; opacity: 0.9;">(${inquiries.length}건)</span></span>`;
+
+    const html = inquiries.map((inquiry, index) => {
+        // 옵션 파싱
+        let optionsHtml = '';
+        if (inquiry.options && inquiry.options !== '[]') {
+            try {
+                const options = typeof inquiry.options === 'string' ? JSON.parse(inquiry.options) : inquiry.options;
+                if (Array.isArray(options) && options.length > 0) {
+                    optionsHtml = `
+                        <div style="margin-top: 16px; padding-top: 16px; border-top: 1px solid #e5e7eb;">
+                            <div style="font-weight: 600; color: #374151; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                                <span>⭐</span>
+                                <span>선택 옵션</span>
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                                ${options.map(opt => `
+                                    <div style="background: #f3f4f6; padding: 6px 12px; border-radius: 8px; font-size: 0.9rem; color: #374151;">
+                                        ${opt}
+                                    </div>
+                                `).join('')}
+                            </div>
                         </div>
-                        <div style="font-size: 0.85rem; color: #6b7280;">등록일: ${inquiry.created_at}</div>
+                    `;
+                }
+            } catch (e) {
+                console.error('옵션 파싱 오류:', e);
+            }
+        }
+
+        return `
+            <div style="background: linear-gradient(to bottom, ${statusBgColors[inquiry.status]}, white); border: 2px solid #e5e7eb; border-radius: 16px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); transition: all 0.3s;" onmouseover="this.style.borderColor='${statusColors[inquiry.status]}'; this.style.boxShadow='0 4px 16px rgba(0,0,0,0.12)'" onmouseout="this.style.borderColor='#e5e7eb'; this.style.boxShadow='0 2px 8px rgba(0,0,0,0.06)'">
+                <!-- 헤더: 상태 + 날짜 -->
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px;">
+                    <div style="display: inline-flex; align-items: center; gap: 8px; background: ${statusColors[inquiry.status]}; color: white; padding: 10px 18px; border-radius: 20px; font-size: 1rem; font-weight: 700; box-shadow: 0 2px 8px ${statusColors[inquiry.status]}40;">
+                        <span style="font-size: 1.2rem;">${statusIcons[inquiry.status]}</span>
+                        <span>${statusText[inquiry.status]}</span>
+                    </div>
+                    <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
+                        <div style="font-size: 0.85rem; color: #6b7280; font-weight: 500;">등록일</div>
+                        <div style="font-size: 0.95rem; color: #111827; font-weight: 600;">${inquiry.created_at}</div>
                     </div>
                 </div>
 
-                <div style="display: grid; gap: 8px; font-size: 0.95rem;">
-                    <div><strong style="color: #6b7280; min-width: 80px; display: inline-block;">아파트:</strong> <span style="color: #111827; font-weight: 500;">${inquiry.apartment}</span></div>
-                    <div><strong style="color: #6b7280; min-width: 80px; display: inline-block;">평형:</strong> ${inquiry.size}</div>
-                    <div><strong style="color: #6b7280; min-width: 80px; display: inline-block;">희망일:</strong> ${inquiry.move_in_date || '-'}</div>
-                    ${inquiry.message ? `<div style="padding-top: 8px; border-top: 1px solid #e5e7eb;"><strong style="color: #6b7280;">문의내용:</strong><br><span style="color: #374151; line-height: 1.6; white-space: pre-wrap;">${inquiry.message}</span></div>` : ''}
-                    ${inquiry.admin_response ? `
-                        <div style="margin-top: 8px; padding: 12px; background: #ecfdf5; border-left: 3px solid #10b981; border-radius: 6px;">
-                            <div style="font-weight: 600; color: #059669; margin-bottom: 6px;">💬 관리자 답변</div>
-                            <div style="color: #065f46; line-height: 1.6; white-space: pre-wrap;">${inquiry.admin_response}</div>
+                <!-- 문의 정보 그리드 -->
+                <div style="display: grid; gap: 14px; font-size: 0.98rem; background: white; padding: 20px; border-radius: 12px; border: 1px solid #e5e7eb;">
+                    <div style="display: flex; align-items: start; gap: 12px;">
+                        <div style="min-width: 70px; font-weight: 600; color: #6b7280; display: flex; align-items: center; gap: 6px;">
+                            <span style="font-size: 1.1rem;">🏢</span>
+                            <span>아파트</span>
+                        </div>
+                        <div style="color: #111827; font-weight: 600; line-height: 1.5;">${inquiry.apartment}</div>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="min-width: 70px; font-weight: 600; color: #6b7280; display: flex; align-items: center; gap: 6px;">
+                            <span style="font-size: 1.1rem;">📐</span>
+                            <span>평형</span>
+                        </div>
+                        <div style="color: #111827; font-weight: 500;">${inquiry.size}</div>
+                    </div>
+                    
+                    ${inquiry.apartment_unit ? `
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="min-width: 70px; font-weight: 600; color: #6b7280; display: flex; align-items: center; gap: 6px;">
+                                <span style="font-size: 1.1rem;">🚪</span>
+                                <span>동·호수</span>
+                            </div>
+                            <div style="color: #111827; font-weight: 500;">${inquiry.apartment_unit}</div>
+                        </div>
+                    ` : ''}
+                    
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="min-width: 70px; font-weight: 600; color: #6b7280; display: flex; align-items: center; gap: 6px;">
+                            <span style="font-size: 1.1rem;">📅</span>
+                            <span>입주일</span>
+                        </div>
+                        <div style="color: #111827; font-weight: 500;">${inquiry.move_in_date || '-'}</div>
+                    </div>
+                    
+                    ${inquiry.preferred_time ? `
+                        <div style="display: flex; align-items: center; gap: 12px;">
+                            <div style="min-width: 70px; font-weight: 600; color: #6b7280; display: flex; align-items: center; gap: 6px;">
+                                <span style="font-size: 1.1rem;">⏰</span>
+                                <span>희망시간</span>
+                            </div>
+                            <div style="color: #111827; font-weight: 500;">${inquiry.preferred_time}</div>
+                        </div>
+                    ` : ''}
+                    
+                    ${optionsHtml}
+                    
+                    ${inquiry.message ? `
+                        <div style="margin-top: 8px; padding-top: 16px; border-top: 1px solid #e5e7eb;">
+                            <div style="font-weight: 600; color: #374151; margin-bottom: 10px; display: flex; align-items: center; gap: 6px;">
+                                <span style="font-size: 1.1rem;">💬</span>
+                                <span>문의 내용</span>
+                            </div>
+                            <div style="color: #374151; line-height: 1.7; white-space: pre-wrap; padding: 14px; background: #f9fafb; border-radius: 8px; border-left: 3px solid #1e3a8a;">${inquiry.message}</div>
                         </div>
                     ` : ''}
                 </div>
-            </div>
-        `).join('')}
-    `;
 
-    resultDiv.innerHTML = html;
+                <!-- 관리자 답변 -->
+                ${inquiry.admin_response ? `
+                    <div style="margin-top: 16px; padding: 18px; background: linear-gradient(135deg, #ecfdf5, #d1fae5); border: 2px solid #10b981; border-radius: 12px; box-shadow: 0 2px 8px rgba(16,185,129,0.15);">
+                        <div style="font-weight: 700; color: #059669; margin-bottom: 10px; font-size: 1.05rem; display: flex; align-items: center; gap: 8px;">
+                            <span style="font-size: 1.3rem;">✅</span>
+                            <span>관리자 답변</span>
+                        </div>
+                        <div style="color: #065f46; line-height: 1.7; white-space: pre-wrap; font-size: 0.98rem;">${inquiry.admin_response}</div>
+                    </div>
+                ` : `
+                    <div style="margin-top: 16px; padding: 14px; background: #fffbeb; border: 1px dashed #f59e0b; border-radius: 10px; text-align: center; color: #92400e; font-size: 0.9rem;">
+                        ⏳ 관리자 답변 대기 중입니다. 빠른 시일 내에 연락드리겠습니다.
+                    </div>
+                `}
+            </div>
+        `;
+    }).join('');
+
+    resultContent.innerHTML = html;
 }
 
 // ===================================

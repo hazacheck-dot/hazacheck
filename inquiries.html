@@ -248,35 +248,66 @@
         </div>
     </section>
 
-    <!-- Lookup Modal -->
-    <div id="lookupModal" class="modal" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); overflow: auto;">
-        <div class="modal-content" style="background-color: white; margin: 10% auto; padding: 0; border-radius: 16px; width: 90%; max-width: 500px; box-shadow: 0 10px 40px rgba(0,0,0,0.3);">
-            <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #3b5998); color: white; padding: 24px; border-radius: 16px 16px 0 0; display: flex; justify-content: space-between; align-items: center;">
-                <h2 style="margin: 0; font-size: 1.5rem; font-weight: 700;">🔍 문의 조회</h2>
-                <span onclick="closeLookupModal()" style="font-size: 2rem; font-weight: bold; cursor: pointer; color: white; opacity: 0.9; transition: opacity 0.2s;">&times;</span>
+    <!-- Lookup Modal (입력용) -->
+    <div id="lookupModal" class="modal" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); overflow: auto; animation: fadeIn 0.2s ease;">
+        <div class="modal-content" style="background-color: white; margin: 10% auto; padding: 0; border-radius: 20px; width: 90%; max-width: 480px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideDown 0.3s ease;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #3b5998); color: white; padding: 28px; border-radius: 20px 20px 0 0; display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="margin: 0; font-size: 1.5rem; font-weight: 700; display: flex; align-items: center; gap: 10px;">
+                    🔍 <span>문의 조회</span>
+                </h2>
+                <span onclick="closeLookupModal()" style="font-size: 2rem; font-weight: bold; cursor: pointer; color: white; opacity: 0.9; transition: opacity 0.2s; line-height: 1;">&times;</span>
             </div>
-            <div class="modal-body" style="padding: 30px;">
+            <div class="modal-body" style="padding: 32px;">
                 <form id="lookupForm" onsubmit="handleLookup(event)">
                     <div style="display: grid; gap: 20px;">
                         <div>
-                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #111827;">연락처</label>
-                            <input type="tel" id="lookupPhone" required placeholder="010-0000-0000" style="width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #111827; font-size: 0.95rem;">연락처</label>
+                            <input type="tel" id="lookupPhone" required placeholder="010-0000-0000" style="width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.2s;" onfocus="this.style.borderColor='#1e3a8a'; this.style.boxShadow='0 0 0 4px rgba(30,58,138,0.1)'" onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
                         </div>
                         <div>
-                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #111827;">비밀번호 (숫자 4자리)</label>
-                            <input type="password" id="lookupPassword" required placeholder="****" maxlength="4" pattern="[0-9]{4}" inputmode="numeric" style="width: 100%; padding: 12px 16px; border: 2px solid #e5e7eb; border-radius: 8px; font-size: 1rem;">
+                            <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #111827; font-size: 0.95rem;">비밀번호 (숫자 4자리)</label>
+                            <input type="password" id="lookupPassword" required placeholder="••••" maxlength="4" pattern="[0-9]{4}" inputmode="numeric" style="width: 100%; padding: 14px 16px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1.2rem; letter-spacing: 4px; transition: all 0.2s;" onfocus="this.style.borderColor='#1e3a8a'; this.style.boxShadow='0 0 0 4px rgba(30,58,138,0.1)'" onblur="this.style.borderColor='#e5e7eb'; this.style.boxShadow='none'">
                         </div>
                     </div>
-                    <button type="submit" style="width: 100%; margin-top: 24px; padding: 14px; background: #1e3a8a; color: white; border: none; border-radius: 8px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s;">조회하기</button>
+                    <button type="submit" style="width: 100%; margin-top: 28px; padding: 16px; background: linear-gradient(135deg, #1e3a8a, #3b5998); color: white; border: none; border-radius: 10px; font-size: 1.1rem; font-weight: 700; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 12px rgba(30,58,138,0.3);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 16px rgba(30,58,138,0.4)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 12px rgba(30,58,138,0.3)'">조회하기</button>
                 </form>
+            </div>
+        </div>
+    </div>
 
-                <!-- 조회 결과 -->
-                <div id="lookupResult" style="display: none; margin-top: 24px; padding: 20px; background: #f9fafb; border-radius: 8px; border: 1px solid #e5e7eb;">
+    <!-- Result Modal (결과 전용) -->
+    <div id="resultModal" class="modal" style="display: none; position: fixed; z-index: 10001; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(4px); overflow: auto; animation: fadeIn 0.2s ease;">
+        <div class="modal-content" style="background-color: white; margin: 5% auto; padding: 0; border-radius: 24px; width: 90%; max-width: 720px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); animation: slideDown 0.3s ease; max-height: 85vh; display: flex; flex-direction: column;">
+            <div class="modal-header" style="background: linear-gradient(135deg, #1e3a8a, #3b5998); color: white; padding: 28px 32px; border-radius: 24px 24px 0 0; display: flex; justify-content: space-between; align-items: center; flex-shrink: 0;">
+                <h2 id="resultModalTitle" style="margin: 0; font-size: 1.6rem; font-weight: 700; display: flex; align-items: center; gap: 12px;">
+                    📋 <span>내 문의 내역</span>
+                </h2>
+                <span onclick="closeResultModal()" style="font-size: 2rem; font-weight: bold; cursor: pointer; color: white; opacity: 0.9; transition: opacity 0.2s; line-height: 1;">&times;</span>
+            </div>
+            <div class="modal-body" style="padding: 32px; overflow-y: auto; flex: 1;">
+                <div id="resultContent">
                     <!-- JavaScript로 동적 생성 -->
                 </div>
             </div>
         </div>
     </div>
+
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideDown {
+            from { 
+                opacity: 0;
+                transform: translateY(-20px); 
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0); 
+            }
+        }
+    </style>
 
     <!-- Footer -->
     <footer class="footer">
