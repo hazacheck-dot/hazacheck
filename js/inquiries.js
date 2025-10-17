@@ -241,7 +241,7 @@ function displayLiveInquiries(inquiries) {
     };
 
     const statusColors = {
-        'pending': '#2563eb',
+        'pending': '#1e3a8a',
         'answered': '#10b981',
         'completed': '#10b981',
         'cancelled': '#6b7280'
@@ -452,7 +452,7 @@ function displayLookupResult(inquiries) {
     };
 
     const statusColors = {
-        'pending': '#2563eb',
+        'pending': '#1e3a8a',
         'answered': '#10b981',
         'completed': '#10b981',
         'cancelled': '#6b7280'
@@ -597,8 +597,8 @@ function displayLookupResult(inquiries) {
 document.querySelectorAll('input:not([type="checkbox"]), select, textarea').forEach(input => {
     input.addEventListener('focus', function() {
         if (this.style.borderColor !== '#ef4444') {
-            this.style.borderColor = '#2563eb';
-            this.style.boxShadow = '0 0 0 4px rgba(37, 99, 235, 0.1)';
+            this.style.borderColor = '#1e3a8a';
+            this.style.boxShadow = '0 0 0 4px rgba(30, 58, 138, 0.1)';
         }
     });
 
@@ -631,9 +631,9 @@ document.addEventListener('change', function(e) {
     if (e.target.classList.contains('option-checkbox')) {
         const card = e.target.closest('.option-card');
         if (e.target.checked) {
-            card.style.borderColor = '#2563eb';
+            card.style.borderColor = '#1e3a8a';
             card.style.background = '#eff6ff';
-            card.style.boxShadow = '0 4px 12px rgba(37, 99, 235, 0.15)';
+            card.style.boxShadow = '0 4px 12px rgba(30, 58, 138, 0.15)';
         } else {
             card.style.borderColor = '#e5e7eb';
             card.style.background = 'white';
