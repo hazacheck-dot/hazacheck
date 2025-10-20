@@ -643,6 +643,140 @@ document.addEventListener('change', function(e) {
 });
 
 // ===================================
+// Terms Modal (약관 모달)
+// ===================================
+
+const termsData = {
+    privacy: {
+        title: '📋 개인정보 수집 및 이용에 대한 안내',
+        content: `
+<div style="margin-bottom: 24px;">
+    <h3 style="font-size: 1.15rem; font-weight: 700; color: #111827; margin-bottom: 12px;">1. 수집하는 개인정보 항목</h3>
+    <p style="margin-bottom: 8px;">하자체크는 상담 및 점검 서비스 제공을 위해 아래와 같은 개인정보를 수집하고 있습니다:</p>
+    <ul style="padding-left: 20px; line-height: 1.8;">
+        <li><strong>필수항목</strong>: 성명, 연락처(휴대전화), 아파트명, 평형/타입, 동·호수, 희망 점검일, 조회용 비밀번호</li>
+        <li><strong>선택항목</strong>: 추가 옵션, 문의 내용</li>
+    </ul>
+</div>
+
+<div style="margin-bottom: 24px;">
+    <h3 style="font-size: 1.15rem; font-weight: 700; color: #111827; margin-bottom: 12px;">2. 개인정보의 수집 및 이용목적</h3>
+    <ul style="padding-left: 20px; line-height: 1.8;">
+        <li>하자 점검 서비스 상담 및 예약</li>
+        <li>점검 일정 조율 및 안내</li>
+        <li>서비스 이용 관련 연락 및 공지사항 전달</li>
+        <li>본인 확인 및 문의 내역 조회</li>
+        <li>고객 문의사항 처리</li>
+    </ul>
+</div>
+
+<div style="margin-bottom: 24px;">
+    <h3 style="font-size: 1.15rem; font-weight: 700; color: #111827; margin-bottom: 12px;">3. 개인정보의 보유 및 이용기간</h3>
+    <p style="margin-bottom: 8px;">원칙적으로 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다.</p>
+    <ul style="padding-left: 20px; line-height: 1.8;">
+        <li><strong>서비스 이용 기록</strong>: 서비스 제공 완료 후 3년 보관 (전자상거래법)</li>
+        <li><strong>상담 문의 내역</strong>: 상담 완료 후 3년 보관</li>
+        <li>단, 관계법령의 규정에 의하여 보존할 필요가 있는 경우 법령에서 정한 기간 동안 보관</li>
+    </ul>
+</div>
+
+<div style="margin-bottom: 24px;">
+    <h3 style="font-size: 1.15rem; font-weight: 700; color: #111827; margin-bottom: 12px;">4. 개인정보 제공 거부 권리</h3>
+    <p>귀하는 개인정보 제공을 거부할 권리가 있습니다. 다만, 필수항목 제공을 거부하실 경우 서비스 이용이 제한될 수 있습니다.</p>
+</div>
+
+<div style="background: #f8fafc; padding: 16px; border-radius: 10px; border-left: 4px solid #1e3a8a; margin-top: 20px;">
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7;">
+        <strong>※ 본 동의는 상담 및 서비스 제공을 위한 필수 동의입니다.</strong><br>
+        동의하지 않으시면 서비스 이용이 불가합니다.
+    </p>
+</div>
+        `
+    },
+    marketing: {
+        title: '📢 마케팅 활용 및 광고 수신 동의',
+        content: `
+<div style="margin-bottom: 24px;">
+    <h3 style="font-size: 1.15rem; font-weight: 700; color: #111827; margin-bottom: 12px;">1. 마케팅 활용 목적</h3>
+    <p style="margin-bottom: 8px;">하자체크는 고객님께 더 나은 서비스 제공을 위해 아래와 같은 목적으로 개인정보를 활용합니다:</p>
+    <ul style="padding-left: 20px; line-height: 1.8;">
+        <li>신규 서비스 및 이벤트 안내</li>
+        <li>할인 프로모션 및 특별 혜택 제공</li>
+        <li>계절별 점검 서비스 안내</li>
+        <li>고객 맞춤형 정보 제공</li>
+    </ul>
+</div>
+
+<div style="margin-bottom: 24px;">
+    <h3 style="font-size: 1.15rem; font-weight: 700; color: #111827; margin-bottom: 12px;">2. 광고 수신 방법</h3>
+    <ul style="padding-left: 20px; line-height: 1.8;">
+        <li>SMS 및 문자 메시지</li>
+        <li>카카오톡 알림톡</li>
+        <li>이메일</li>
+        <li>전화 안내</li>
+    </ul>
+</div>
+
+<div style="margin-bottom: 24px;">
+    <h3 style="font-size: 1.15rem; font-weight: 700; color: #111827; margin-bottom: 12px;">3. 보유 및 이용기간</h3>
+    <p>동의일로부터 회원 탈퇴 또는 동의 철회 시까지 보관 및 이용됩니다.</p>
+</div>
+
+<div style="margin-bottom: 24px;">
+    <h3 style="font-size: 1.15rem; font-weight: 700; color: #111827; margin-bottom: 12px;">4. 동의 거부 및 철회 권리</h3>
+    <p style="margin-bottom: 8px;">귀하는 마케팅 활용 및 광고 수신에 대한 동의를 거부하거나 철회할 권리가 있습니다:</p>
+    <ul style="padding-left: 20px; line-height: 1.8;">
+        <li>동의하지 않아도 기본 서비스 이용에는 제한이 없습니다</li>
+        <li>언제든지 고객센터(010-2900-5200) 또는 이메일(hazacheck@gmail.com)을 통해 철회 가능합니다</li>
+        <li>수신 거부 의사를 밝히시면 즉시 발송이 중단됩니다</li>
+    </ul>
+</div>
+
+<div style="background: #fffbeb; padding: 16px; border-radius: 10px; border-left: 4px solid #f59e0b; margin-top: 20px;">
+    <p style="margin: 0; font-size: 0.95rem; line-height: 1.7;">
+        <strong>※ 본 동의는 선택사항입니다.</strong><br>
+        동의하지 않으셔도 서비스 이용에는 제한이 없습니다.
+    </p>
+</div>
+        `
+    }
+};
+
+function openTermsModal(type) {
+    const modal = document.getElementById('termsModal');
+    const title = document.getElementById('termsModalTitle');
+    const content = document.getElementById('termsContent');
+
+    if (!modal || !title || !content) return;
+
+    const data = termsData[type];
+    if (!data) return;
+
+    title.textContent = data.title;
+    content.innerHTML = data.content;
+    modal.style.display = 'flex';
+}
+
+function closeTermsModal() {
+    const modal = document.getElementById('termsModal');
+    if (modal) {
+        modal.style.display = 'none';
+    }
+}
+
+// 전역 함수로 등록
+window.openTermsModal = openTermsModal;
+window.closeTermsModal = closeTermsModal;
+
+// 모달 외부 클릭 시 닫기
+window.addEventListener('click', function(event) {
+    const termsModal = document.getElementById('termsModal');
+    if (event.target === termsModal) {
+        closeTermsModal();
+    }
+});
+
+// ===================================
 // Initialize
 // ===================================
 
