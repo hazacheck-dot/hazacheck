@@ -1,4 +1,32 @@
 // ===================================
+// Date Formatting Utility
+// ===================================
+
+function formatDateTime(dateString) {
+    if (!dateString) return '-';
+
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${year}-${month}-${day} ${hours}:${minutes}`;
+}
+
+function formatDate(dateString) {
+    if (!dateString) return '-';
+
+    const date = new Date(dateString);
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+}
+
+// ===================================
 // Inquiry Form Handling
 // ===================================
 
@@ -505,8 +533,8 @@ function displayLookupResult(inquiries) {
                         <span>${statusText[inquiry.status]}</span>
                     </div>
                     <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px;">
-                        <div style="font-size: 0.85rem; color: #6b7280; font-weight: 500;">등록일</div>
-                        <div style="font-size: 0.95rem; color: #111827; font-weight: 600;">${inquiry.created_at}</div>
+                        <div style="font-size: 0.85rem; color: #6b7280; font-weight: 500;">문의 등록일</div>
+                        <div style="font-size: 0.95rem; color: #111827; font-weight: 600;">${formatDateTime(inquiry.created_at)}</div>
                     </div>
                 </div>
 
@@ -541,9 +569,9 @@ function displayLookupResult(inquiries) {
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div style="min-width: 70px; font-weight: 600; color: #6b7280; display: flex; align-items: center; gap: 6px;">
                             <span style="font-size: 1.1rem;">📅</span>
-                            <span>입주일</span>
+                            <span>희망일</span>
                         </div>
-                        <div style="color: #111827; font-weight: 500;">${inquiry.move_in_date || '-'}</div>
+                        <div style="color: #111827; font-weight: 500;">${formatDate(inquiry.move_in_date)}</div>
                     </div>
                     
                     ${inquiry.preferred_time ? `
