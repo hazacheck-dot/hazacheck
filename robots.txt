@@ -1,7 +1,10 @@
 # robots.txt for hazacheck.vercel.app
+# 하자체크 - 입주 전 아파트 하자 점검 전문
+
 User-agent: *
 Allow: /
 Disallow: /api/
+Disallow: /admin/
 
 # Sitemap
 Sitemap: https://hazacheck.vercel.app/sitemap.xml
@@ -13,6 +16,18 @@ Allow: /
 User-agent: Googlebot-Image
 Allow: /images/
 
-# Prevent crawling of admin pages
-Disallow: /admin
+# Naver Search Bot
+User-agent: Yeti
+Allow: /
+
+User-agent: NaverBot
+Allow: /
+
+# Daum Search Bot
+User-agent: Daumoa
+Allow: /
+
+# Bing
+User-agent: Bingbot
+Allow: /
 
