@@ -43,6 +43,17 @@ async function sendTelegramNotification(inquiryData) {
   }
 }
 
+function formatDate(dateString) {
+  if (!dateString) return '-';
+
+  const date = new Date(dateString);
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+
+  return `${year}-${month}-${day}`;
+}
+
 function formatInquiryMessage(inquiry) {
   const {
     id,
@@ -84,7 +95,7 @@ function formatInquiryMessage(inquiry) {
 ${email ? `📧 <b>이메일:</b> ${email}` : ''}
 🏠 <b>아파트:</b> ${apartment}
 📐 <b>세대 크기:</b> ${size}타입
-📅 <b>희망 점검일:</b> ${move_in_date}
+📅 <b>희망 점검일:</b> ${formatDate(move_in_date)}
 ⏰ <b>접수 시간:</b> ${new Date(created_at).toLocaleString('ko-KR')}
 ${optionsText}
 
