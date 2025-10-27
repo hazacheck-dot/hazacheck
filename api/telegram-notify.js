@@ -54,6 +54,27 @@ function formatDate(dateString) {
   return `${year}-${month}-${day}`;
 }
 
+function formatKoreanDateTime(dateString) {
+  if (!dateString) return '-';
+
+  const date = new Date(dateString);
+
+  // 한국 시간대(Asia/Seoul)로 변환
+  const koreanTime = new Date(date.toLocaleString('en-US', { timeZone: 'Asia/Seoul' }));
+
+  const year = koreanTime.getFullYear();
+  const month = String(koreanTime.getMonth() + 1).padStart(2, '0');
+  const day = String(koreanTime.getDate()).padStart(2, '0');
+  const hours = String(koreanTime.getHours()).padStart(2, '0');
+  const minutes = String(koreanTime.getMinutes()).padStart(2, '0');
+  const seconds = String(koreanTime.getSeconds()).padStart(2, '0');
+
+  const ampm = koreanTime.getHours() >= 12 ? '오후' : '오전';
+  const displayHour = koreanTime.getHours() % 12 || 12;
+
+  return `${year}. ${month}. ${day}. ${ampm} ${displayHour}:${minutes}:${seconds}`;
+}
+
 function formatInquiryMessage(inquiry) {
   const {
     id,
@@ -97,7 +118,7 @@ ${email ? `📧 <b>이메일:</b> ${email}` : ''}
 🏠 <b>아파트:</b> ${apartment}
 📐 <b>세대 크기:</b> ${size}타입
 📅 <b>희망 점검일:</b> ${formatDate(move_in_date)}${preferred_time ? ` ${preferred_time}` : ''}
-⏰ <b>접수 시간:</b> ${new Date(created_at).toLocaleString('ko-KR')}
+⏰ <b>접수 시간:</b> ${formatKoreanDateTime(created_at)}
 ${optionsText}
 
 💬 <b>문의 내용:</b>
@@ -139,7 +160,7 @@ async function sendStatusChangeNotification(inquiryId, oldStatus, newStatus, adm
 🆔 <b>문의 ID:</b> #${inquiryId}
 📊 <b>상태 변경:</b> ${statusEmoji[oldStatus]} ${statusText[oldStatus]} → ${statusEmoji[newStatus]} ${statusText[newStatus]}
 ${adminNote ? `📝 <b>관리자 메모:</b> ${adminNote}` : ''}
-⏰ <b>변경 시간:</b> ${new Date().toLocaleString('ko-KR')}
+⏰ <b>변경 시간:</b> ${formatKoreanDateTime(new Date().toISOString())}
 
 🔗 <b>관리자 페이지:</b> https://www.hazacheck.com/admin.html
     `.trim();
