@@ -2721,22 +2721,30 @@ h4 { font-size: 1.25rem; }
 
     /* Floating Buttons Mobile */
     .floating-kakao {
-        bottom: 80px;
+        bottom: 20px;
         right: 20px;
-        width: 64px;
-        height: 64px;
+        width: 60px;
+        height: 60px;
+    }
+
+    .floating-phone {
+        bottom: 90px;
+        right: 20px;
+        width: 60px;
+        height: 60px;
     }
 
     .floating-inquiry {
-        bottom: 155px;
+        bottom: 160px;
         right: 20px;
-        width: 64px;
-        height: 64px;
+        width: 60px;
+        height: 60px;
     }
 
     .kakao-text,
+    .phone-text,
     .inquiry-text {
-        font-size: 0.65rem;
+        font-size: 0.6rem;
     }
 
     .scroll-to-top {
