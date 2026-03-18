@@ -68,7 +68,7 @@
             "closes": "18:00"
         },
         "sameAs": [
-            "https://open.kakao.com/o/s84OO5Th"
+            "http://pf.kakao.com/_lxoxaHn/chat"
         ],
         "priceRange": "₩₩",
         "areaServed": {
@@ -147,7 +147,7 @@
                     당신의 새 집을 완벽하게 점검합니다
                 </p>
                 <div class="hero-buttons fade-in-up delay-2">
-                    <a href="https://open.kakao.com/o/s84OO5Th" target="_blank" class="btn btn-kakao btn-lg">
+                    <a href="http://pf.kakao.com/_lxoxaHn/chat" target="_blank" rel="noopener" class="btn btn-kakao btn-lg">
                         💬 카카오톡 상담하기
                     </a>
                     <a href="inquiries.html" class="btn btn-primary btn-lg">온라인 문의하기</a>
@@ -924,7 +924,7 @@
                 </div>
 
                 <div class="cta-buttons">
-                    <a href="https://open.kakao.com/o/s84OO5Th" target="_blank" class="btn btn-kakao btn-lg">💬 카카오톡 상담하기</a>
+                    <a href="http://pf.kakao.com/_lxoxaHn/chat" target="_blank" rel="noopener" class="btn btn-kakao btn-lg">💬 카카오톡 상담하기</a>
                     <a href="inquiries.html" class="btn btn-primary btn-lg">📝 온라인 문의하기</a>
                 </div>
 
@@ -940,7 +940,7 @@
                         <span class="contact-icon">💬</span>
                         <div class="contact-info">
                             <strong>카카오톡</strong>
-                            <span>@hazacheck</span>
+                            <a href="http://pf.kakao.com/_lxoxaHn/chat" target="_blank" rel="noopener">@hazacheck</a>
                         </div>
                     </div>
                     <div class="contact-item">
@@ -954,7 +954,7 @@
 
                 <div class="kakao-qr">
                     <p>카카오톡 QR 코드</p>
-                    <img src="images/kakao-qr-code.jpg" alt="카카오톡 QR 코드">
+                    <img src="images/kakao-partners-qr-code.png" alt="카카오톡 QR 코드">
                 </div>
             </div>
         </div>
@@ -1006,35 +1006,36 @@
         </div>
     </footer>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" id="scrollToTop" aria-label="맨 위로">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-            <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-    </button>
+    <div class="floating-actions" aria-label="빠른 상담 버튼">
+        <a href="inquiries.html" class="floating-action action-inquiry" aria-label="온라인 문의">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                <path d="M4 6C4 4.89543 4.89543 4 6 4H26C27.1046 4 28 4.89543 28 6V20C28 21.1046 27.1046 22 26 22H12L4 28V6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M10 12H22M10 16H18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <span class="floating-label">문의</span>
+        </a>
 
-    <!-- Floating Contact Buttons -->
-    <a href="inquiries.html" class="floating-inquiry" aria-label="온라인 문의">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M4 6C4 4.89543 4.89543 4 6 4H26C27.1046 4 28 4.89543 28 6V20C28 21.1046 27.1046 22 26 22H12L4 28V6Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M10 12H22M10 16H18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-        <span class="inquiry-text">문의하기</span>
-    </a>
+        <a href="http://pf.kakao.com/_lxoxaHn/chat" target="_blank" rel="noopener" class="floating-action action-kakao" aria-label="카카오톡 상담">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                <path d="M16 4C9.373 4 4 8.373 4 13.714c0 3.434 2.186 6.446 5.467 8.228-.214 1.862-1.42 5.314-1.467 5.521-.056.247.089.243.186.177.077-.053 4.676-3.188 6.814-4.526 1.333.186 2.667.28 4 .28 6.627 0 12-4.373 12-9.714S22.627 4 16 4z" fill="currentColor"/>
+            </svg>
+            <span class="floating-label">카카오톡</span>
+        </a>
 
-    <a href="https://open.kakao.com/o/s84OO5Th" target="_blank" class="floating-kakao" aria-label="카카오톡 상담">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M16 4C9.373 4 4 8.373 4 13.714c0 3.434 2.186 6.446 5.467 8.228-.214 1.862-1.42 5.314-1.467 5.521-.056.247.089.243.186.177.077-.053 4.676-3.188 6.814-4.526 1.333.186 2.667.28 4 .28 6.627 0 12-4.373 12-9.714S22.627 4 16 4z" fill="currentColor"/>
-        </svg>
-        <span class="kakao-text">상담하기</span>
-    </a>
+        <a href="tel:010-2900-5200" class="floating-action action-phone" aria-label="전화 문의">
+            <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                <path d="M26.6 20.267l-3.6-1.6c-.467-.2-.933-.133-1.333.2l-2 1.6c-.4.333-.867.467-1.333.267-1.467-.667-3.467-1.867-5.2-3.6-1.733-1.733-2.933-3.733-3.6-5.2-.2-.467-.067-.933.267-1.333l1.6-2c.333-.4.4-.867.2-1.333l-1.6-3.6c-.2-.533-.733-.8-1.267-.6l-3.2 1.333c-.533.2-.933.733-.933 1.333.133 4.533 2 9.133 5.333 12.467 3.333 3.333 7.933 5.2 12.467 5.333.6 0 1.133-.4 1.333-.933l1.333-3.2c.2-.534-.067-1.067-.6-1.267z" fill="currentColor"/>
+            </svg>
+            <span class="floating-label">전화</span>
+        </a>
 
-    <a href="tel:010-2900-5200" class="floating-phone" aria-label="전화 문의">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
-            <path d="M26.6 20.267l-3.6-1.6c-.467-.2-.933-.133-1.333.2l-2 1.6c-.4.333-.867.467-1.333.267-1.467-.667-3.467-1.867-5.2-3.6-1.733-1.733-2.933-3.733-3.6-5.2-.2-.467-.067-.933.267-1.333l1.6-2c.333-.4.4-.867.2-1.333l-1.6-3.6c-.2-.533-.733-.8-1.267-.6l-3.2 1.333c-.533.2-.933.733-.933 1.333.133 4.533 2 9.133 5.333 12.467 3.333 3.333 7.933 5.2 12.467 5.333.6 0 1.133-.4 1.333-.933l1.333-3.2c.2-.534-.067-1.067-.6-1.267z" fill="currentColor"/>
-        </svg>
-        <span class="phone-text">전화하기</span>
-    </a>
+        <button class="floating-action action-top" id="scrollToTop" aria-label="맨 위로">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M12 19V5M12 5L5 12M12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span class="floating-label">TOP</span>
+        </button>
+    </div>
 
     <!-- JavaScript -->
     <script src="js/script.js"></script>

@@ -2268,106 +2268,79 @@ h4 { font-size: 1.25rem; }
 /* ===================================
    Floating Contact Buttons
    =================================== */
-.floating-kakao {
+.floating-actions {
     position: fixed;
-    bottom: 100px;
-    right: 30px;
-    width: 70px;
-    height: 70px;
-    background: #FEE500;
-    color: #3C1E1E;
-    border-radius: 50%;
+    right: 24px;
+    bottom: 24px;
     display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+    z-index: 998;
+}
+
+.floating-action {
+    min-width: 72px;
+    min-height: 72px;
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 22px;
+    display: inline-flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 20px rgba(254, 229, 0, 0.5);
-    cursor: pointer;
-    transition: all var(--transition-normal);
-    z-index: 998;
+    gap: 4px;
     text-decoration: none;
-    gap: 2px;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.18);
+    cursor: pointer;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal), background var(--transition-normal), opacity var(--transition-normal), visibility var(--transition-normal);
 }
 
-.floating-kakao:hover {
-    background: #FDD800;
-    transform: scale(1.1);
-    box-shadow: 0 6px 30px rgba(254, 229, 0, 0.7);
+.floating-action:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 32px rgba(15, 23, 42, 0.24);
 }
 
-.kakao-text {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #3C1E1E;
-    margin-top: -2px;
+.floating-label {
+    font-size: 0.75rem;
+    font-weight: 800;
+    line-height: 1;
 }
 
-.floating-inquiry {
-    position: fixed;
-    bottom: 180px;
-    right: 30px;
-    width: 70px;
-    height: 70px;
+.action-inquiry {
     background: var(--primary-color);
     color: white;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.5);
-    cursor: pointer;
-    transition: all var(--transition-normal);
-    z-index: 998;
-    text-decoration: none;
-    gap: 2px;
 }
 
-.floating-inquiry:hover {
+.action-inquiry:hover {
     background: var(--primary-dark);
-    transform: scale(1.1);
-    box-shadow: 0 6px 30px rgba(37, 99, 235, 0.7);
 }
 
-.inquiry-text {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: white;
-    margin-top: -2px;
+.action-kakao {
+    background: #FEE500;
+    color: #3C1E1E;
 }
 
-.floating-phone {
-    position: fixed;
-    bottom: 90px;
-    right: 30px;
-    width: 70px;
-    height: 70px;
+.action-kakao:hover {
+    background: #FDD800;
+}
+
+.action-phone {
     background: #10b981;
     color: white;
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 20px rgba(16, 185, 129, 0.5);
-    cursor: pointer;
-    transition: all var(--transition-normal);
-    z-index: 998;
-    text-decoration: none;
-    gap: 2px;
 }
 
-.floating-phone:hover {
+.action-phone:hover {
     background: #059669;
-    transform: scale(1.1);
-    box-shadow: 0 6px 30px rgba(16, 185, 129, 0.7);
 }
 
-.phone-text {
-    font-size: 0.7rem;
-    font-weight: 700;
+.action-top {
+    background: #0f172a;
     color: white;
-    margin-top: -2px;
+}
+
+.action-top:hover {
+    background: #1e293b;
 }
 
 /* ===================================
@@ -2747,31 +2720,21 @@ h4 { font-size: 1.25rem; }
     }
 
     /* Floating Buttons Mobile */
-    .floating-kakao {
+    .floating-actions {
+        right: 16px;
         bottom: 20px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
+        gap: 10px;
     }
 
-    .floating-phone {
-        bottom: 90px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
+    .floating-action {
+        min-width: 60px;
+        min-height: 60px;
+        padding: 8px 10px;
+        border-radius: 20px;
     }
 
-    .floating-inquiry {
-        bottom: 160px;
-        right: 20px;
-        width: 60px;
-        height: 60px;
-    }
-
-    .kakao-text,
-    .phone-text,
-    .inquiry-text {
-        font-size: 0.6rem;
+    .floating-label {
+        font-size: 0.65rem;
     }
 
     .scroll-to-top {
