@@ -46,17 +46,40 @@ function loadPriceSimulationData() {
 
             // 평형/타입 자동 입력
             if (data.size) {
-                const sizeInput = document.getElementById('size');
-                if (sizeInput) {
-                    // size 값을 m² 형식으로 변환
-                    const sizeMap = {
-                        '58': '~58m²',
-                        '74': '59~74m²',
-                        '84': '75~84m²',
-                        '104': '85~104m²',
-                        'over': '104m² 이상'
-                    };
-                    sizeInput.value = sizeMap[data.size] || data.size;
+                const sizeAreaInput = document.getElementById('sizeArea');
+                const sizeTypeInput = document.getElementById('sizeType');
+                const sizeMap = {
+                    '58': '58',
+                    '74': '74',
+                    '84': '84',
+                    '104': '104',
+                    'over': '104'
+                };
+                const normalizedSize = String(sizeMap[data.size] || data.size).trim();
+                const areaMatch = normalizedSize.match(/\d+/);
+                const typeMatch = normalizedSize.match(/[A-Za-z]+$/);
+
+                if (sizeAreaInput) {
+                    sizeAreaInput.value = areaMatch ? areaMatch[0] : normalizedSize.replace(/[^0-9]/g, '');
+                }
+
+                if (sizeTypeInput) {
+                    sizeTypeInput.value = (data.sizeType || (typeMatch ? typeMatch[0] : '')).toUpperCase();
+                }
+            }
+
+            if (data.apartment_unit) {
+                const buildingInput = document.getElementById('buildingNumber');
+                const unitInput = document.getElementById('unitNumber');
+                const buildingMatch = String(data.apartment_unit).match(/(\d+)\s*\uB3D9/);
+                const unitMatch = String(data.apartment_unit).match(/(\d+)\s*\uD638/);
+
+                if (buildingInput && buildingMatch) {
+                    buildingInput.value = buildingMatch[1];
+                }
+
+                if (unitInput && unitMatch) {
+                    unitInput.value = unitMatch[1];
                 }
             }
 
@@ -183,12 +206,19 @@ if (inquiryForm) {
             selectedOptions.push(checkbox.value);
         });
 
+        const sizeArea = document.getElementById('sizeArea').value.trim();
+        const sizeType = document.getElementById('sizeType').value.trim().toUpperCase();
+        const sizeLabel = sizeType ? `${sizeArea}m\u00B2 ${sizeType}` : `${sizeArea}m\u00B2`;
+        const buildingNumber = document.getElementById('buildingNumber').value.trim();
+        const unitNumber = document.getElementById('unitNumber').value.trim();
+        const apartmentUnitLabel = `${buildingNumber}동 ${unitNumber}호`;
+
         const formData = {
             name: document.getElementById('name').value.trim(),
             phone: document.getElementById('phone').value.trim(),
             apartment: document.getElementById('apartment').value.trim(),
-            size: document.getElementById('size').value.trim(),
-            apartment_unit: document.getElementById('apartment_unit').value.trim(),
+            size: sizeLabel,
+            apartment_unit: apartmentUnitLabel,
             move_in_date: document.getElementById('move_in_date').value,
             preferred_time: document.getElementById('preferred_time').value,
             options: selectedOptions, // 배열로 전송

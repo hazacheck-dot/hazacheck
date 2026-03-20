@@ -120,24 +120,33 @@
                                 <input type="text" id="apartment" name="apartment" required placeholder="예: 안산 센트럴푸르지오" style="width: 100%; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.2s; font-family: 'Source Han Sans KR', sans-serif;">
                             </div>
 
-                            <!-- 평형/타입 -->
+                            <!-- size/type -->
                             <div>
-                                <label style="display: block; margin-bottom: 10px; font-weight: 700; color: #111827; font-size: 1rem;">평형/타입 <span style="color: #ef4444;">*</span></label>
-                                <input type="text" id="size" name="size" required placeholder="예: 74A 또는 84m²" style="width: 100%; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.2s; font-family: 'Source Han Sans KR', sans-serif;">
+                                <label style="display: block; margin-bottom: 10px; font-weight: 700; color: #111827; font-size: 1rem;">&#54217;&#54805;/&#53440;&#51077; <span style="color: #ef4444;">*</span></label>
+                                <div style="display: grid; grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr) 40px; gap: 12px; align-items: center;">
+                                    <input type="number" id="sizeArea" name="sizeArea" required min="1" step="1" inputmode="numeric" placeholder="&#50696;: 84" style="width: 100%; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.2s; font-family: 'Source Han Sans KR', sans-serif;">
+                                    <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; font-size: 1rem; font-weight: 700; color: #374151; white-space: nowrap; text-align: center;">m&sup2;</span>
+                                    <input type="text" id="sizeType" name="sizeType" maxlength="4" pattern="[A-Za-z0-9]{1,4}" placeholder="&#50696;: A, B" style="width: 100%; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.2s; font-family: 'Source Han Sans KR', sans-serif; text-transform: uppercase;">
+                                    <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; font-size: 1rem; font-weight: 700; color: #374151; white-space: nowrap; text-align: center;">&#53440;&#51077;</span>
+                                </div>
                             </div>
 
-                            <!-- 아파트 동/호수 -->
+                            <!-- apartment unit -->
                             <div>
-                                <label style="display: block; margin-bottom: 10px; font-weight: 700; color: #111827; font-size: 1rem;">동/호수 <span style="color: #ef4444;">*</span></label>
-                                <input type="text" id="apartment_unit" name="apartment_unit" required placeholder="예: 101동 1001호" style="width: 100%; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.2s; font-family: 'Source Han Sans KR', sans-serif;">
+                                <label style="display: block; margin-bottom: 10px; font-weight: 700; color: #111827; font-size: 1rem;">&#46041;/&#54840;&#49688; <span style="color: #ef4444;">*</span></label>
+                                <div style="display: grid; grid-template-columns: minmax(0, 1fr) 40px minmax(0, 1fr) 40px; gap: 12px; align-items: center;">
+                                    <input type="text" id="buildingNumber" name="buildingNumber" required inputmode="numeric" placeholder="&#50696;: 101" style="width: 100%; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.2s; font-family: 'Source Han Sans KR', sans-serif;">
+                                    <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; font-size: 1rem; font-weight: 700; color: #374151; white-space: nowrap; text-align: center;">&#46041;</span>
+                                    <input type="text" id="unitNumber" name="unitNumber" required inputmode="numeric" placeholder="&#50696;: 1001" style="width: 100%; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.2s; font-family: 'Source Han Sans KR', sans-serif;">
+                                    <span style="display: inline-flex; align-items: center; justify-content: center; width: 40px; font-size: 1rem; font-weight: 700; color: #374151; white-space: nowrap; text-align: center;">&#54840;</span>
+                                </div>
                             </div>
-
                             <!-- 사전점검 희망날짜 -->
                             <div>
                                 <label style="display: block; margin-bottom: 10px; font-weight: 700; color: #111827; font-size: 1rem;">희망 점검일 <span style="color: #ef4444;">*</span></label>
-                                <div style="display: grid; grid-template-columns: 1fr auto; gap: 12px;">
-                                    <input type="date" id="move_in_date" name="move_in_date" required style="width: 100%; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.2s; font-family: 'Source Han Sans KR', sans-serif;">
-                                    <select id="preferred_time" name="preferred_time" required style="padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; background: white; cursor: pointer; font-family: 'Source Han Sans KR', sans-serif; font-weight: 500; min-width: 120px;">
+                                <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; align-items: stretch;">
+                                    <input type="date" id="move_in_date" name="move_in_date" required lang="en-CA" placeholder="yyyy-mm-dd" onfocus="if (this.showPicker) this.showPicker();" style="width: 100%; min-height: 56px; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; transition: all 0.2s; font-family: 'Source Han Sans KR', sans-serif; background: white;">
+                                    <select id="preferred_time" name="preferred_time" required style="width: 100%; min-height: 56px; padding: 14px 18px; border: 2px solid #e5e7eb; border-radius: 10px; font-size: 1rem; background: white; cursor: pointer; font-family: 'Source Han Sans KR', sans-serif; font-weight: 500;">
                                         <option value="">시간 선택</option>
                                         <option value="09:00">09:00</option>
                                         <option value="09:30">09:30</option>
