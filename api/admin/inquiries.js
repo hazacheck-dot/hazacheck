@@ -113,6 +113,7 @@ module.exports = async function handler(req, res) {
           apartment,
           size,
           move_in_date,
+          preferred_time,
           options,
           message,
           status,

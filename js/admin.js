@@ -188,12 +188,13 @@ function renderInquiriesTable(inquiries) {
         <tr>
             <td class="cell-compact">${inquiry.id}</td>
             <td class="cell-compact">${inquiry.name}</td>
-            <td class="cell-compact">${inquiry.phone}</td>
+            <td class="cell-compact cell-phone">${inquiry.phone}</td>
             <td class="cell-compact">${inquiry.apartment}</td>
             <td class="cell-compact">${inquiry.size}</td>
             <td class="cell-date">${formatPreferredSchedule(inquiry.move_in_date, inquiry.preferred_time)}</td>
             <td class="cell-status"><span class="status-badge status-${inquiry.status}">${getStatusText(inquiry.status)}</span></td>
             <td class="cell-date">${formatDateTimeTwoLine(inquiry.created_at)}</td>
+            <td class="cell-compact">${formatAdminOptions(inquiry.options)}</td>
             <td class="cell-actions">
                 <div class="action-buttons">
                     <button class="btn btn-sm btn-view" onclick="viewInquiry(${inquiry.id})">&#48372;&#44592;</button>
@@ -491,6 +492,42 @@ function formatDateTimeTwoLine(dateString) {
     });
 
     return `${datePart}<br><span class="table-subline">${timePart}</span>`;
+}
+
+function formatAdminOptions(options) {
+    if (!options) return '';
+
+    let normalized = options;
+
+    if (typeof normalized === 'string') {
+        try {
+            normalized = JSON.parse(normalized);
+        } catch (error) {
+            normalized = [normalized];
+        }
+    }
+
+    if (!Array.isArray(normalized)) {
+        normalized = [normalized];
+    }
+
+    const labels = [];
+
+    normalized.forEach((option) => {
+        const text = String(option).trim();
+        if (!text) return;
+
+        if (text.includes('\uD558\uC790 \uC811\uC218 \uB300\uD589')) {
+            labels.push('\uD558\uC790\uC811\uC218 \uB300\uD589');
+            return;
+        }
+
+        if (text.includes('\uC0AC\uD6C4\uAD00\uB9AC \uC7AC\uC810\uAC80')) {
+            labels.push('\uC0AC\uD6C4\uAD00\uB9AC');
+        }
+    });
+
+    return labels.join(', ');
 }
 
 // ===================================

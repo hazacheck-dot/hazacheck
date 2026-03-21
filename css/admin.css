@@ -239,8 +239,8 @@
 .inquiries-table th {
     background: linear-gradient(180deg, #f3f4f6 0%, #eef2ff 100%);
     padding: 18px 14px;
-    text-align: left;
-    font-weight: 600;
+    text-align: center;
+    font-weight: 700;
     color: #111827;
     border-bottom: 2px solid var(--border-color);
     border-right: 2px solid rgba(18, 26, 37, 0.18);
@@ -252,12 +252,13 @@
     border-bottom: 1px solid var(--border-color);
     border-right: 1px solid rgba(148, 163, 184, 0.16);
     color: #111827;
-    font-weight: 600;
+    font-weight: 700;
     vertical-align: middle;
     font-size: clamp(0.78rem, 0.9vw, 0.95rem);
     line-height: 1.5;
     overflow-wrap: anywhere;
     word-break: keep-all;
+    text-align: center;
 }
 
 .cell-compact,
@@ -269,6 +270,20 @@
 
 .cell-date {
     font-variant-numeric: tabular-nums;
+}
+
+.cell-phone {
+    font-size: clamp(0.72rem, 0.82vw, 0.88rem);
+}
+
+.inquiries-table th:nth-child(1),
+.inquiries-table td:nth-child(1) {
+    width: 2%;
+}
+
+.inquiries-table th:nth-child(3),
+.inquiries-table td:nth-child(3) {
+    width: 18%;
 }
 
 .table-subline {
