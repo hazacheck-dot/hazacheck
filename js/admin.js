@@ -186,19 +186,19 @@ function renderInquiriesTable(inquiries) {
 
     inquiriesTableBody.innerHTML = inquiries.map(inquiry => `
         <tr>
-            <td>${inquiry.id}</td>
-            <td>${inquiry.name}</td>
-            <td>${inquiry.phone}</td>
-            <td>${inquiry.apartment}</td>
-            <td>${inquiry.size}타입</td>
-            <td>${inquiry.move_in_date}</td>
-            <td><span class="status-badge status-${inquiry.status}">${getStatusText(inquiry.status)}</span></td>
-            <td>${formatDate(inquiry.created_at)}</td>
-            <td>
+            <td class="cell-compact">${inquiry.id}</td>
+            <td class="cell-compact">${inquiry.name}</td>
+            <td class="cell-compact">${inquiry.phone}</td>
+            <td class="cell-compact">${inquiry.apartment}</td>
+            <td class="cell-compact">${inquiry.size}</td>
+            <td class="cell-date">${formatPreferredSchedule(inquiry.move_in_date, inquiry.preferred_time)}</td>
+            <td class="cell-status"><span class="status-badge status-${inquiry.status}">${getStatusText(inquiry.status)}</span></td>
+            <td class="cell-date">${formatDateTimeTwoLine(inquiry.created_at)}</td>
+            <td class="cell-actions">
                 <div class="action-buttons">
-                    <button class="btn btn-sm btn-view" onclick="viewInquiry(${inquiry.id})">보기</button>
-                    <button class="btn btn-sm btn-edit" onclick="editInquiry(${inquiry.id})">답변</button>
-                    <button class="btn btn-sm btn-delete" onclick="deleteInquiry(${inquiry.id})">삭제</button>
+                    <button class="btn btn-sm btn-view" onclick="viewInquiry(${inquiry.id})">&#48372;&#44592;</button>
+                    <button class="btn btn-sm btn-edit" onclick="editInquiry(${inquiry.id})">&#45813;&#48320;</button>
+                    <button class="btn btn-sm btn-delete" onclick="deleteInquiry(${inquiry.id})">&#49325;&#51228;</button>
                 </div>
             </td>
         </tr>
@@ -462,6 +462,35 @@ function formatDate(dateString) {
         hour: '2-digit',
         minute: '2-digit'
     });
+}
+
+function formatPreferredSchedule(dateString, preferredTime) {
+    const date = new Date(dateString);
+
+    if (Number.isNaN(date.getTime())) {
+        return `${dateString || '-'}<br><span class="table-subline">${preferredTime || '\uC2DC\uAC04 \uBBF8\uC815'}</span>`;
+    }
+
+    const datePart = date.toLocaleDateString('sv-SE');
+    const timePart = preferredTime || '\uC2DC\uAC04 \uBBF8\uC815';
+    return `${datePart}<br><span class="table-subline">${timePart}</span>`;
+}
+
+function formatDateTimeTwoLine(dateString) {
+    const date = new Date(dateString);
+
+    if (Number.isNaN(date.getTime())) {
+        return dateString || '-';
+    }
+
+    const datePart = date.toLocaleDateString('sv-SE');
+    const timePart = date.toLocaleTimeString('ko-KR', {
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false
+    });
+
+    return `${datePart}<br><span class="table-subline">${timePart}</span>`;
 }
 
 // ===================================

@@ -233,6 +233,7 @@
 .inquiries-table {
     width: 100%;
     border-collapse: collapse;
+    table-layout: fixed;
 }
 
 .inquiries-table th {
@@ -242,15 +243,49 @@
     font-weight: 600;
     color: #111827;
     border-bottom: 2px solid var(--border-color);
+    border-right: 2px solid rgba(18, 26, 37, 0.18);
     white-space: nowrap;
 }
 
 .inquiries-table td {
     padding: 18px 14px;
     border-bottom: 1px solid var(--border-color);
+    border-right: 1px solid rgba(148, 163, 184, 0.16);
     color: #111827;
     font-weight: 600;
     vertical-align: middle;
+    font-size: clamp(0.78rem, 0.9vw, 0.95rem);
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+    word-break: keep-all;
+}
+
+.cell-compact,
+.cell-date,
+.cell-status,
+.cell-actions {
+    white-space: normal;
+}
+
+.cell-date {
+    font-variant-numeric: tabular-nums;
+}
+
+.table-subline {
+    display: inline-block;
+    margin-top: 4px;
+    font-size: 0.88em;
+    color: #4b5563;
+    font-weight: 600;
+}
+
+.cell-status .status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+    text-align: center;
+    white-space: normal;
 }
 
 .inquiries-table tbody tr:hover {
@@ -259,6 +294,11 @@
 
 .inquiries-table tbody tr:last-child td {
     border-bottom: none;
+}
+
+.inquiries-table th:last-child,
+.inquiries-table td:last-child {
+    border-right: none;
 }
 
 /* Status Badges */
@@ -295,6 +335,7 @@
 .action-buttons {
     display: flex;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
 .btn-sm {
