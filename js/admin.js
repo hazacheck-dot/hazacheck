@@ -194,7 +194,7 @@ function renderInquiriesTable(inquiries) {
             <td class="cell-date">${formatPreferredSchedule(inquiry.move_in_date, inquiry.preferred_time)}</td>
             <td class="cell-status"><span class="status-badge status-${inquiry.status}">${getStatusText(inquiry.status)}</span></td>
             <td class="cell-date">${formatDateTimeTwoLine(inquiry.created_at)}</td>
-            <td class="cell-compact">${formatAdminOptions(inquiry.options)}</td>
+            <td class="cell-options">${formatAdminOptions(inquiry.options)}</td>
             <td class="cell-actions">
                 <div class="action-buttons">
                     <button class="btn btn-sm btn-view" onclick="viewInquiry(${inquiry.id})">&#48372;&#44592;</button>
@@ -527,7 +527,7 @@ function formatAdminOptions(options) {
         }
     });
 
-    return labels.join(', ');
+    return labels.map((label) => `<span class="option-badge">${label}</span>`).join('');
 }
 
 // ===================================

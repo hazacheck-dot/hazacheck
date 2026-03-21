@@ -264,7 +264,8 @@
 .cell-compact,
 .cell-date,
 .cell-status,
-.cell-actions {
+.cell-actions,
+.cell-options {
     white-space: normal;
 }
 
@@ -278,12 +279,12 @@
 
 .inquiries-table th:nth-child(1),
 .inquiries-table td:nth-child(1) {
-    width: 4%;
+    width: 6%;
 }
 
 .inquiries-table th:nth-child(3),
 .inquiries-table td:nth-child(3) {
-    width: 16%;
+    width: 14%;
 }
 
 .table-subline {
@@ -301,6 +302,29 @@
     max-width: 100%;
     text-align: center;
     white-space: normal;
+}
+
+.cell-options {
+    text-align: center;
+}
+
+.cell-options .option-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 4px 8px;
+    margin-bottom: 6px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background: #eef2ff;
+    color: #3730a3;
+    white-space: normal;
+}
+
+.cell-options .option-badge:last-child {
+    margin-bottom: 0;
 }
 
 .inquiries-table tbody tr:hover {
