@@ -278,12 +278,12 @@
 
 .inquiries-table th:nth-child(1),
 .inquiries-table td:nth-child(1) {
-    width: 2%;
+    width: 4%;
 }
 
 .inquiries-table th:nth-child(3),
 .inquiries-table td:nth-child(3) {
-    width: 18%;
+    width: 16%;
 }
 
 .table-subline {

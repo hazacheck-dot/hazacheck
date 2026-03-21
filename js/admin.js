@@ -518,7 +518,7 @@ function formatAdminOptions(options) {
         if (!text) return;
 
         if (text.includes('\uD558\uC790 \uC811\uC218 \uB300\uD589')) {
-            labels.push('\uD558\uC790\uC811\uC218 \uB300\uD589');
+            labels.push('\uC811\uC218\uB300\uD589');
             return;
         }
 
